@@ -10,8 +10,9 @@ start : 'ehh' '{'
 widthValue : INT;
 heightValue : INT;
 colorValue : INT ',' INT ',' INT;
-outputValue : ID;
+outputValue : FILENAME;
 
 INT : [0-9]+ ;
-ID : [a-zA-Z]+ ;
-WS : [ \t\r\n]+ -> skip ;
+ID : [a-zA-Z]+;
+FILENAME : [a-zA-Z0-9.]+;
+WS : [ \t\r\n]+ -> skip;
