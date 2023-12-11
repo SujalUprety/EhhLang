@@ -1,0 +1,15 @@
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\bin\Debug\net6.0\Ehhmake.exe
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\bin\Debug\net6.0\Ehhmake.deps.json
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\bin\Debug\net6.0\Ehhmake.runtimeconfig.json
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\bin\Debug\net6.0\Ehhmake.dll
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\bin\Debug\net6.0\Ehhmake.pdb
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\obj\Debug\net6.0\Ehhmake.csproj.AssemblyReference.cache
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\obj\Debug\net6.0\Ehhmake.GeneratedMSBuildEditorConfig.editorconfig
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\obj\Debug\net6.0\Ehhmake.AssemblyInfoInputs.cache
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\obj\Debug\net6.0\Ehhmake.AssemblyInfo.cs
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\obj\Debug\net6.0\Ehhmake.csproj.CoreCompileInputs.cache
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\obj\Debug\net6.0\Ehhmake.dll
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\obj\Debug\net6.0\refint\Ehhmake.dll
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\obj\Debug\net6.0\Ehhmake.pdb
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\obj\Debug\net6.0\Ehhmake.genruntimeconfig.cache
+G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\obj\Debug\net6.0\ref\Ehhmake.dll
