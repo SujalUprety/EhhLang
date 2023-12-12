@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\GrammarContent\Ehh.g4 by ANTLR 4.6.6
+// Generated from E:\Project\My Rule\Ehhmake\Ehhmake\Ehhmake\GrammarContent\Ehh.g4 by ANTLR 4.6.6
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -31,8 +31,8 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 [System.CLSCompliant(false)]
 public partial class EhhParser : Parser {
 	public const int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, INT=9, 
-		ID=10, FILENAME=11, WS=12;
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, LB=7, RB=8, INT=9, ID=10, 
+		FILENAME=11, WS=12;
 	public const int
 		RULE_start = 0, RULE_widthValue = 1, RULE_heightValue = 2, RULE_colorValue = 3, 
 		RULE_outputValue = 4;
@@ -41,11 +41,11 @@ public partial class EhhParser : Parser {
 	};
 
 	private static readonly string[] _LiteralNames = {
-		null, "'ehh'", "'{'", "'width:'", "'height:'", "'background:'", "'output:'", 
-		"'}'", "','"
+		null, "'ehh'", "'width:'", "'height:'", "'background:'", "'output:'", 
+		"','"
 	};
 	private static readonly string[] _SymbolicNames = {
-		null, null, null, null, null, null, null, null, null, "INT", "ID", "FILENAME", 
+		null, null, null, null, null, null, null, "LB", "RB", "INT", "ID", "FILENAME", 
 		"WS"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
@@ -99,6 +99,7 @@ public partial class EhhParser : Parser {
 		_interp = new ParserATNSimulator(this,_ATN);
 	}
 	public partial class StartContext : ParserRuleContext {
+		public ITerminalNode LB() { return GetToken(EhhParser.LB, 0); }
 		public WidthValueContext widthValue() {
 			return GetRuleContext<WidthValueContext>(0);
 		}
@@ -111,6 +112,7 @@ public partial class EhhParser : Parser {
 		public OutputValueContext outputValue() {
 			return GetRuleContext<OutputValueContext>(0);
 		}
+		public ITerminalNode RB() { return GetToken(EhhParser.RB, 0); }
 		public StartContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -139,16 +141,16 @@ public partial class EhhParser : Parser {
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 10; Match(T__0);
-			State = 11; Match(T__1);
-			State = 12; Match(T__2);
+			State = 11; Match(LB);
+			State = 12; Match(T__1);
 			State = 13; widthValue();
-			State = 14; Match(T__3);
+			State = 14; Match(T__2);
 			State = 15; heightValue();
-			State = 16; Match(T__4);
+			State = 16; Match(T__3);
 			State = 17; colorValue();
-			State = 18; Match(T__5);
+			State = 18; Match(T__4);
 			State = 19; outputValue();
-			State = 20; Match(T__6);
+			State = 20; Match(RB);
 			}
 		}
 		catch (RecognitionException re) {
@@ -281,9 +283,9 @@ public partial class EhhParser : Parser {
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 26; Match(INT);
-			State = 27; Match(T__7);
+			State = 27; Match(T__5);
 			State = 28; Match(INT);
-			State = 29; Match(T__7);
+			State = 29; Match(T__5);
 			State = 30; Match(INT);
 			}
 		}
@@ -348,12 +350,12 @@ public partial class EhhParser : Parser {
 		"\x3\x5\x3\x5\x3\x5\x3\x5\x3\x5\x3\x5\x3\x6\x3\x6\x3\x6\x2\x2\x2\a\x2\x2"+
 		"\x4\x2\x6\x2\b\x2\n\x2\x2\x2\x1F\x2\f\x3\x2\x2\x2\x4\x18\x3\x2\x2\x2\x6"+
 		"\x1A\x3\x2\x2\x2\b\x1C\x3\x2\x2\x2\n\"\x3\x2\x2\x2\f\r\a\x3\x2\x2\r\xE"+
-		"\a\x4\x2\x2\xE\xF\a\x5\x2\x2\xF\x10\x5\x4\x3\x2\x10\x11\a\x6\x2\x2\x11"+
-		"\x12\x5\x6\x4\x2\x12\x13\a\a\x2\x2\x13\x14\x5\b\x5\x2\x14\x15\a\b\x2\x2"+
-		"\x15\x16\x5\n\x6\x2\x16\x17\a\t\x2\x2\x17\x3\x3\x2\x2\x2\x18\x19\a\v\x2"+
-		"\x2\x19\x5\x3\x2\x2\x2\x1A\x1B\a\v\x2\x2\x1B\a\x3\x2\x2\x2\x1C\x1D\a\v"+
-		"\x2\x2\x1D\x1E\a\n\x2\x2\x1E\x1F\a\v\x2\x2\x1F \a\n\x2\x2 !\a\v\x2\x2"+
-		"!\t\x3\x2\x2\x2\"#\a\r\x2\x2#\v\x3\x2\x2\x2\x2";
+		"\a\t\x2\x2\xE\xF\a\x4\x2\x2\xF\x10\x5\x4\x3\x2\x10\x11\a\x5\x2\x2\x11"+
+		"\x12\x5\x6\x4\x2\x12\x13\a\x6\x2\x2\x13\x14\x5\b\x5\x2\x14\x15\a\a\x2"+
+		"\x2\x15\x16\x5\n\x6\x2\x16\x17\a\n\x2\x2\x17\x3\x3\x2\x2\x2\x18\x19\a"+
+		"\v\x2\x2\x19\x5\x3\x2\x2\x2\x1A\x1B\a\v\x2\x2\x1B\a\x3\x2\x2\x2\x1C\x1D"+
+		"\a\v\x2\x2\x1D\x1E\a\b\x2\x2\x1E\x1F\a\v\x2\x2\x1F \a\b\x2\x2 !\a\v\x2"+
+		"\x2!\t\x3\x2\x2\x2\"#\a\r\x2\x2#\v\x3\x2\x2\x2\x2";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }

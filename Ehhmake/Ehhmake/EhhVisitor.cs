@@ -6,6 +6,16 @@ namespace Ehhmake;
 public class EhhVisitor : EhhBaseVisitor<int> {
 
     public override int VisitStart(EhhParser.StartContext context) {
+        if (context.LB().GetText() != "{") {
+            Console.WriteLine("Curly braces not found in \'ehh\' method");
+            return base.VisitStart(context);
+        }
+        
+        if (context.RB().GetText() != "}") {
+            Console.WriteLine("Closing bracket not found in \'ehh\' method");
+            return base.VisitStart(context);
+        }
+        
         var width = int.Parse(context.widthValue().GetText());
         var height = int.Parse(context.heightValue().GetText());
 
