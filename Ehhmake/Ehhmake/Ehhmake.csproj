@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="GrammarContent\Ehh.g4" />
+      <Content Include="Content\Ehh.g4" />
     </ItemGroup>
 
 </Project>

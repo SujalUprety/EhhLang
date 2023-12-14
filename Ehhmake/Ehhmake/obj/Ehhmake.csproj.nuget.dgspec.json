@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Project\\My Rule\\Ehhmake\\Ehhmake\\Ehhmake\\Ehhmake.csproj": {}
+    "G:\\Projects\\My Rule\\Ehhmake\\Ehhmake\\Ehhmake\\Ehhmake.csproj": {}
   },
   "projects": {
-    "E:\\Project\\My Rule\\Ehhmake\\Ehhmake\\Ehhmake\\Ehhmake.csproj": {
+    "G:\\Projects\\My Rule\\Ehhmake\\Ehhmake\\Ehhmake\\Ehhmake.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Project\\My Rule\\Ehhmake\\Ehhmake\\Ehhmake\\Ehhmake.csproj",
+        "projectUniqueName": "G:\\Projects\\My Rule\\Ehhmake\\Ehhmake\\Ehhmake\\Ehhmake.csproj",
         "projectName": "Ehhmake",
-        "projectPath": "E:\\Project\\My Rule\\Ehhmake\\Ehhmake\\Ehhmake\\Ehhmake.csproj",
+        "projectPath": "G:\\Projects\\My Rule\\Ehhmake\\Ehhmake\\Ehhmake\\Ehhmake.csproj",
         "packagesPath": "C:\\Users\\sujal\\.nuget\\packages\\",
-        "outputPath": "E:\\Project\\My Rule\\Ehhmake\\Ehhmake\\Ehhmake\\obj\\",
+        "outputPath": "G:\\Projects\\My Rule\\Ehhmake\\Ehhmake\\Ehhmake\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sujal\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\sujal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -74,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.417\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.411\\RuntimeIdentifierGraph.json"
         }
       }
     }

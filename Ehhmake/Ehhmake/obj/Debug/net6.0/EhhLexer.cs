@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from E:\Project\My Rule\Ehhmake\Ehhmake\Ehhmake\GrammarContent\Ehh.g4 by ANTLR 4.6.6
+// Generated from G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\GrammarContent\Ehh.g4 by ANTLR 4.6.6
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,7 +19,7 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
-namespace Ehhmake.GrammarContent {
+namespace Ehhmake.Content {
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Misc;

@@ -1,11 +1,11 @@
+using Ehhmake.Content;
 using OpenCvSharp;
-using Ehhmake.GrammarContent;
 
 namespace Ehhmake;
 
-public class EhhVisitor : EhhBaseVisitor<int> {
+public class EhhVisitor : EhhBaseVisitor<object?> {
 
-    public override int VisitStart(EhhParser.StartContext context) {
+    public override object? VisitStart(EhhParser.StartContext context) {
         if (context.LB().GetText() != "{") {
             Console.WriteLine("Curly braces not found in \'ehh\' method");
             return base.VisitStart(context);
@@ -21,8 +21,10 @@ public class EhhVisitor : EhhBaseVisitor<int> {
 
         var color = context.colorValue().GetText().Split(',');
         var rgb = Array.ConvertAll(color, int.Parse);
-
-        var outputName = context.outputValue().GetText();
+        
+        
+        const string outputDirectory = @"G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\Content\";
+        var outputName = outputDirectory + context.outputValue().GetText();
         
         //Creating Image
         var image = new Mat(height, width, MatType.CV_8UC3, new Scalar(rgb[2], rgb[1], rgb[0]));
