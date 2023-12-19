@@ -21,10 +21,8 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
 
         var color = context.colorValue().GetText().Split(',');
         var rgb = Array.ConvertAll(color, int.Parse);
-        
-        
-        const string outputDirectory = @"G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\Content\";
-        var outputName = outputDirectory + context.outputValue().GetText();
+      
+        var outputName = context.outputValue().GetText();
         
         //Creating Image
         var image = new Mat(height, width, MatType.CV_8UC3, new Scalar(rgb[2], rgb[1], rgb[0]));

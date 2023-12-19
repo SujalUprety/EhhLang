@@ -8,12 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\GrammarContent\Ehh.g4 by ANTLR 4.6.6
+// Generated from E:\Project\My Rule\Ehhmake\Ehhmake\Ehhmake\Content\Ehh.g4 by ANTLR 4.6.6
 
 // Unreachable code detected
-
-using Ehhmake.Content;
-
 #pragma warning disable 0162
 // The variable '...' is assigned but its value is never used
 #pragma warning disable 0219
@@ -362,4 +359,4 @@ public partial class EhhParser : Parser {
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }
-} // namespace Ehhmake.GrammarContent
+} // namespace Ehhmake.Content
