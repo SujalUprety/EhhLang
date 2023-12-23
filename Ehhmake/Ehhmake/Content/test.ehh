@@ -1,6 +1,6 @@
 ehh {
     width: 1920
     height: 1080
-    background: 200, 20, 100
+    background: 2, 55, 30
     output: ehhhh.png
 }
