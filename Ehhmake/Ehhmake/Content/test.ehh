@@ -9,5 +9,20 @@ tehhxt {
     thickness: 5
     textPosition: 100, 100
     textColor: 255, 0, 0
-    text: "Hello World!"
+    text: "My first ehhmage with tehhxt!"
+}
+
+tehhxt {
+    textPosition: 100, 300
+    text: "My second ehhmage with tehhxt!"
+}
+
+tehhxt {
+    textPosition: 100, 500
+    text: "My third ehhmage with tehhxt!"
+}
+
+tehhxt {
+    textPosition: 100, 700
+    text: "My fourth ehhmage with tehhxt!"
 }
