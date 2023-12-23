@@ -1,3 +1,13 @@
 ehh {
-    
+    width: 1920
+    height: 1080
+    background: 0, 0, 0
+}
+
+tehhxt {
+    fontScale: 5
+    thickness: 5
+    textPosition: 100, 100
+    textColor: 255, 0, 0
+    text: "Hello World!"
 }

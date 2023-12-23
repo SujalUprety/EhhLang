@@ -33,11 +33,18 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IEhhVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.start"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.program"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitStart([NotNull] EhhParser.StartContext context);
+	Result VisitProgram([NotNull] EhhParser.ProgramContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="EhhParser.function"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFunction([NotNull] EhhParser.FunctionContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="EhhParser.attribPair"/>.

@@ -32,15 +32,26 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IEhhListener : IParseTreeListener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.start"/>.
+	/// Enter a parse tree produced by <see cref="EhhParser.program"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterStart([NotNull] EhhParser.StartContext context);
+	void EnterProgram([NotNull] EhhParser.ProgramContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.start"/>.
+	/// Exit a parse tree produced by <see cref="EhhParser.program"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitStart([NotNull] EhhParser.StartContext context);
+	void ExitProgram([NotNull] EhhParser.ProgramContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="EhhParser.function"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunction([NotNull] EhhParser.FunctionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="EhhParser.function"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunction([NotNull] EhhParser.FunctionContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="EhhParser.attribPair"/>.

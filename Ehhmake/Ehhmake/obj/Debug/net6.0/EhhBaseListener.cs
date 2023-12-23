@@ -36,17 +36,30 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CLSCompliant(false)]
 public partial class EhhBaseListener : IEhhListener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.start"/>.
+	/// Enter a parse tree produced by <see cref="EhhParser.program"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterStart([NotNull] EhhParser.StartContext context) { }
+	public virtual void EnterProgram([NotNull] EhhParser.ProgramContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.start"/>.
+	/// Exit a parse tree produced by <see cref="EhhParser.program"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitStart([NotNull] EhhParser.StartContext context) { }
+	public virtual void ExitProgram([NotNull] EhhParser.ProgramContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="EhhParser.function"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterFunction([NotNull] EhhParser.FunctionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="EhhParser.function"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitFunction([NotNull] EhhParser.FunctionContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="EhhParser.attribPair"/>.

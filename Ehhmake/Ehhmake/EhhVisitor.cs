@@ -4,25 +4,62 @@ namespace Ehhmake;
 
 public class EhhVisitor : EhhBaseVisitor<object?> {
     
+    private enum FunctionName {
+        ehh,
+        tehhxt
+    }
+    
     private readonly Ehhmage _ehhmage = new();
 
-    public override object? VisitStart(EhhParser.StartContext context) {
-        if (context.LB().GetText() != "{") {
-            Console.WriteLine("Curly braces not found in \'ehh\' function");
-            return base.VisitStart(context);
+    public override object? VisitProgram(EhhParser.ProgramContext context) {
+
+        if (context.function()[0].ID().GetText() != "ehh") {
+            Console.WriteLine("Main function Ehh not found");
+            return base.VisitProgram(context);
+        }
+
+        foreach (var function in context.function()) {
+            var functionName = function.ID().GetText();
+            var functionContext = function.attribPair();
+
+            #region CurlyBracesCheck
+            
+            if (function.LB().GetText() != "{") {
+                Console.WriteLine($"Curly braces not found in \'{functionName}\' function");
+                return base.VisitProgram(context);
+            }
+            
+            if (function.RB().GetText() != "}") {
+                Console.WriteLine($"Closing bracket not found in \'{functionName}\' function");
+                return base.VisitProgram(context);
+            }
+            
+            #endregion
+
+            switch (functionName) {
+                case nameof(FunctionName.ehh):
+                    InitializeFunctionEhh(functionContext);
+                    break;
+                
+                case nameof(FunctionName.tehhxt):
+                    InsertText(functionContext);
+                    break;
+            }
         }
         
-        if (context.RB().GetText() != "}") {
-            Console.WriteLine("Closing bracket not found in \'ehh\' function");
-            return base.VisitStart(context);
-        }
+        _ehhmage.CreateImage();
+        
+        return base.VisitProgram(context);
+    }
 
-        foreach (var attribPairContext in context.attribPair()) {
+    private void InitializeFunctionEhh(IEnumerable<EhhParser.AttribPairContext> context) {
+        
+        foreach (var attribPairContext in context) {
             var attribName = attribPairContext.ID().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
-
+        
             switch (attribName) {
-                case nameof(Ehhmage.Attribute.width): {
+                case nameof(Ehhmage.EhhmageAttribute.width): {
                     if (!int.TryParse(attribValue, out var width)) {
                         Console.WriteLine("Width attribute value is not a number");
                         break;
@@ -30,8 +67,8 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                     _ehhmage.SetWidth(width);
                     break;
                 }
-
-                case nameof(Ehhmage.Attribute.height): {
+        
+                case nameof(Ehhmage.EhhmageAttribute.height): {
                     if (!int.TryParse(attribValue, out var height)) {
                         Console.WriteLine("Height attribute value is not a number");
                         break;
@@ -39,8 +76,8 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                     _ehhmage.SetHeight(height);
                     break;
                 }
-
-                case nameof(Ehhmage.Attribute.background): {
+        
+                case nameof(Ehhmage.EhhmageAttribute.background): {
                     var background = attribValue.Split(',').Select(int.Parse).ToArray();
                     if (background.Length != 3) {
                         Console.WriteLine("Background attribute value is not a 3-tuple");
@@ -51,7 +88,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                     break;
                 }
                 
-                case nameof(Ehhmage.Attribute.output): {
+                case nameof(Ehhmage.EhhmageAttribute.output): {
                     _ehhmage.SetOutputName(attribValue);
                     break;
                 }
@@ -59,9 +96,68 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             }
         }
         
-        _ehhmage.CreateImage();
+        _ehhmage.InitializeEhhMage();
         
-        return base.VisitStart(context);
+    }
+
+    private void InsertText(IEnumerable<EhhParser.AttribPairContext> context) {
+        
+        foreach (var attribPairContext in context) {
+            var attribName = attribPairContext.ID().GetText();
+            var attribValue = attribPairContext.attribValue().GetText();
+
+            switch (attribName) {
+                case nameof(Ehhmage.TextAttribute.fontScale): {
+                    if (!int.TryParse(attribValue, out var fontScale)) {
+                        Console.WriteLine("FontScale attribute value is not a number");
+                        break;
+                    }
+                    _ehhmage.SetFontScale(fontScale);
+                    break;
+                }
+                
+                case nameof(Ehhmage.TextAttribute.thickness): {
+                    if (!int.TryParse(attribValue, out var thickness)) {
+                        Console.WriteLine("Thickness attribute value is not a number");
+                        break;
+                    }
+                    _ehhmage.SetThickness(thickness);
+                    break;
+                }
+                
+                case nameof(Ehhmage.TextAttribute.textPosition): {
+                    var textPosition = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (textPosition.Length != 2) {
+                        Console.WriteLine("TextPosition attribute value is not a 2-tuple");
+                        break;
+                    }
+                    _ehhmage.SetTextPosition(textPosition);
+                    break;
+                }
+                
+                case nameof(Ehhmage.TextAttribute.textColor): {
+                    var textColor = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (textColor.Length != 3) {
+                        Console.WriteLine("TextColor attribute value is not a 3-tuple");
+                        break;
+                    }
+                    _ehhmage.SetTextColor(textColor);
+                    break;
+                }
+                
+                case nameof(Ehhmage.TextAttribute.text): {
+                    if(attribValue.StartsWith('"') && attribValue.EndsWith('"')) {
+                        _ehhmage.SetText(attribValue[1..^1]);
+                    } else {
+                        Console.WriteLine("Text attribute value is not a string");
+                    }
+                    break;
+                }
+            }
+            
+        }
+        
+        _ehhmage.InsertText();
     }
     
 }
