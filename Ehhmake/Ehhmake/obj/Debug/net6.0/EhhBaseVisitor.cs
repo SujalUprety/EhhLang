@@ -46,7 +46,7 @@ public partial class EhhBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, 
 	public virtual Result VisitStart([NotNull] EhhParser.StartContext context) { return VisitChildren(context); }
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.widthValue"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.attribPair"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -54,10 +54,10 @@ public partial class EhhBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, 
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitWidthValue([NotNull] EhhParser.WidthValueContext context) { return VisitChildren(context); }
+	public virtual Result VisitAttribPair([NotNull] EhhParser.AttribPairContext context) { return VisitChildren(context); }
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.heightValue"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.attribValue"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -65,28 +65,6 @@ public partial class EhhBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, 
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitHeightValue([NotNull] EhhParser.HeightValueContext context) { return VisitChildren(context); }
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.colorValue"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitColorValue([NotNull] EhhParser.ColorValueContext context) { return VisitChildren(context); }
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.outputValue"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitOutputValue([NotNull] EhhParser.OutputValueContext context) { return VisitChildren(context); }
+	public virtual Result VisitAttribValue([NotNull] EhhParser.AttribValueContext context) { return VisitChildren(context); }
 }
 } // namespace Ehhmake.Content

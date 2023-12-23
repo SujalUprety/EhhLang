@@ -31,21 +31,19 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 [System.CLSCompliant(false)]
 public partial class EhhParser : Parser {
 	public const int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, LB=7, RB=8, INT=9, ID=10, 
-		FILENAME=11, WS=12;
+		T__0=1, T__1=2, T__2=3, LB=4, RB=5, INT=6, ID=7, NEWLINE=8, FILENAME=9, 
+		WS=10;
 	public const int
-		RULE_start = 0, RULE_widthValue = 1, RULE_heightValue = 2, RULE_colorValue = 3, 
-		RULE_outputValue = 4;
+		RULE_start = 0, RULE_attribPair = 1, RULE_attribValue = 2;
 	public static readonly string[] ruleNames = {
-		"start", "widthValue", "heightValue", "colorValue", "outputValue"
+		"start", "attribPair", "attribValue"
 	};
 
 	private static readonly string[] _LiteralNames = {
-		null, "'ehh'", "'width:'", "'height:'", "'background:'", "'output:'", 
-		"','"
+		null, "'ehh'", "':'", "','"
 	};
 	private static readonly string[] _SymbolicNames = {
-		null, null, null, null, null, null, null, "LB", "RB", "INT", "ID", "FILENAME", 
+		null, null, null, null, "LB", "RB", "INT", "ID", "NEWLINE", "FILENAME", 
 		"WS"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
@@ -100,19 +98,13 @@ public partial class EhhParser : Parser {
 	}
 	public partial class StartContext : ParserRuleContext {
 		public ITerminalNode LB() { return GetToken(EhhParser.LB, 0); }
-		public WidthValueContext widthValue() {
-			return GetRuleContext<WidthValueContext>(0);
-		}
-		public HeightValueContext heightValue() {
-			return GetRuleContext<HeightValueContext>(0);
-		}
-		public ColorValueContext colorValue() {
-			return GetRuleContext<ColorValueContext>(0);
-		}
-		public OutputValueContext outputValue() {
-			return GetRuleContext<OutputValueContext>(0);
-		}
 		public ITerminalNode RB() { return GetToken(EhhParser.RB, 0); }
+		public AttribPairContext[] attribPair() {
+			return GetRuleContexts<AttribPairContext>();
+		}
+		public AttribPairContext attribPair(int i) {
+			return GetRuleContext<AttribPairContext>(i);
+		}
 		public StartContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -137,20 +129,26 @@ public partial class EhhParser : Parser {
 	public StartContext start() {
 		StartContext _localctx = new StartContext(_ctx, State);
 		EnterRule(_localctx, 0, RULE_start);
+		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 10; Match(T__0);
-			State = 11; Match(LB);
-			State = 12; Match(T__1);
-			State = 13; widthValue();
-			State = 14; Match(T__2);
-			State = 15; heightValue();
-			State = 16; Match(T__3);
-			State = 17; colorValue();
-			State = 18; Match(T__4);
-			State = 19; outputValue();
-			State = 20; Match(RB);
+			State = 6; Match(T__0);
+			State = 7; Match(LB);
+			State = 11;
+			_errHandler.Sync(this);
+			_la = _input.La(1);
+			while (_la==ID) {
+				{
+				{
+				State = 8; attribPair();
+				}
+				}
+				State = 13;
+				_errHandler.Sync(this);
+				_la = _input.La(1);
+			}
+			State = 14; Match(RB);
 			}
 		}
 		catch (RecognitionException re) {
@@ -164,36 +162,43 @@ public partial class EhhParser : Parser {
 		return _localctx;
 	}
 
-	public partial class WidthValueContext : ParserRuleContext {
-		public ITerminalNode INT() { return GetToken(EhhParser.INT, 0); }
-		public WidthValueContext(ParserRuleContext parent, int invokingState)
+	public partial class AttribPairContext : ParserRuleContext {
+		public ITerminalNode ID() { return GetToken(EhhParser.ID, 0); }
+		public AttribValueContext attribValue() {
+			return GetRuleContext<AttribValueContext>(0);
+		}
+		public ITerminalNode NEWLINE() { return GetToken(EhhParser.NEWLINE, 0); }
+		public AttribPairContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_widthValue; } }
+		public override int RuleIndex { get { return RULE_attribPair; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			IEhhListener typedListener = listener as IEhhListener;
-			if (typedListener != null) typedListener.EnterWidthValue(this);
+			if (typedListener != null) typedListener.EnterAttribPair(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IEhhListener typedListener = listener as IEhhListener;
-			if (typedListener != null) typedListener.ExitWidthValue(this);
+			if (typedListener != null) typedListener.ExitAttribPair(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IEhhVisitor<TResult> typedVisitor = visitor as IEhhVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitWidthValue(this);
+			if (typedVisitor != null) return typedVisitor.VisitAttribPair(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public WidthValueContext widthValue() {
-		WidthValueContext _localctx = new WidthValueContext(_ctx, State);
-		EnterRule(_localctx, 2, RULE_widthValue);
+	public AttribPairContext attribPair() {
+		AttribPairContext _localctx = new AttribPairContext(_ctx, State);
+		EnterRule(_localctx, 2, RULE_attribPair);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 22; Match(INT);
+			State = 16; Match(ID);
+			State = 17; Match(T__1);
+			State = 18; attribValue();
+			State = 19; Match(NEWLINE);
 			}
 		}
 		catch (RecognitionException re) {
@@ -207,129 +212,64 @@ public partial class EhhParser : Parser {
 		return _localctx;
 	}
 
-	public partial class HeightValueContext : ParserRuleContext {
-		public ITerminalNode INT() { return GetToken(EhhParser.INT, 0); }
-		public HeightValueContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_heightValue; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			IEhhListener typedListener = listener as IEhhListener;
-			if (typedListener != null) typedListener.EnterHeightValue(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IEhhListener typedListener = listener as IEhhListener;
-			if (typedListener != null) typedListener.ExitHeightValue(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IEhhVisitor<TResult> typedVisitor = visitor as IEhhVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitHeightValue(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public HeightValueContext heightValue() {
-		HeightValueContext _localctx = new HeightValueContext(_ctx, State);
-		EnterRule(_localctx, 4, RULE_heightValue);
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 24; Match(INT);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.ReportError(this, re);
-			_errHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
-	public partial class ColorValueContext : ParserRuleContext {
+	public partial class AttribValueContext : ParserRuleContext {
 		public ITerminalNode[] INT() { return GetTokens(EhhParser.INT); }
 		public ITerminalNode INT(int i) {
 			return GetToken(EhhParser.INT, i);
 		}
-		public ColorValueContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_colorValue; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			IEhhListener typedListener = listener as IEhhListener;
-			if (typedListener != null) typedListener.EnterColorValue(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IEhhListener typedListener = listener as IEhhListener;
-			if (typedListener != null) typedListener.ExitColorValue(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IEhhVisitor<TResult> typedVisitor = visitor as IEhhVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitColorValue(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public ColorValueContext colorValue() {
-		ColorValueContext _localctx = new ColorValueContext(_ctx, State);
-		EnterRule(_localctx, 6, RULE_colorValue);
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 26; Match(INT);
-			State = 27; Match(T__5);
-			State = 28; Match(INT);
-			State = 29; Match(T__5);
-			State = 30; Match(INT);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.ReportError(this, re);
-			_errHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
-	public partial class OutputValueContext : ParserRuleContext {
 		public ITerminalNode FILENAME() { return GetToken(EhhParser.FILENAME, 0); }
-		public OutputValueContext(ParserRuleContext parent, int invokingState)
+		public AttribValueContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_outputValue; } }
+		public override int RuleIndex { get { return RULE_attribValue; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			IEhhListener typedListener = listener as IEhhListener;
-			if (typedListener != null) typedListener.EnterOutputValue(this);
+			if (typedListener != null) typedListener.EnterAttribValue(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IEhhListener typedListener = listener as IEhhListener;
-			if (typedListener != null) typedListener.ExitOutputValue(this);
+			if (typedListener != null) typedListener.ExitAttribValue(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IEhhVisitor<TResult> typedVisitor = visitor as IEhhVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitOutputValue(this);
+			if (typedVisitor != null) return typedVisitor.VisitAttribValue(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public OutputValueContext outputValue() {
-		OutputValueContext _localctx = new OutputValueContext(_ctx, State);
-		EnterRule(_localctx, 8, RULE_outputValue);
+	public AttribValueContext attribValue() {
+		AttribValueContext _localctx = new AttribValueContext(_ctx, State);
+		EnterRule(_localctx, 4, RULE_attribValue);
 		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 32; Match(FILENAME);
+			State = 28;
+			_errHandler.Sync(this);
+			switch ( Interpreter.AdaptivePredict(_input,1,_ctx) ) {
+			case 1:
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 21; Match(INT);
+				}
+				break;
+
+			case 2:
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 22; Match(FILENAME);
+				}
+				break;
+
+			case 3:
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 23; Match(INT);
+				State = 24; Match(T__2);
+				State = 25; Match(INT);
+				State = 26; Match(T__2);
+				State = 27; Match(INT);
+				}
+				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -344,18 +284,18 @@ public partial class EhhParser : Parser {
 	}
 
 	public static readonly string _serializedATN =
-		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\xE%\x4\x2\t\x2"+
-		"\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x3\x2\x3\x2\x3\x2\x3\x2\x3"+
-		"\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x3\x3\x3\x3\x4\x3\x4"+
-		"\x3\x5\x3\x5\x3\x5\x3\x5\x3\x5\x3\x5\x3\x6\x3\x6\x3\x6\x2\x2\x2\a\x2\x2"+
-		"\x4\x2\x6\x2\b\x2\n\x2\x2\x2\x1F\x2\f\x3\x2\x2\x2\x4\x18\x3\x2\x2\x2\x6"+
-		"\x1A\x3\x2\x2\x2\b\x1C\x3\x2\x2\x2\n\"\x3\x2\x2\x2\f\r\a\x3\x2\x2\r\xE"+
-		"\a\t\x2\x2\xE\xF\a\x4\x2\x2\xF\x10\x5\x4\x3\x2\x10\x11\a\x5\x2\x2\x11"+
-		"\x12\x5\x6\x4\x2\x12\x13\a\x6\x2\x2\x13\x14\x5\b\x5\x2\x14\x15\a\a\x2"+
-		"\x2\x15\x16\x5\n\x6\x2\x16\x17\a\n\x2\x2\x17\x3\x3\x2\x2\x2\x18\x19\a"+
-		"\v\x2\x2\x19\x5\x3\x2\x2\x2\x1A\x1B\a\v\x2\x2\x1B\a\x3\x2\x2\x2\x1C\x1D"+
-		"\a\v\x2\x2\x1D\x1E\a\b\x2\x2\x1E\x1F\a\v\x2\x2\x1F \a\b\x2\x2 !\a\v\x2"+
-		"\x2!\t\x3\x2\x2\x2\"#\a\r\x2\x2#\v\x3\x2\x2\x2\x2";
+		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\f!\x4\x2\t\x2\x4"+
+		"\x3\t\x3\x4\x4\t\x4\x3\x2\x3\x2\x3\x2\a\x2\f\n\x2\f\x2\xE\x2\xF\v\x2\x3"+
+		"\x2\x3\x2\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4"+
+		"\x3\x4\x3\x4\x5\x4\x1F\n\x4\x3\x4\x2\x2\x2\x5\x2\x2\x4\x2\x6\x2\x2\x2"+
+		" \x2\b\x3\x2\x2\x2\x4\x12\x3\x2\x2\x2\x6\x1E\x3\x2\x2\x2\b\t\a\x3\x2\x2"+
+		"\t\r\a\x6\x2\x2\n\f\x5\x4\x3\x2\v\n\x3\x2\x2\x2\f\xF\x3\x2\x2\x2\r\v\x3"+
+		"\x2\x2\x2\r\xE\x3\x2\x2\x2\xE\x10\x3\x2\x2\x2\xF\r\x3\x2\x2\x2\x10\x11"+
+		"\a\a\x2\x2\x11\x3\x3\x2\x2\x2\x12\x13\a\t\x2\x2\x13\x14\a\x4\x2\x2\x14"+
+		"\x15\x5\x6\x4\x2\x15\x16\a\n\x2\x2\x16\x5\x3\x2\x2\x2\x17\x1F\a\b\x2\x2"+
+		"\x18\x1F\a\v\x2\x2\x19\x1A\a\b\x2\x2\x1A\x1B\a\x5\x2\x2\x1B\x1C\a\b\x2"+
+		"\x2\x1C\x1D\a\x5\x2\x2\x1D\x1F\a\b\x2\x2\x1E\x17\x3\x2\x2\x2\x1E\x18\x3"+
+		"\x2\x2\x2\x1E\x19\x3\x2\x2\x2\x1F\a\x3\x2\x2\x2\x4\r\x1E";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }

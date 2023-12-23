@@ -49,56 +49,30 @@ public partial class EhhBaseListener : IEhhListener {
 	public virtual void ExitStart([NotNull] EhhParser.StartContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.widthValue"/>.
+	/// Enter a parse tree produced by <see cref="EhhParser.attribPair"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterWidthValue([NotNull] EhhParser.WidthValueContext context) { }
+	public virtual void EnterAttribPair([NotNull] EhhParser.AttribPairContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.widthValue"/>.
+	/// Exit a parse tree produced by <see cref="EhhParser.attribPair"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitWidthValue([NotNull] EhhParser.WidthValueContext context) { }
+	public virtual void ExitAttribPair([NotNull] EhhParser.AttribPairContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.heightValue"/>.
+	/// Enter a parse tree produced by <see cref="EhhParser.attribValue"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterHeightValue([NotNull] EhhParser.HeightValueContext context) { }
+	public virtual void EnterAttribValue([NotNull] EhhParser.AttribValueContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.heightValue"/>.
+	/// Exit a parse tree produced by <see cref="EhhParser.attribValue"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitHeightValue([NotNull] EhhParser.HeightValueContext context) { }
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.colorValue"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterColorValue([NotNull] EhhParser.ColorValueContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.colorValue"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitColorValue([NotNull] EhhParser.ColorValueContext context) { }
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.outputValue"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterOutputValue([NotNull] EhhParser.OutputValueContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.outputValue"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitOutputValue([NotNull] EhhParser.OutputValueContext context) { }
+	public virtual void ExitAttribValue([NotNull] EhhParser.AttribValueContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

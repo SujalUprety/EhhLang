@@ -43,47 +43,25 @@ public interface IEhhListener : IParseTreeListener {
 	void ExitStart([NotNull] EhhParser.StartContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.widthValue"/>.
+	/// Enter a parse tree produced by <see cref="EhhParser.attribPair"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterWidthValue([NotNull] EhhParser.WidthValueContext context);
+	void EnterAttribPair([NotNull] EhhParser.AttribPairContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.widthValue"/>.
+	/// Exit a parse tree produced by <see cref="EhhParser.attribPair"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitWidthValue([NotNull] EhhParser.WidthValueContext context);
+	void ExitAttribPair([NotNull] EhhParser.AttribPairContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.heightValue"/>.
+	/// Enter a parse tree produced by <see cref="EhhParser.attribValue"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterHeightValue([NotNull] EhhParser.HeightValueContext context);
+	void EnterAttribValue([NotNull] EhhParser.AttribValueContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.heightValue"/>.
+	/// Exit a parse tree produced by <see cref="EhhParser.attribValue"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitHeightValue([NotNull] EhhParser.HeightValueContext context);
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.colorValue"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterColorValue([NotNull] EhhParser.ColorValueContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.colorValue"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitColorValue([NotNull] EhhParser.ColorValueContext context);
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.outputValue"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterOutputValue([NotNull] EhhParser.OutputValueContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.outputValue"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitOutputValue([NotNull] EhhParser.OutputValueContext context);
+	void ExitAttribValue([NotNull] EhhParser.AttribValueContext context);
 }
 } // namespace Ehhmake.Content

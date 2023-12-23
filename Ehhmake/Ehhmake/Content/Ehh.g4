@@ -1,20 +1,16 @@
 grammar Ehh;
 
 start : 'ehh' LB
-            'width:' widthValue
-            'height:' heightValue
-            'background:' colorValue
-            'output:' outputValue
+            (attribPair)*
         RB;
         
-widthValue : INT;
-heightValue : INT;
-colorValue : INT ',' INT ',' INT;
-outputValue : FILENAME;
+attribPair : ID ':' attribValue NEWLINE;
+attribValue : INT | FILENAME | INT ',' INT ',' INT;
 
 LB : [{];
 RB : [}];
 INT : [0-9]+;
 ID : [a-zA-Z]+;
+NEWLINE : [\r\n]+;
 FILENAME : [a-zA-Z0-9.]+;
 WS : [ \t\r\n]+ -> skip;

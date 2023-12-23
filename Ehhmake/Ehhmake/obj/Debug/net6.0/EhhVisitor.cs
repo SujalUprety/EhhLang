@@ -40,31 +40,17 @@ public interface IEhhVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitStart([NotNull] EhhParser.StartContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.widthValue"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.attribPair"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitWidthValue([NotNull] EhhParser.WidthValueContext context);
+	Result VisitAttribPair([NotNull] EhhParser.AttribPairContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.heightValue"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.attribValue"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitHeightValue([NotNull] EhhParser.HeightValueContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.colorValue"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitColorValue([NotNull] EhhParser.ColorValueContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.outputValue"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitOutputValue([NotNull] EhhParser.OutputValueContext context);
+	Result VisitAttribValue([NotNull] EhhParser.AttribValueContext context);
 }
 } // namespace Ehhmake.Content
