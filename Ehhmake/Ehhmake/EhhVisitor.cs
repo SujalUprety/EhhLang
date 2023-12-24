@@ -12,7 +12,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
     private readonly Ehhmage _ehhmage = new();
 
     public override object? VisitProgram(EhhParser.ProgramContext context) {
-
+        
         if (context.function()[0].ID().GetText() != "ehh") {
             Console.WriteLine("Main function Ehh not found");
             return base.VisitProgram(context);
