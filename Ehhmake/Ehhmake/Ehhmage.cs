@@ -159,7 +159,10 @@ public class Ehhmage {
         var rectColor = new Scalar(_rectangleColor[2], _rectangleColor[1], _rectangleColor[0]);
         var fillColor = new Scalar(_rectangleFillColor[2], _rectangleFillColor[1], _rectangleFillColor[0]);
         
-        if (_fillRectangle) Cv2.Rectangle(_ehhmage, rect, fillColor, Cv2.FILLED);
+        if (_fillRectangle) {
+            Cv2.Rectangle(_ehhmage, rect, fillColor, Cv2.FILLED);
+            _fillRectangle = false;
+        }
         
         Cv2.Rectangle(_ehhmage, rect, rectColor, _rectangleThickness);
     }
