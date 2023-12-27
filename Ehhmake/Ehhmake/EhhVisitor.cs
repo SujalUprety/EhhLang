@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Ehhmake.Content;
 
 namespace Ehhmake;
@@ -6,7 +7,8 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
     
     private enum FunctionName {
         ehh,
-        tehhxt
+        tehhxt,
+        rehhct
     }
     
     private readonly Ehhmage _ehhmage = new();
@@ -43,6 +45,14 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                 
                 case nameof(FunctionName.tehhxt):
                     InsertText(functionContext);
+                    break;
+                
+                case nameof(FunctionName.rehhct):
+                    DrawRect(functionContext);
+                    break;
+                
+                default:
+                    Console.WriteLine($"Function \'{functionName}\' not defined");
                     break;
             }
         }
@@ -158,6 +168,75 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         }
         
         _ehhmage.InsertText();
+    }
+
+    private void DrawRect(IEnumerable<EhhParser.AttribPairContext> context) {
+        foreach (var attribPairContext in context) {
+            var attribName = attribPairContext.ID().GetText();
+            var attribValue = attribPairContext.attribValue().GetText();
+
+            switch (attribName) {
+                case nameof(Ehhmage.RectangleAttribute.thickness): {
+                    if (!int.TryParse(attribValue, out var thickness)) {
+                        Console.WriteLine("Thickness attribute value is not a number");
+                        break;
+                    }
+                    _ehhmage.SetRectangleThickness(thickness);
+                    break;
+                }
+                
+                case nameof(Ehhmage.RectangleAttribute.rectanglePosition): {
+                    var rectPosition = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (rectPosition.Length != 2) {
+                        Console.WriteLine("RectPosition attribute value is not a 2-tuple");
+                        break;
+                    }
+                    _ehhmage.SetRectanglePosition(rectPosition);
+                    break;
+                }
+                
+                case nameof(Ehhmage.RectangleAttribute.rectangleColor): {
+                    var rectColor = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (rectColor.Length != 3) {
+                        Console.WriteLine("RectColor attribute value is not a 3-tuple");
+                        break;
+                    }
+                    _ehhmage.SetRectangleColor(rectColor);
+                    break;
+                }
+                
+                case nameof(Ehhmage.RectangleAttribute.width): {
+                    if (!int.TryParse(attribValue, out var rectWidth)) {
+                        Console.WriteLine("RectWidth attribute value is not a number");
+                        break;
+                    }
+                    _ehhmage.SetRectangleWidth(rectWidth);
+                    break;
+                }
+                
+                case nameof(Ehhmage.RectangleAttribute.height): {
+                    if (!int.TryParse(attribValue, out var rectHeight)) {
+                        Console.WriteLine("RectHeight attribute value is not a number");
+                        break;
+                    }
+                    _ehhmage.SetRectangleHeight(rectHeight);
+                    break;
+                }
+                
+                case nameof(Ehhmage.RectangleAttribute.fillColor): {
+                    var fillColor = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (fillColor.Length != 3) {
+                        Console.WriteLine("FillColor attribute value is not a 3-tuple");
+                        break;
+                    }
+                    _ehhmage.SetFillRectangle(true);
+                    _ehhmage.SetRectangleFillColor(fillColor);
+                    break;
+                }
+                
+            }
+        }
+        _ehhmage.DrawRectangle();
     }
     
 }

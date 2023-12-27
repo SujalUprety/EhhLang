@@ -26,3 +26,19 @@ tehhxt {
     textPosition: 100, 700
     text: "My fourth ehhmage with tehhxt!"
 }
+
+rehhct {
+    rectanglePosition: 100, 800
+    rectangleColor: 0, 255, 0
+    width: 950
+    height: 250
+    thickness: 10
+    fillColor: 0, 0, 255
+}
+
+tehhxt {
+    fontScale: 3
+    thickness: 3
+    textPosition: 600, 930
+    text: "Hello world!"
+}
