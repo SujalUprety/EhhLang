@@ -1,4 +1,3 @@
-using System.Drawing;
 using OpenCvSharp;
 using Point = OpenCvSharp.Point;
 
@@ -159,9 +158,8 @@ public class Ehhmage {
         var rect = new Rect(_rectanglePosition[0], _rectanglePosition[1], _rectangleWidth, _rectangleHeight);
         var rectColor = new Scalar(_rectangleColor[2], _rectangleColor[1], _rectangleColor[0]);
         var fillColor = new Scalar(_rectangleFillColor[2], _rectangleFillColor[1], _rectangleFillColor[0]);
-        if (_fillRectangle) {
-            Cv2.Rectangle(_ehhmage, rect, fillColor, Cv2.FILLED);
-        }
+        
+        if (_fillRectangle) Cv2.Rectangle(_ehhmage, rect, fillColor, Cv2.FILLED);
         
         Cv2.Rectangle(_ehhmage, rect, rectColor, _rectangleThickness);
     }

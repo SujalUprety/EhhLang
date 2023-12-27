@@ -1,5 +1,5 @@
-using System.ComponentModel;
 using Ehhmake.Content;
+using static System.Enum;
 
 namespace Ehhmake;
 
@@ -7,8 +7,10 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
     
     private enum FunctionName {
         ehh,
-        tehhxt,
-        rehhct
+        tehhxt = 1,
+        rehhct = 2,
+        text = 1,
+        rect = 2
     }
     
     private readonly Ehhmage _ehhmage = new();
@@ -38,23 +40,26 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             
             #endregion
 
-            switch (functionName) {
-                case nameof(FunctionName.ehh):
-                    InitializeFunctionEhh(functionContext);
-                    break;
-                
-                case nameof(FunctionName.tehhxt):
-                    InsertText(functionContext);
-                    break;
-                
-                case nameof(FunctionName.rehhct):
-                    DrawRect(functionContext);
-                    break;
-                
-                default:
-                    Console.WriteLine($"Function \'{functionName}\' not defined");
-                    break;
+            if(TryParse(functionName, out FunctionName functionNameEnum)) {
+                switch (functionNameEnum) {
+                    case FunctionName.ehh:
+                        InitializeFunctionEhh(functionContext);
+                        break;
+
+                    case FunctionName.tehhxt:
+                        InsertText(functionContext);
+                        break;
+
+                    case FunctionName.rehhct:
+                        DrawRect(functionContext);
+                        break;
+
+                    default:
+                        Console.WriteLine($"Function \'{functionName}\' not defined");
+                        break;
+                }
             }
+            else Console.WriteLine($"Function \'{functionName}\' not defined");
         }
         
         _ehhmage.CreateImage();
