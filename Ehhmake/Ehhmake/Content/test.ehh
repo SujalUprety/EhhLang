@@ -7,29 +7,29 @@ ehh {
 tehhxt {
     fontScale: 5
     thickness: 5
-    textPosition: 100, 100
-    textColor: 255, 0, 0
+    position: 100, 100
+    color: 255, 0, 0
     text: "First tehhxt in ehhmage!"
 }
 
 tehhxt {
-    textPosition: 100, 300
+    position: 100, 300
     text: "Second tehhxt in ehhmage!"
 }
 
 tehhxt {
-    textPosition: 100, 500
+    position: 100, 500
     text: "Third tehhxt in ehhmage!"
 }
 
 tehhxt {
-    textPosition: 100, 700
+    position: 100, 700
     text: "Fourth tehhxt in ehhmage!"
 }
 
 rehhct {
-    rectanglePosition: 100, 800
-    rectangleColor: 0, 255, 0
+    position: 100, 800
+    color: 0, 255, 0
     width: 300
     height: 250
     thickness: 10
@@ -39,19 +39,19 @@ rehhct {
 tehhxt {
     fontScale: 3
     thickness: 3
-    textPosition: 110, 930
+    position: 110, 930
     text: "Hello world!"
 }
 
 rect {
-    rectanglePosition: 500, 800
-    rectangleColor: 0, 255, 0
+    position: 500, 800
+    color: 0, 255, 0
     width: 300
     height: 250
     thickness: 10
 }
 
 text {
-    textPosition: 510, 930
+    position: 510, 930
     text: "Hello world!"
 }

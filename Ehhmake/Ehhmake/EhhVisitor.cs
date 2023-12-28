@@ -13,7 +13,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         rect = 2
     }
     
-    private readonly Ehhmage _ehhmage = new();
+    private readonly EhhmageComplete _ehhmageComplete = new();
 
     public override object? VisitProgram(EhhParser.ProgramContext context) {
         
@@ -62,7 +62,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             else Console.WriteLine($"Function \'{functionName}\' not defined");
         }
         
-        _ehhmage.CreateImage();
+        _ehhmageComplete._ehhmage.CreateImage();
         
         return base.VisitProgram(context);
     }
@@ -74,44 +74,47 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             var attribValue = attribPairContext.attribValue().GetText();
         
             switch (attribName) {
-                case nameof(Ehhmage.EhhmageAttribute.width): {
+                case nameof(EhhmageComplete.EhhmageAttribute.width): {
                     if (!int.TryParse(attribValue, out var width)) {
                         Console.WriteLine("Width attribute value is not a number");
                         break;
                     }
-                    _ehhmage.SetWidth(width);
+                    _ehhmageComplete._ehhmage.SetWidth(width);
                     break;
                 }
         
-                case nameof(Ehhmage.EhhmageAttribute.height): {
+                case nameof(EhhmageComplete.EhhmageAttribute.height): {
                     if (!int.TryParse(attribValue, out var height)) {
                         Console.WriteLine("Height attribute value is not a number");
                         break;
                     }
-                    _ehhmage.SetHeight(height);
+                    _ehhmageComplete._ehhmage.SetHeight(height);
                     break;
                 }
         
-                case nameof(Ehhmage.EhhmageAttribute.background): {
+                case nameof(EhhmageComplete.EhhmageAttribute.background): {
                     var background = attribValue.Split(',').Select(int.Parse).ToArray();
                     if (background.Length != 3) {
                         Console.WriteLine("Background attribute value is not a 3-tuple");
                         break;
                     }
-                    _ehhmage.SetBackground(background);
+                    _ehhmageComplete._ehhmage.SetBackground(background);
                     
                     break;
                 }
                 
-                case nameof(Ehhmage.EhhmageAttribute.output): {
-                    _ehhmage.SetOutputName(attribValue);
+                case nameof(EhhmageComplete.EhhmageAttribute.output): {
+                    _ehhmageComplete._ehhmage.SetOutputName(attribValue);
                     break;
                 }
-                    
+                
+                default:
+                    Console.WriteLine($"{attribName} is not defined");
+                    break;
             }
         }
         
-        _ehhmage.InitializeEhhMage();
+        _ehhmageComplete._ehhmage.InitializeEhhMage();
         
     }
 
@@ -122,57 +125,62 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             var attribValue = attribPairContext.attribValue().GetText();
 
             switch (attribName) {
-                case nameof(Ehhmage.TextAttribute.fontScale): {
+                case nameof(EhhmageComplete.TextAttribute.fontScale): {
                     if (!int.TryParse(attribValue, out var fontScale)) {
                         Console.WriteLine("FontScale attribute value is not a number");
                         break;
                     }
-                    _ehhmage.SetFontScale(fontScale);
+                    _ehhmageComplete._text.SetFontScale(fontScale);
                     break;
                 }
                 
-                case nameof(Ehhmage.TextAttribute.thickness): {
+                case nameof(EhhmageComplete.TextAttribute.thickness): {
                     if (!int.TryParse(attribValue, out var thickness)) {
                         Console.WriteLine("Thickness attribute value is not a number");
                         break;
                     }
-                    _ehhmage.SetThickness(thickness);
+                    _ehhmageComplete._text.SetThickness(thickness);
                     break;
                 }
                 
-                case nameof(Ehhmage.TextAttribute.textPosition): {
+                case nameof(EhhmageComplete.TextAttribute.position): {
                     var textPosition = attribValue.Split(',').Select(int.Parse).ToArray();
                     if (textPosition.Length != 2) {
                         Console.WriteLine("TextPosition attribute value is not a 2-tuple");
                         break;
                     }
-                    _ehhmage.SetTextPosition(textPosition);
+                    _ehhmageComplete._text.SetPosition(textPosition);
                     break;
                 }
                 
-                case nameof(Ehhmage.TextAttribute.textColor): {
+                case nameof(EhhmageComplete.TextAttribute.color): {
                     var textColor = attribValue.Split(',').Select(int.Parse).ToArray();
                     if (textColor.Length != 3) {
                         Console.WriteLine("TextColor attribute value is not a 3-tuple");
                         break;
                     }
-                    _ehhmage.SetTextColor(textColor);
+                    _ehhmageComplete._text.SetColor(textColor);
                     break;
                 }
                 
-                case nameof(Ehhmage.TextAttribute.text): {
+                case nameof(EhhmageComplete.TextAttribute.text): {
                     if(attribValue.StartsWith('"') && attribValue.EndsWith('"')) {
-                        _ehhmage.SetText(attribValue[1..^1]);
+                        _ehhmageComplete._text.SetText(attribValue[1..^1]);
                     } else {
                         Console.WriteLine("Text attribute value is not a string");
                     }
                     break;
                 }
+                
+                default:
+                    Console.WriteLine($"{attribName} is not defined");
+                    break;
             }
             
         }
         
-        _ehhmage.InsertText();
+        _ehhmageComplete._text.InsertText();
+        
     }
 
     private void DrawRect(IEnumerable<EhhParser.AttribPairContext> context) {
@@ -181,67 +189,70 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             var attribValue = attribPairContext.attribValue().GetText();
 
             switch (attribName) {
-                case nameof(Ehhmage.RectangleAttribute.thickness): {
+                case nameof(EhhmageComplete.RectangleAttribute.thickness): {
                     if (!int.TryParse(attribValue, out var thickness)) {
                         Console.WriteLine("Thickness attribute value is not a number");
                         break;
                     }
-                    _ehhmage.SetRectangleThickness(thickness);
+                    _ehhmageComplete._rectangle.SetThickness(thickness);
                     break;
                 }
                 
-                case nameof(Ehhmage.RectangleAttribute.rectanglePosition): {
+                case nameof(EhhmageComplete.RectangleAttribute.position): {
                     var rectPosition = attribValue.Split(',').Select(int.Parse).ToArray();
                     if (rectPosition.Length != 2) {
                         Console.WriteLine("RectPosition attribute value is not a 2-tuple");
                         break;
                     }
-                    _ehhmage.SetRectanglePosition(rectPosition);
+                    _ehhmageComplete._rectangle.SetPosition(rectPosition);
                     break;
                 }
                 
-                case nameof(Ehhmage.RectangleAttribute.rectangleColor): {
+                case nameof(EhhmageComplete.RectangleAttribute.color): {
                     var rectColor = attribValue.Split(',').Select(int.Parse).ToArray();
                     if (rectColor.Length != 3) {
                         Console.WriteLine("RectColor attribute value is not a 3-tuple");
                         break;
                     }
-                    _ehhmage.SetRectangleColor(rectColor);
+                    _ehhmageComplete._rectangle.SetColor(rectColor);
                     break;
                 }
                 
-                case nameof(Ehhmage.RectangleAttribute.width): {
+                case nameof(EhhmageComplete.RectangleAttribute.width): {
                     if (!int.TryParse(attribValue, out var rectWidth)) {
                         Console.WriteLine("RectWidth attribute value is not a number");
                         break;
                     }
-                    _ehhmage.SetRectangleWidth(rectWidth);
+                    _ehhmageComplete._rectangle.SetWidth(rectWidth);
                     break;
                 }
                 
-                case nameof(Ehhmage.RectangleAttribute.height): {
+                case nameof(EhhmageComplete.RectangleAttribute.height): {
                     if (!int.TryParse(attribValue, out var rectHeight)) {
                         Console.WriteLine("RectHeight attribute value is not a number");
                         break;
                     }
-                    _ehhmage.SetRectangleHeight(rectHeight);
+                    _ehhmageComplete._rectangle.SetHeight(rectHeight);
                     break;
                 }
                 
-                case nameof(Ehhmage.RectangleAttribute.fillColor): {
+                case nameof(EhhmageComplete.RectangleAttribute.fillColor): {
                     var fillColor = attribValue.Split(',').Select(int.Parse).ToArray();
                     if (fillColor.Length != 3) {
                         Console.WriteLine("FillColor attribute value is not a 3-tuple");
                         break;
                     }
-                    _ehhmage.SetFillRectangle(true);
-                    _ehhmage.SetRectangleFillColor(fillColor);
+                    _ehhmageComplete._rectangle.SetDoFill(true);
+                    _ehhmageComplete._rectangle.SetFillColor(fillColor);
                     break;
                 }
                 
+                default:
+                    Console.WriteLine($"{attribName} is not defined");
+                    break;
             }
         }
-        _ehhmage.DrawRectangle();
+        _ehhmageComplete._rectangle.DrawRectangle();
     }
     
 }
