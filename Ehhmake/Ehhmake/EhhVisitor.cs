@@ -14,6 +14,9 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
     }
     
     private readonly EhhmageComplete _ehhmageComplete = new();
+    
+    private static EhhmageComplete.Text _text = new();
+    private static readonly EhhmageComplete.Rectangle _rectangle = new();
 
     public override object? VisitProgram(EhhParser.ProgramContext context) {
         
@@ -40,35 +43,64 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             }
             
             #endregion
-            
-            if(preDefinedFunctionName != "ehh")
+
+            try {
+                var symbol = function.functionIdentifier().symbol().GetText();
                 functionName = function.functionIdentifier().functionName().GetText();
+                
+                try {
+                    var functionObject = _ehhmageComplete.FunctionNames[preDefinedFunctionName];
+                    switch (functionObject) {
+                        case EhhmageComplete.Text text:
+                            text.Print();
+                            InsertText(functionContext, functionName, text);
+                            break;
 
-            if(TryParse(preDefinedFunctionName, out FunctionName functionNameEnum)) {
-                switch (functionNameEnum) {
-                    case FunctionName.ehh:
-                        InitializeFunctionEhh(functionContext);
-                        break;
+                        case EhhmageComplete.Rectangle rectangle:
+                            DrawRect(functionContext, functionName, rectangle);
+                            break;
 
-                    case FunctionName.tehhxt:
-                        InsertText(functionContext, functionName);
-                        break;
-
-                    case FunctionName.rehhct:
-                        DrawRect(functionContext, functionName);
-                        break;
-
-                    default:
-                        Console.WriteLine($"Function \'{functionName}\' not identified");
-                        break;
+                        default:
+                            Console.WriteLine($"Function \'{functionName}\' not identified");
+                            break;
+                    }
+                }
+                catch{
+                    CompareLibraryDefinedFunction(preDefinedFunctionName, functionName, functionContext);
                 }
             }
-            else Console.WriteLine($"Function \'{functionName}\' not identified");
+            catch {
+                CompareLibraryDefinedFunction(preDefinedFunctionName, functionName, functionContext);
+            }
+
         }
         
         _ehhmageComplete.ehhmage.CreateImage();
         
         return base.VisitProgram(context);
+    }
+
+    private void CompareLibraryDefinedFunction(string preDefinedFunctionName, string functionName, IEnumerable<EhhParser.AttribPairContext> functionContext) {
+        if(TryParse(preDefinedFunctionName, out FunctionName functionNameEnum)) {
+            switch (functionNameEnum) {
+                case FunctionName.ehh:
+                    InitializeFunctionEhh(functionContext);
+                    break;
+
+                case FunctionName.tehhxt:
+                    InsertText(functionContext, functionName);
+                    break;
+
+                case FunctionName.rehhct:
+                    DrawRect(functionContext, functionName);
+                    break;
+
+                default:
+                    Console.WriteLine($"Function \'{functionName}\' not identified3");
+                    break;
+            }
+        }
+        else Console.WriteLine($"Function \'{functionName}\' not identified4");
     }
 
     private void InitializeFunctionEhh(IEnumerable<EhhParser.AttribPairContext> context) {
@@ -122,9 +154,14 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         
     }
 
-    private void InsertText(IEnumerable<EhhParser.AttribPairContext> context, string functionName) {
-
-        var text = new EhhmageComplete.Text();
+    private void InsertText(IEnumerable<EhhParser.AttribPairContext> context, string functionName, EhhmageComplete.Text? text = null) {
+        
+        var isGlobal = false;
+        
+        if (text == null) {
+            text = _text.Clone();
+            isGlobal = true;
+        }
         
         foreach (var attribPairContext in context) {
             var attribName = attribPairContext.ID().GetText();
@@ -186,12 +223,14 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         }
         
         text.InsertText();
-        _ehhmageComplete.FunctionNames.Add(functionName, text);
+        if(!functionName.Equals(string.Empty)) _ehhmageComplete.FunctionNames.Add(functionName, text);
+
+        if (isGlobal) _text = text.Clone();
     }
 
-    private void DrawRect(IEnumerable<EhhParser.AttribPairContext> context, string functionName) {
-
-        var rectangle = new EhhmageComplete.Rectangle();
+    private void DrawRect(IEnumerable<EhhParser.AttribPairContext> context, string functionName, EhhmageComplete.Rectangle? rectangle = null) {
+        
+        rectangle ??= _rectangle;
         
         foreach (var attribPairContext in context) {
             var attribName = attribPairContext.ID().GetText();
@@ -261,8 +300,9 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                     break;
             }
         }
+        
         rectangle.DrawRectangle();
-        _ehhmageComplete.FunctionNames.Add(functionName, rectangle);
+        if(!functionName.Equals(string.Empty))   _ehhmageComplete.FunctionNames.Add(functionName, rectangle);
     }
     
 }

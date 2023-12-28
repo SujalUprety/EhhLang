@@ -9,7 +9,7 @@ function: functionIdentifier LB
 functionIdentifier: preFunctionName
                     | preFunctionName symbol functionName;
     
-symbol: '::' | '=>';
+symbol: '::';
 preFunctionName: ID;
 functionName: ID;
         

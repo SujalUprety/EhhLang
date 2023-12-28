@@ -101,6 +101,47 @@ public class EhhmageComplete {
     
         #endregion
         
+        #region Getters
+        
+        public int GetFontScale() {
+            return _fontScale;
+        }
+        
+        public int GetThickness() {
+            return _thickness;
+        }
+        
+        public int[] GetPosition() {
+            return _position;
+        }
+        
+        public int[] GetColor() {
+            return _color;
+        }
+        
+        public string GetText() {
+            return _text;
+        }
+        
+        #endregion
+
+        public Text Clone() {
+            var to = new Text
+            {
+                _fontScale = _fontScale,
+                _thickness = _thickness,
+                _position = _position,
+                _color = _color,
+                _text = _text
+            };
+
+            return to;
+        }
+        
+        public void Print() {
+            Console.WriteLine($"\nFont Scale: {_fontScale}\nThickness: {_thickness}\nPosition: {_position[0]}, {_position[1]}\nColor: {_color[0]}, {_color[1]}, {_color[2]}\nText: {_text}\n");
+        }
+        
         public void InsertText() {
             Cv2.PutText(_ehhmageOutput, _text, new Point(_position[0], _position[1]), 
                 HersheyFonts.HersheyPlain, _fontScale, new Scalar(_color[2], _color[1], _color[0]), _thickness);
@@ -168,6 +209,6 @@ public class EhhmageComplete {
 
     public Ehhmage ehhmage = new();
     
-    public Dictionary<string, object?> FunctionNames = new();
+    public readonly Dictionary<string, object?> FunctionNames = new();
 
 }
