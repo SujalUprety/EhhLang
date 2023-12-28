@@ -47,6 +47,34 @@ public interface IEhhVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitFunction([NotNull] EhhParser.FunctionContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="EhhParser.functionIdentifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFunctionIdentifier([NotNull] EhhParser.FunctionIdentifierContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="EhhParser.symbol"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSymbol([NotNull] EhhParser.SymbolContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="EhhParser.preFunctionName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPreFunctionName([NotNull] EhhParser.PreFunctionNameContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="EhhParser.functionName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFunctionName([NotNull] EhhParser.FunctionNameContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="EhhParser.attribPair"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

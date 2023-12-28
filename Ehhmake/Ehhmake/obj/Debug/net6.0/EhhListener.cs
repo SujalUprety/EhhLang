@@ -54,6 +54,50 @@ public interface IEhhListener : IParseTreeListener {
 	void ExitFunction([NotNull] EhhParser.FunctionContext context);
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="EhhParser.functionIdentifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunctionIdentifier([NotNull] EhhParser.FunctionIdentifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="EhhParser.functionIdentifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunctionIdentifier([NotNull] EhhParser.FunctionIdentifierContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="EhhParser.symbol"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSymbol([NotNull] EhhParser.SymbolContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="EhhParser.symbol"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSymbol([NotNull] EhhParser.SymbolContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="EhhParser.preFunctionName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPreFunctionName([NotNull] EhhParser.PreFunctionNameContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="EhhParser.preFunctionName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPreFunctionName([NotNull] EhhParser.PreFunctionNameContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="EhhParser.functionName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunctionName([NotNull] EhhParser.FunctionNameContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="EhhParser.functionName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunctionName([NotNull] EhhParser.FunctionNameContext context);
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="EhhParser.attribPair"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

@@ -17,13 +17,14 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
 
     public override object? VisitProgram(EhhParser.ProgramContext context) {
         
-        if (context.function()[0].ID().GetText() != "ehh") {
+        if (context.function()[0].functionIdentifier().preFunctionName().GetText() != "ehh") {
             Console.WriteLine("Main function Ehh not found");
             return base.VisitProgram(context);
         }
 
         foreach (var function in context.function()) {
-            var functionName = function.ID().GetText();
+            var preDefinedFunctionName = function.functionIdentifier().preFunctionName().GetText();
+            var functionName = string.Empty;
             var functionContext = function.attribPair();
 
             #region CurlyBracesCheck
@@ -39,30 +40,33 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             }
             
             #endregion
+            
+            if(preDefinedFunctionName != "ehh")
+                functionName = function.functionIdentifier().functionName().GetText();
 
-            if(TryParse(functionName, out FunctionName functionNameEnum)) {
+            if(TryParse(preDefinedFunctionName, out FunctionName functionNameEnum)) {
                 switch (functionNameEnum) {
                     case FunctionName.ehh:
                         InitializeFunctionEhh(functionContext);
                         break;
 
                     case FunctionName.tehhxt:
-                        InsertText(functionContext);
+                        InsertText(functionContext, functionName);
                         break;
 
                     case FunctionName.rehhct:
-                        DrawRect(functionContext);
+                        DrawRect(functionContext, functionName);
                         break;
 
                     default:
-                        Console.WriteLine($"Function \'{functionName}\' not defined");
+                        Console.WriteLine($"Function \'{functionName}\' not identified");
                         break;
                 }
             }
-            else Console.WriteLine($"Function \'{functionName}\' not defined");
+            else Console.WriteLine($"Function \'{functionName}\' not identified");
         }
         
-        _ehhmageComplete._ehhmage.CreateImage();
+        _ehhmageComplete.ehhmage.CreateImage();
         
         return base.VisitProgram(context);
     }
@@ -79,7 +83,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("Width attribute value is not a number");
                         break;
                     }
-                    _ehhmageComplete._ehhmage.SetWidth(width);
+                    _ehhmageComplete.ehhmage.SetWidth(width);
                     break;
                 }
         
@@ -88,7 +92,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("Height attribute value is not a number");
                         break;
                     }
-                    _ehhmageComplete._ehhmage.SetHeight(height);
+                    _ehhmageComplete.ehhmage.SetHeight(height);
                     break;
                 }
         
@@ -98,13 +102,13 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("Background attribute value is not a 3-tuple");
                         break;
                     }
-                    _ehhmageComplete._ehhmage.SetBackground(background);
+                    _ehhmageComplete.ehhmage.SetBackground(background);
                     
                     break;
                 }
                 
                 case nameof(EhhmageComplete.EhhmageAttribute.output): {
-                    _ehhmageComplete._ehhmage.SetOutputName(attribValue);
+                    _ehhmageComplete.ehhmage.SetOutputName(attribValue);
                     break;
                 }
                 
@@ -114,11 +118,13 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             }
         }
         
-        _ehhmageComplete._ehhmage.InitializeEhhMage();
+        _ehhmageComplete.ehhmage.InitializeEhhMage();
         
     }
 
-    private void InsertText(IEnumerable<EhhParser.AttribPairContext> context) {
+    private void InsertText(IEnumerable<EhhParser.AttribPairContext> context, string functionName) {
+
+        var text = new EhhmageComplete.Text();
         
         foreach (var attribPairContext in context) {
             var attribName = attribPairContext.ID().GetText();
@@ -130,7 +136,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("FontScale attribute value is not a number");
                         break;
                     }
-                    _ehhmageComplete._text.SetFontScale(fontScale);
+                    text.SetFontScale(fontScale);
                     break;
                 }
                 
@@ -139,7 +145,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("Thickness attribute value is not a number");
                         break;
                     }
-                    _ehhmageComplete._text.SetThickness(thickness);
+                    text.SetThickness(thickness);
                     break;
                 }
                 
@@ -149,7 +155,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("TextPosition attribute value is not a 2-tuple");
                         break;
                     }
-                    _ehhmageComplete._text.SetPosition(textPosition);
+                    text.SetPosition(textPosition);
                     break;
                 }
                 
@@ -159,13 +165,13 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("TextColor attribute value is not a 3-tuple");
                         break;
                     }
-                    _ehhmageComplete._text.SetColor(textColor);
+                    text.SetColor(textColor);
                     break;
                 }
                 
                 case nameof(EhhmageComplete.TextAttribute.text): {
                     if(attribValue.StartsWith('"') && attribValue.EndsWith('"')) {
-                        _ehhmageComplete._text.SetText(attribValue[1..^1]);
+                        text.SetText(attribValue[1..^1]);
                     } else {
                         Console.WriteLine("Text attribute value is not a string");
                     }
@@ -179,11 +185,14 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             
         }
         
-        _ehhmageComplete._text.InsertText();
-        
+        text.InsertText();
+        _ehhmageComplete.FunctionNames.Add(functionName, text);
     }
 
-    private void DrawRect(IEnumerable<EhhParser.AttribPairContext> context) {
+    private void DrawRect(IEnumerable<EhhParser.AttribPairContext> context, string functionName) {
+
+        var rectangle = new EhhmageComplete.Rectangle();
+        
         foreach (var attribPairContext in context) {
             var attribName = attribPairContext.ID().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
@@ -194,7 +203,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("Thickness attribute value is not a number");
                         break;
                     }
-                    _ehhmageComplete._rectangle.SetThickness(thickness);
+                    rectangle.SetThickness(thickness);
                     break;
                 }
                 
@@ -204,7 +213,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("RectPosition attribute value is not a 2-tuple");
                         break;
                     }
-                    _ehhmageComplete._rectangle.SetPosition(rectPosition);
+                    rectangle.SetPosition(rectPosition);
                     break;
                 }
                 
@@ -214,7 +223,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("RectColor attribute value is not a 3-tuple");
                         break;
                     }
-                    _ehhmageComplete._rectangle.SetColor(rectColor);
+                    rectangle.SetColor(rectColor);
                     break;
                 }
                 
@@ -223,7 +232,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("RectWidth attribute value is not a number");
                         break;
                     }
-                    _ehhmageComplete._rectangle.SetWidth(rectWidth);
+                    rectangle.SetWidth(rectWidth);
                     break;
                 }
                 
@@ -232,7 +241,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("RectHeight attribute value is not a number");
                         break;
                     }
-                    _ehhmageComplete._rectangle.SetHeight(rectHeight);
+                    rectangle.SetHeight(rectHeight);
                     break;
                 }
                 
@@ -242,8 +251,8 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("FillColor attribute value is not a 3-tuple");
                         break;
                     }
-                    _ehhmageComplete._rectangle.SetDoFill(true);
-                    _ehhmageComplete._rectangle.SetFillColor(fillColor);
+                    rectangle.SetDoFill(true);
+                    rectangle.SetFillColor(fillColor);
                     break;
                 }
                 
@@ -252,7 +261,8 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                     break;
             }
         }
-        _ehhmageComplete._rectangle.DrawRectangle();
+        rectangle.DrawRectangle();
+        _ehhmageComplete.FunctionNames.Add(functionName, rectangle);
     }
     
 }

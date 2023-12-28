@@ -165,11 +165,9 @@ public class EhhmageComplete {
         }
         
     }
+
+    public Ehhmage ehhmage = new();
     
-    
-    public Ehhmage _ehhmage = new();
-    public Text _text = new();
-    public Rectangle _rectangle = new();
-    
-    
+    public Dictionary<string, object?> FunctionNames = new();
+
 }

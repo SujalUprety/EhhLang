@@ -31,20 +31,23 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 [System.CLSCompliant(false)]
 public partial class EhhParser : Parser {
 	public const int
-		T__0=1, T__1=2, LB=3, RB=4, INT=5, ID=6, STRING=7, NEWLINE=8, FILENAME=9, 
-		WS=10;
+		T__0=1, T__1=2, T__2=3, T__3=4, LB=5, RB=6, INT=7, ID=8, STRING=9, NEWLINE=10, 
+		FILENAME=11, WS=12;
 	public const int
-		RULE_program = 0, RULE_function = 1, RULE_attribPair = 2, RULE_attribValue = 3;
+		RULE_program = 0, RULE_function = 1, RULE_functionIdentifier = 2, RULE_symbol = 3, 
+		RULE_preFunctionName = 4, RULE_functionName = 5, RULE_attribPair = 6, 
+		RULE_attribValue = 7;
 	public static readonly string[] ruleNames = {
-		"program", "function", "attribPair", "attribValue"
+		"program", "function", "functionIdentifier", "symbol", "preFunctionName", 
+		"functionName", "attribPair", "attribValue"
 	};
 
 	private static readonly string[] _LiteralNames = {
-		null, "':'", "','"
+		null, "'::'", "'=>'", "':'", "','"
 	};
 	private static readonly string[] _SymbolicNames = {
-		null, null, null, "LB", "RB", "INT", "ID", "STRING", "NEWLINE", "FILENAME", 
-		"WS"
+		null, null, null, null, null, "LB", "RB", "INT", "ID", "STRING", "NEWLINE", 
+		"FILENAME", "WS"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -132,20 +135,20 @@ public partial class EhhParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 11;
+			State = 19;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while (_la==ID) {
 				{
 				{
-				State = 8; function();
+				State = 16; function();
 				}
 				}
-				State = 13;
+				State = 21;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 14; Match(Eof);
+			State = 22; Match(Eof);
 			}
 		}
 		catch (RecognitionException re) {
@@ -160,7 +163,9 @@ public partial class EhhParser : Parser {
 	}
 
 	public partial class FunctionContext : ParserRuleContext {
-		public ITerminalNode ID() { return GetToken(EhhParser.ID, 0); }
+		public FunctionIdentifierContext functionIdentifier() {
+			return GetRuleContext<FunctionIdentifierContext>(0);
+		}
 		public ITerminalNode LB() { return GetToken(EhhParser.LB, 0); }
 		public ITerminalNode RB() { return GetToken(EhhParser.RB, 0); }
 		public AttribPairContext[] attribPair() {
@@ -197,22 +202,228 @@ public partial class EhhParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 16; Match(ID);
-			State = 17; Match(LB);
-			State = 21;
+			State = 24; functionIdentifier();
+			State = 25; Match(LB);
+			State = 29;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while (_la==ID) {
 				{
 				{
-				State = 18; attribPair();
+				State = 26; attribPair();
 				}
 				}
-				State = 23;
+				State = 31;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 24; Match(RB);
+			State = 32; Match(RB);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class FunctionIdentifierContext : ParserRuleContext {
+		public PreFunctionNameContext preFunctionName() {
+			return GetRuleContext<PreFunctionNameContext>(0);
+		}
+		public SymbolContext symbol() {
+			return GetRuleContext<SymbolContext>(0);
+		}
+		public FunctionNameContext functionName() {
+			return GetRuleContext<FunctionNameContext>(0);
+		}
+		public FunctionIdentifierContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_functionIdentifier; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IEhhListener typedListener = listener as IEhhListener;
+			if (typedListener != null) typedListener.EnterFunctionIdentifier(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IEhhListener typedListener = listener as IEhhListener;
+			if (typedListener != null) typedListener.ExitFunctionIdentifier(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IEhhVisitor<TResult> typedVisitor = visitor as IEhhVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunctionIdentifier(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public FunctionIdentifierContext functionIdentifier() {
+		FunctionIdentifierContext _localctx = new FunctionIdentifierContext(_ctx, State);
+		EnterRule(_localctx, 4, RULE_functionIdentifier);
+		try {
+			State = 39;
+			_errHandler.Sync(this);
+			switch ( Interpreter.AdaptivePredict(_input,2,_ctx) ) {
+			case 1:
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 34; preFunctionName();
+				}
+				break;
+
+			case 2:
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 35; preFunctionName();
+				State = 36; symbol();
+				State = 37; functionName();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class SymbolContext : ParserRuleContext {
+		public SymbolContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_symbol; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IEhhListener typedListener = listener as IEhhListener;
+			if (typedListener != null) typedListener.EnterSymbol(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IEhhListener typedListener = listener as IEhhListener;
+			if (typedListener != null) typedListener.ExitSymbol(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IEhhVisitor<TResult> typedVisitor = visitor as IEhhVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSymbol(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public SymbolContext symbol() {
+		SymbolContext _localctx = new SymbolContext(_ctx, State);
+		EnterRule(_localctx, 6, RULE_symbol);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 41;
+			_la = _input.La(1);
+			if ( !(_la==T__0 || _la==T__1) ) {
+			_errHandler.RecoverInline(this);
+			} else {
+				if (_input.La(1) == TokenConstants.Eof) {
+					matchedEOF = true;
+				}
+
+				_errHandler.ReportMatch(this);
+				Consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class PreFunctionNameContext : ParserRuleContext {
+		public ITerminalNode ID() { return GetToken(EhhParser.ID, 0); }
+		public PreFunctionNameContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_preFunctionName; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IEhhListener typedListener = listener as IEhhListener;
+			if (typedListener != null) typedListener.EnterPreFunctionName(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IEhhListener typedListener = listener as IEhhListener;
+			if (typedListener != null) typedListener.ExitPreFunctionName(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IEhhVisitor<TResult> typedVisitor = visitor as IEhhVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPreFunctionName(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public PreFunctionNameContext preFunctionName() {
+		PreFunctionNameContext _localctx = new PreFunctionNameContext(_ctx, State);
+		EnterRule(_localctx, 8, RULE_preFunctionName);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 43; Match(ID);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class FunctionNameContext : ParserRuleContext {
+		public ITerminalNode ID() { return GetToken(EhhParser.ID, 0); }
+		public FunctionNameContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_functionName; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IEhhListener typedListener = listener as IEhhListener;
+			if (typedListener != null) typedListener.EnterFunctionName(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IEhhListener typedListener = listener as IEhhListener;
+			if (typedListener != null) typedListener.ExitFunctionName(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IEhhVisitor<TResult> typedVisitor = visitor as IEhhVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunctionName(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public FunctionNameContext functionName() {
+		FunctionNameContext _localctx = new FunctionNameContext(_ctx, State);
+		EnterRule(_localctx, 10, RULE_functionName);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 45; Match(ID);
 			}
 		}
 		catch (RecognitionException re) {
@@ -255,14 +466,14 @@ public partial class EhhParser : Parser {
 	[RuleVersion(0)]
 	public AttribPairContext attribPair() {
 		AttribPairContext _localctx = new AttribPairContext(_ctx, State);
-		EnterRule(_localctx, 4, RULE_attribPair);
+		EnterRule(_localctx, 12, RULE_attribPair);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 26; Match(ID);
-			State = 27; Match(T__0);
-			State = 28; attribValue();
-			State = 29; Match(NEWLINE);
+			State = 47; Match(ID);
+			State = 48; Match(T__2);
+			State = 49; attribValue();
+			State = 50; Match(NEWLINE);
 			}
 		}
 		catch (RecognitionException re) {
@@ -307,47 +518,47 @@ public partial class EhhParser : Parser {
 	[RuleVersion(0)]
 	public AttribValueContext attribValue() {
 		AttribValueContext _localctx = new AttribValueContext(_ctx, State);
-		EnterRule(_localctx, 6, RULE_attribValue);
+		EnterRule(_localctx, 14, RULE_attribValue);
 		try {
-			State = 40;
+			State = 61;
 			_errHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(_input,2,_ctx) ) {
+			switch ( Interpreter.AdaptivePredict(_input,3,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 31; Match(INT);
+				State = 52; Match(INT);
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 32; Match(FILENAME);
+				State = 53; Match(FILENAME);
 				}
 				break;
 
 			case 3:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 33; Match(INT);
-				State = 34; Match(T__1);
-				State = 35; Match(INT);
-				State = 36; Match(T__1);
-				State = 37; Match(INT);
+				State = 54; Match(INT);
+				State = 55; Match(T__3);
+				State = 56; Match(INT);
+				State = 57; Match(T__3);
+				State = 58; Match(INT);
 				}
 				break;
 
 			case 4:
 				EnterOuterAlt(_localctx, 4);
 				{
-				State = 38; Match(ID);
+				State = 59; Match(ID);
 				}
 				break;
 
 			case 5:
 				EnterOuterAlt(_localctx, 5);
 				{
-				State = 39; Match(STRING);
+				State = 60; Match(STRING);
 				}
 				break;
 			}
@@ -364,22 +575,28 @@ public partial class EhhParser : Parser {
 	}
 
 	public static readonly string _serializedATN =
-		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\f-\x4\x2\t\x2\x4"+
-		"\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x3\x2\a\x2\f\n\x2\f\x2\xE\x2\xF\v\x2\x3"+
-		"\x2\x3\x2\x3\x3\x3\x3\x3\x3\a\x3\x16\n\x3\f\x3\xE\x3\x19\v\x3\x3\x3\x3"+
-		"\x3\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x5\x3\x5\x3\x5\x3\x5\x3\x5\x3\x5"+
-		"\x3\x5\x3\x5\x3\x5\x5\x5+\n\x5\x3\x5\x2\x2\x2\x6\x2\x2\x4\x2\x6\x2\b\x2"+
-		"\x2\x2.\x2\r\x3\x2\x2\x2\x4\x12\x3\x2\x2\x2\x6\x1C\x3\x2\x2\x2\b*\x3\x2"+
-		"\x2\x2\n\f\x5\x4\x3\x2\v\n\x3\x2\x2\x2\f\xF\x3\x2\x2\x2\r\v\x3\x2\x2\x2"+
-		"\r\xE\x3\x2\x2\x2\xE\x10\x3\x2\x2\x2\xF\r\x3\x2\x2\x2\x10\x11\a\x2\x2"+
-		"\x3\x11\x3\x3\x2\x2\x2\x12\x13\a\b\x2\x2\x13\x17\a\x5\x2\x2\x14\x16\x5"+
-		"\x6\x4\x2\x15\x14\x3\x2\x2\x2\x16\x19\x3\x2\x2\x2\x17\x15\x3\x2\x2\x2"+
-		"\x17\x18\x3\x2\x2\x2\x18\x1A\x3\x2\x2\x2\x19\x17\x3\x2\x2\x2\x1A\x1B\a"+
-		"\x6\x2\x2\x1B\x5\x3\x2\x2\x2\x1C\x1D\a\b\x2\x2\x1D\x1E\a\x3\x2\x2\x1E"+
-		"\x1F\x5\b\x5\x2\x1F \a\n\x2\x2 \a\x3\x2\x2\x2!+\a\a\x2\x2\"+\a\v\x2\x2"+
-		"#$\a\a\x2\x2$%\a\x4\x2\x2%&\a\a\x2\x2&\'\a\x4\x2\x2\'+\a\a\x2\x2(+\a\b"+
-		"\x2\x2)+\a\t\x2\x2*!\x3\x2\x2\x2*\"\x3\x2\x2\x2*#\x3\x2\x2\x2*(\x3\x2"+
-		"\x2\x2*)\x3\x2\x2\x2+\t\x3\x2\x2\x2\x5\r\x17*";
+		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\xE\x42\x4\x2\t"+
+		"\x2\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t"+
+		"\t\t\x3\x2\a\x2\x14\n\x2\f\x2\xE\x2\x17\v\x2\x3\x2\x3\x2\x3\x3\x3\x3\x3"+
+		"\x3\a\x3\x1E\n\x3\f\x3\xE\x3!\v\x3\x3\x3\x3\x3\x3\x4\x3\x4\x3\x4\x3\x4"+
+		"\x3\x4\x5\x4*\n\x4\x3\x5\x3\x5\x3\x6\x3\x6\x3\a\x3\a\x3\b\x3\b\x3\b\x3"+
+		"\b\x3\b\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x5\t@\n\t\x3\t\x2"+
+		"\x2\x2\n\x2\x2\x4\x2\x6\x2\b\x2\n\x2\f\x2\xE\x2\x10\x2\x2\x3\x3\x2\x3"+
+		"\x4@\x2\x15\x3\x2\x2\x2\x4\x1A\x3\x2\x2\x2\x6)\x3\x2\x2\x2\b+\x3\x2\x2"+
+		"\x2\n-\x3\x2\x2\x2\f/\x3\x2\x2\x2\xE\x31\x3\x2\x2\x2\x10?\x3\x2\x2\x2"+
+		"\x12\x14\x5\x4\x3\x2\x13\x12\x3\x2\x2\x2\x14\x17\x3\x2\x2\x2\x15\x13\x3"+
+		"\x2\x2\x2\x15\x16\x3\x2\x2\x2\x16\x18\x3\x2\x2\x2\x17\x15\x3\x2\x2\x2"+
+		"\x18\x19\a\x2\x2\x3\x19\x3\x3\x2\x2\x2\x1A\x1B\x5\x6\x4\x2\x1B\x1F\a\a"+
+		"\x2\x2\x1C\x1E\x5\xE\b\x2\x1D\x1C\x3\x2\x2\x2\x1E!\x3\x2\x2\x2\x1F\x1D"+
+		"\x3\x2\x2\x2\x1F \x3\x2\x2\x2 \"\x3\x2\x2\x2!\x1F\x3\x2\x2\x2\"#\a\b\x2"+
+		"\x2#\x5\x3\x2\x2\x2$*\x5\n\x6\x2%&\x5\n\x6\x2&\'\x5\b\x5\x2\'(\x5\f\a"+
+		"\x2(*\x3\x2\x2\x2)$\x3\x2\x2\x2)%\x3\x2\x2\x2*\a\x3\x2\x2\x2+,\t\x2\x2"+
+		"\x2,\t\x3\x2\x2\x2-.\a\n\x2\x2.\v\x3\x2\x2\x2/\x30\a\n\x2\x2\x30\r\x3"+
+		"\x2\x2\x2\x31\x32\a\n\x2\x2\x32\x33\a\x5\x2\x2\x33\x34\x5\x10\t\x2\x34"+
+		"\x35\a\f\x2\x2\x35\xF\x3\x2\x2\x2\x36@\a\t\x2\x2\x37@\a\r\x2\x2\x38\x39"+
+		"\a\t\x2\x2\x39:\a\x6\x2\x2:;\a\t\x2\x2;<\a\x6\x2\x2<@\a\t\x2\x2=@\a\n"+
+		"\x2\x2>@\a\v\x2\x2?\x36\x3\x2\x2\x2?\x37\x3\x2\x2\x2?\x38\x3\x2\x2\x2"+
+		"?=\x3\x2\x2\x2?>\x3\x2\x2\x2@\x11\x3\x2\x2\x2\x6\x15\x1F)?";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }

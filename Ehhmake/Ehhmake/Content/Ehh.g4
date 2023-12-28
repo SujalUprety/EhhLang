@@ -2,9 +2,16 @@ grammar Ehh;
 
 program: (function)* EOF;
         
-function: ID LB
+function: functionIdentifier LB
             (attribPair)*
         RB;
+        
+functionIdentifier: preFunctionName
+                    | preFunctionName symbol functionName;
+    
+symbol: '::' | '=>';
+preFunctionName: ID;
+functionName: ID;
         
 attribPair : ID ':' attribValue NEWLINE;
 attribValue : INT | FILENAME | INT ',' INT ',' INT | ID | STRING;
@@ -14,7 +21,9 @@ RB : [}];
 
 INT : [0-9]+;
 ID : [a-zA-Z]+;
+
 STRING: '"' .*? '"';
 NEWLINE : [\r\n]+;
 FILENAME : [a-zA-Z0-9.]+;
+
 WS : [ \t\r\n]+ -> skip;

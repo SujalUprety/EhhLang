@@ -1,0 +1,23 @@
+ehh {
+    width: 1920
+    height: 1080
+    background: 255, 255, 0
+    output: test2.png
+}
+
+text=>test {
+    fontScale: 5
+    thickness: 5
+    position: 100, 100
+    color: 255, 0, 0
+    text: "First tehhxt in ehhmage!"
+}
+
+rect=>testRect {
+    position: 100, 300
+    color: 0, 255, 0
+    width: 300
+    height: 250
+    thickness: 10
+    fillColor: 0, 0, 255
+}
