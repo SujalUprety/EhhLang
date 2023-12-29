@@ -124,19 +124,6 @@ public class EhhmageComplete {
         }
         
         #endregion
-
-        public Text Clone() {
-            var to = new Text
-            {
-                _fontScale = _fontScale,
-                _thickness = _thickness,
-                _position = _position,
-                _color = _color,
-                _text = _text
-            };
-
-            return to;
-        }
         
         public void Print() {
             Console.WriteLine($"\nFont Scale: {_fontScale}\nThickness: {_thickness}\nPosition: {_position[0]}, {_position[1]}\nColor: {_color[0]}, {_color[1]}, {_color[2]}\nText: {_text}\n");
@@ -207,8 +194,12 @@ public class EhhmageComplete {
         
     }
 
-    public Ehhmage ehhmage = new();
+
+    public static readonly EhhmageComplete instance = new();
+    public readonly Ehhmage ehhmage = new();
     
     public readonly Dictionary<string, object?> FunctionNames = new();
+    
+    private EhhmageComplete() {/*private constructor*/}
 
 }
