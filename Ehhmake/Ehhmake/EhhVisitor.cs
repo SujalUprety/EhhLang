@@ -47,7 +47,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                     var functionObject = EhhmageComplete.instance.FunctionNames[preDefinedFunctionName];
                     switch (functionObject) {
                         case EhhmageComplete.Text text:
-                            InsertText(functionContext, functionName, text);
+                            InsertText(functionContext, functionName, text.Clone());
                             break;
 
                         case EhhmageComplete.Rectangle rectangle:
@@ -70,15 +70,6 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         }
         
         EhhmageComplete.instance.ehhmage.CreateImage();
-
-        foreach (var functions in EhhmageComplete.instance.FunctionNames) {
-            Console.WriteLine(functions.Key);
-            switch (functions.Value) {
-                case EhhmageComplete.Text text:
-                    text.Print();
-                    break;
-            }
-        }
         
         return base.VisitProgram(context);
     }

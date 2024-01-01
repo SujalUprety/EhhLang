@@ -39,3 +39,22 @@ okText::ByeText {
     position: 600, 200
     text: "Bye Text"
 }
+
+text::anotherTest {
+    position: 100, 500
+    text: "Another Test"
+}
+
+anotherTest::anotherTest2 {
+    position: 100, 600
+    text: "Another Test 2"
+}
+
+ByeText::anotherTest3 {
+    position: 600, 300
+    text: "Another Test 3"
+}
+
+ByeText::anotherTest4 {
+    position: 600, 400
+}

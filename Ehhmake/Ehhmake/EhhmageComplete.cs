@@ -64,7 +64,7 @@ public class EhhmageComplete {
         
         public void CreateImage() {
             Cv2.ImWrite(_outputName, _ehhmageOutput);
-            // Cv2.ImShow(@"G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\Content\"+_outputName, _ehhmage);
+            // Cv2.ImShow(@"G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\Content\TestPrograms"+_outputName, _ehhmageOutput);
         }
         
     }
@@ -125,8 +125,14 @@ public class EhhmageComplete {
         
         #endregion
         
-        public void Print() {
-            Console.WriteLine($"\nFont Scale: {_fontScale}\nThickness: {_thickness}\nPosition: {_position[0]}, {_position[1]}\nColor: {_color[0]}, {_color[1]}, {_color[2]}\nText: {_text}\n");
+        public Text Clone() {
+            return new Text {
+                _fontScale = _fontScale,
+                _thickness = _thickness,
+                _position = _position,
+                _color = _color,
+                _text = _text
+            };
         }
         
         public void InsertText() {
