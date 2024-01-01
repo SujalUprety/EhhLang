@@ -3,7 +3,7 @@ using Point = OpenCvSharp.Point;
 
 namespace Ehhmake;
 
-public class EhhmageComplete {
+public static class EhhmageComplete {
     
     public enum EhhmageAttribute {
         width,
@@ -30,39 +30,41 @@ public class EhhmageComplete {
     }
 
     private static Mat _ehhmageOutput = new();
+    public static readonly Dictionary<string, object?> FunctionNames = new();
+    
 
-    public class Ehhmage {
+    public static class Ehhmage {
         
-        private int _height  = 1080;
-        private int _width  = 1920;
-        private int[] _background  = { 0, 0, 0 };
-        private string _outputName  = "ehhmage.png";
+        private static int _height  = 1080;
+        private static int _width  = 1920;
+        private static int[] _background  = { 0, 0, 0 };
+        private static string _outputName  = "ehhmage.png";
         
         #region Setters
     
-        public void SetHeight(int height) {
+        public static void SetHeight(int height) {
             _height = height;
         }
         
-        public void SetWidth(int width) {
+        public static void SetWidth(int width) {
             _width = width;
         }
         
-        public void SetBackground(int[] background) {
+        public static void SetBackground(int[] background) {
             _background = background;
         }
         
-        public void SetOutputName(string outputName) {
+        public static void SetOutputName(string outputName) {
             _outputName = outputName;
         }
     
         #endregion
 
-        public void InitializeEhhMage() {
+        public static void InitializeEhhMage() {
             _ehhmageOutput = new Mat(_height, _width, MatType.CV_8UC3, new Scalar(_background[2], _background[1], _background[0]));
         }
         
-        public void CreateImage() {
+        public static void CreateImage() {
             Cv2.ImWrite(_outputName, _ehhmageOutput);
             // Cv2.ImShow(@"G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\Content\TestPrograms"+_outputName, _ehhmageOutput);
         }
@@ -188,12 +190,9 @@ public class EhhmageComplete {
         
     }
 
-
-    public static readonly EhhmageComplete instance = new();
-    public readonly Ehhmage ehhmage = new();
-    
-    public readonly Dictionary<string, object?> FunctionNames = new();
-    
-    private EhhmageComplete() {/*private constructor*/}
+    public static class Global {
+        internal static Text Text = new();
+        internal static Rectangle Rectangle = new();
+    }
 
 }

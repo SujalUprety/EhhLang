@@ -5,6 +5,14 @@ ehh {
     output: test2.png
 }
 
+text {
+    fontScale: 10
+    thickness: 10
+    color: 255, 255, 0
+    position: 800, 800
+    text: "Hello World"
+}
+
 text::testText {
     fontScale: 5
     thickness: 5
@@ -57,4 +65,9 @@ ByeText::anotherTest3 {
 
 ByeText::anotherTest4 {
     position: 600, 400
+}
+
+text::anotherTest5 {
+    position: 100, 700
+    text: "Another Test 5"
 }

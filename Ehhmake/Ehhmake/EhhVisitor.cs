@@ -44,7 +44,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                 functionName = function.functionIdentifier().functionName().GetText();
                 
                 try {
-                    var functionObject = EhhmageComplete.instance.FunctionNames[preDefinedFunctionName];
+                    var functionObject = EhhmageComplete.FunctionNames[preDefinedFunctionName];
                     switch (functionObject) {
                         case EhhmageComplete.Text text:
                             InsertText(functionContext, functionName, text.Clone());
@@ -69,7 +69,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
 
         }
         
-        EhhmageComplete.instance.ehhmage.CreateImage();
+        EhhmageComplete.Ehhmage.CreateImage();
         
         return base.VisitProgram(context);
     }
@@ -109,7 +109,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("Width attribute value is not a number");
                         break;
                     }
-                    EhhmageComplete.instance.ehhmage.SetWidth(width);
+                    EhhmageComplete.Ehhmage.SetWidth(width);
                     break;
                 }
         
@@ -118,7 +118,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("Height attribute value is not a number");
                         break;
                     }
-                    EhhmageComplete.instance.ehhmage.SetHeight(height);
+                    EhhmageComplete.Ehhmage.SetHeight(height);
                     break;
                 }
         
@@ -128,13 +128,13 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         Console.WriteLine("Background attribute value is not a 3-tuple");
                         break;
                     }
-                    EhhmageComplete.instance.ehhmage.SetBackground(background);
+                    EhhmageComplete.Ehhmage.SetBackground(background);
                     
                     break;
                 }
                 
                 case nameof(EhhmageComplete.EhhmageAttribute.output): {
-                    EhhmageComplete.instance.ehhmage.SetOutputName(attribValue);
+                    EhhmageComplete.Ehhmage.SetOutputName(attribValue);
                     break;
                 }
                 
@@ -144,13 +144,13 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             }
         }
         
-        EhhmageComplete.instance.ehhmage.InitializeEhhMage();
+        EhhmageComplete.Ehhmage.InitializeEhhMage();
         
     }
 
     private static void InsertText(IEnumerable<EhhParser.AttribPairContext> context, string functionName, EhhmageComplete.Text? text = null) {
         
-        text ??= new EhhmageComplete.Text();
+        text ??= EhhmageComplete.Global.Text.Clone();
         
         foreach (var attribPairContext in context) {
             var attribName = attribPairContext.ID().GetText();
@@ -212,14 +212,14 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         }
         
         text.InsertText();
-        if(!functionName.Equals(string.Empty)) EhhmageComplete.instance.FunctionNames.Add(functionName, text);
+        if(!functionName.Equals(string.Empty)) EhhmageComplete.FunctionNames.Add(functionName, text);
+        else EhhmageComplete.Global.Text = text.Clone();
         
     }
 
     private static void DrawRect(IEnumerable<EhhParser.AttribPairContext> context, string functionName, EhhmageComplete.Rectangle? rectangle = null) {
         
-        // rectangle ??= _rectangle;
-        rectangle ??= new EhhmageComplete.Rectangle();
+        rectangle ??= EhhmageComplete.Global.Rectangle.Clone();
         
         foreach (var attribPairContext in context) {
             var attribName = attribPairContext.ID().GetText();
@@ -291,7 +291,8 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         }
         
         rectangle.DrawRectangle();
-        if(!functionName.Equals(string.Empty))   EhhmageComplete.instance.FunctionNames.Add(functionName, rectangle);
+        if(!functionName.Equals(string.Empty))   EhhmageComplete.FunctionNames.Add(functionName, rectangle);
+        else EhhmageComplete.Global.Rectangle = rectangle.Clone();
     }
     
 }
