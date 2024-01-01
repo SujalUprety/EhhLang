@@ -179,12 +179,8 @@ public static class EhhmageComplete {
             var rect = new Rect(_position[0], _position[1], _width, _height);
             var rectColor = new Scalar(_color[2], _color[1], _color[0]);
             var fillColor = new Scalar(_fillColor[2], _fillColor[1], _fillColor[0]);
-        
-            if (_doFill) {
-                Cv2.Rectangle(_ehhmageOutput, rect, fillColor, Cv2.FILLED);
-                _doFill = false;
-            }
-        
+            
+            if (_doFill) Cv2.Rectangle(_ehhmageOutput, rect, fillColor, Cv2.FILLED);
             Cv2.Rectangle(_ehhmageOutput, rect, rectColor, _thickness);
         }
         

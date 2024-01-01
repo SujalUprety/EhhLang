@@ -274,6 +274,11 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                 }
                 
                 case nameof(EhhmageComplete.RectangleAttribute.fillColor): {
+                    if (attribValue == "no") {
+                        rectangle.SetDoFill(false);
+                        break;
+                    }
+                    
                     var fillColor = attribValue.Split(',').Select(int.Parse).ToArray();
                     if (fillColor.Length != 3) {
                         Console.WriteLine("FillColor attribute value is not a 3-tuple");
