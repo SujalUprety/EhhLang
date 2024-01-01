@@ -51,7 +51,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                             break;
 
                         case EhhmageComplete.Rectangle rectangle:
-                            DrawRect(functionContext, functionName, rectangle);
+                            DrawRect(functionContext, functionName, rectangle.Clone());
                             break;
 
                         default:

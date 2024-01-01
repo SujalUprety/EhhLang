@@ -101,30 +101,6 @@ public class EhhmageComplete {
     
         #endregion
         
-        #region Getters
-        
-        public int GetFontScale() {
-            return _fontScale;
-        }
-        
-        public int GetThickness() {
-            return _thickness;
-        }
-        
-        public int[] GetPosition() {
-            return _position;
-        }
-        
-        public int[] GetColor() {
-            return _color;
-        }
-        
-        public string GetText() {
-            return _text;
-        }
-        
-        #endregion
-        
         public Text Clone() {
             return new Text {
                 _fontScale = _fontScale,
@@ -184,6 +160,18 @@ public class EhhmageComplete {
         }
     
         #endregion
+
+        public Rectangle Clone() {
+            return new Rectangle {
+                _thickness = _thickness,
+                _position = _position,
+                _color = _color,
+                _width = _width,
+                _height = _height,
+                _fillColor = _fillColor,
+                _doFill = _doFill
+            };
+        }
         
         public void DrawRectangle() {
             var rect = new Rect(_position[0], _position[1], _width, _height);
