@@ -23,6 +23,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         foreach (var function in context.function()) {
             var preDefinedFunctionName = function.functionIdentifier().preFunctionName().GetText();
             var functionName = string.Empty;
+            var symbol = string.Empty;
             var functionContext = function.attribPair();
 
             #region CurlyBracesCheck
@@ -40,7 +41,6 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             #endregion
 
             try {
-                var symbol = function.functionIdentifier().symbol().GetText();
                 functionName = function.functionIdentifier().functionName().GetText();
                 
                 try {
@@ -64,7 +64,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                 }
             }
             catch {
-                CompareLibraryDefinedFunction(preDefinedFunctionName, functionName, functionContext);
+                CompareLibraryDefinedFunction(preDefinedFunctionName, preDefinedFunctionName, functionContext);
             }
 
         }
@@ -90,11 +90,11 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                     break;
 
                 default:
-                    Console.WriteLine($"Function \'{functionName}\' not identified3");
+                    Console.WriteLine($"Function \'{preDefinedFunctionName}\' not identified3");
                     break;
             }
         }
-        else Console.WriteLine($"Function \'{functionName}\' not identified4");
+        else Console.WriteLine($"Function \'{preDefinedFunctionName}\' not identified");
     }
 
     private static void InitializeFunctionEhh(IEnumerable<EhhParser.AttribPairContext> context) {

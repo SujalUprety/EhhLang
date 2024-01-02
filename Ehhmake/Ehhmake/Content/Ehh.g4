@@ -1,19 +1,18 @@
 grammar Ehh;
 
-program: (function)* EOF;
+program: (function (NEWLINE)?)* EOF;
         
 function: functionIdentifier LB
             (attribPair)*
         RB;
         
-functionIdentifier: preFunctionName
-                    | preFunctionName symbol functionName;
+functionIdentifier: preFunctionName (symbol functionName)?;
     
 symbol: '::';
 preFunctionName: ID;
 functionName: ID;
         
-attribPair : ID ':' attribValue NEWLINE;
+attribPair : ID ':' attribValue (NEWLINE)?;
 attribValue : INT | FILENAME | INT ',' INT ',' INT | ID | STRING;
 
 LB : [{];

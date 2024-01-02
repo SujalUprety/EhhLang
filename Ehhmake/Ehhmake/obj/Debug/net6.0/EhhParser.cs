@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\Content\Ehh.g4 by ANTLR 4.6.6
+// Generated from E:\Project\My Rule\EhhLang\Ehhmake\Ehhmake\Content\Ehh.g4 by ANTLR 4.6.6
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -107,6 +107,10 @@ public partial class EhhParser : Parser {
 		public FunctionContext function(int i) {
 			return GetRuleContext<FunctionContext>(i);
 		}
+		public ITerminalNode[] NEWLINE() { return GetTokens(EhhParser.NEWLINE); }
+		public ITerminalNode NEWLINE(int i) {
+			return GetToken(EhhParser.NEWLINE, i);
+		}
 		public ProgramContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -135,20 +139,29 @@ public partial class EhhParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 19;
+			State = 22;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while (_la==ID) {
 				{
 				{
 				State = 16; function();
+				State = 18;
+				_errHandler.Sync(this);
+				_la = _input.La(1);
+				if (_la==NEWLINE) {
+					{
+					State = 17; Match(NEWLINE);
+					}
+				}
+
 				}
 				}
-				State = 21;
+				State = 24;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 22; Match(Eof);
+			State = 25; Match(Eof);
 			}
 		}
 		catch (RecognitionException re) {
@@ -202,22 +215,22 @@ public partial class EhhParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 24; functionIdentifier();
-			State = 25; Match(LB);
-			State = 29;
+			State = 27; functionIdentifier();
+			State = 28; Match(LB);
+			State = 32;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while (_la==ID) {
 				{
 				{
-				State = 26; attribPair();
+				State = 29; attribPair();
 				}
 				}
-				State = 31;
+				State = 34;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 32; Match(RB);
+			State = 35; Match(RB);
 			}
 		}
 		catch (RecognitionException re) {
@@ -265,25 +278,21 @@ public partial class EhhParser : Parser {
 	public FunctionIdentifierContext functionIdentifier() {
 		FunctionIdentifierContext _localctx = new FunctionIdentifierContext(_ctx, State);
 		EnterRule(_localctx, 4, RULE_functionIdentifier);
+		int _la;
 		try {
-			State = 39;
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 37; preFunctionName();
+			State = 41;
 			_errHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(_input,2,_ctx) ) {
-			case 1:
-				EnterOuterAlt(_localctx, 1);
+			_la = _input.La(1);
+			if (_la==T__0) {
 				{
-				State = 34; preFunctionName();
+				State = 38; symbol();
+				State = 39; functionName();
 				}
-				break;
+			}
 
-			case 2:
-				EnterOuterAlt(_localctx, 2);
-				{
-				State = 35; preFunctionName();
-				State = 36; symbol();
-				State = 37; functionName();
-				}
-				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -325,7 +334,7 @@ public partial class EhhParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 41; Match(T__0);
+			State = 43; Match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -368,7 +377,7 @@ public partial class EhhParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 43; Match(ID);
+			State = 45; Match(ID);
 			}
 		}
 		catch (RecognitionException re) {
@@ -411,7 +420,7 @@ public partial class EhhParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 45; Match(ID);
+			State = 47; Match(ID);
 			}
 		}
 		catch (RecognitionException re) {
@@ -455,13 +464,22 @@ public partial class EhhParser : Parser {
 	public AttribPairContext attribPair() {
 		AttribPairContext _localctx = new AttribPairContext(_ctx, State);
 		EnterRule(_localctx, 12, RULE_attribPair);
+		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 47; Match(ID);
-			State = 48; Match(T__1);
-			State = 49; attribValue();
-			State = 50; Match(NEWLINE);
+			State = 49; Match(ID);
+			State = 50; Match(T__1);
+			State = 51; attribValue();
+			State = 53;
+			_errHandler.Sync(this);
+			_la = _input.La(1);
+			if (_la==NEWLINE) {
+				{
+				State = 52; Match(NEWLINE);
+				}
+			}
+
 			}
 		}
 		catch (RecognitionException re) {
@@ -508,45 +526,45 @@ public partial class EhhParser : Parser {
 		AttribValueContext _localctx = new AttribValueContext(_ctx, State);
 		EnterRule(_localctx, 14, RULE_attribValue);
 		try {
-			State = 61;
+			State = 64;
 			_errHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(_input,3,_ctx) ) {
+			switch ( Interpreter.AdaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 52; Match(INT);
+				State = 55; Match(INT);
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 53; Match(FILENAME);
+				State = 56; Match(FILENAME);
 				}
 				break;
 
 			case 3:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 54; Match(INT);
-				State = 55; Match(T__2);
-				State = 56; Match(INT);
-				State = 57; Match(T__2);
-				State = 58; Match(INT);
+				State = 57; Match(INT);
+				State = 58; Match(T__2);
+				State = 59; Match(INT);
+				State = 60; Match(T__2);
+				State = 61; Match(INT);
 				}
 				break;
 
 			case 4:
 				EnterOuterAlt(_localctx, 4);
 				{
-				State = 59; Match(ID);
+				State = 62; Match(ID);
 				}
 				break;
 
 			case 5:
 				EnterOuterAlt(_localctx, 5);
 				{
-				State = 60; Match(STRING);
+				State = 63; Match(STRING);
 				}
 				break;
 			}
@@ -563,28 +581,30 @@ public partial class EhhParser : Parser {
 	}
 
 	public static readonly string _serializedATN =
-		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\r\x42\x4\x2\t\x2"+
+		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\r\x45\x4\x2\t\x2"+
 		"\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t"+
-		"\t\x3\x2\a\x2\x14\n\x2\f\x2\xE\x2\x17\v\x2\x3\x2\x3\x2\x3\x3\x3\x3\x3"+
-		"\x3\a\x3\x1E\n\x3\f\x3\xE\x3!\v\x3\x3\x3\x3\x3\x3\x4\x3\x4\x3\x4\x3\x4"+
-		"\x3\x4\x5\x4*\n\x4\x3\x5\x3\x5\x3\x6\x3\x6\x3\a\x3\a\x3\b\x3\b\x3\b\x3"+
-		"\b\x3\b\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x5\t@\n\t\x3\t\x2"+
-		"\x2\x2\n\x2\x2\x4\x2\x6\x2\b\x2\n\x2\f\x2\xE\x2\x10\x2\x2\x2@\x2\x15\x3"+
-		"\x2\x2\x2\x4\x1A\x3\x2\x2\x2\x6)\x3\x2\x2\x2\b+\x3\x2\x2\x2\n-\x3\x2\x2"+
-		"\x2\f/\x3\x2\x2\x2\xE\x31\x3\x2\x2\x2\x10?\x3\x2\x2\x2\x12\x14\x5\x4\x3"+
-		"\x2\x13\x12\x3\x2\x2\x2\x14\x17\x3\x2\x2\x2\x15\x13\x3\x2\x2\x2\x15\x16"+
-		"\x3\x2\x2\x2\x16\x18\x3\x2\x2\x2\x17\x15\x3\x2\x2\x2\x18\x19\a\x2\x2\x3"+
-		"\x19\x3\x3\x2\x2\x2\x1A\x1B\x5\x6\x4\x2\x1B\x1F\a\x6\x2\x2\x1C\x1E\x5"+
-		"\xE\b\x2\x1D\x1C\x3\x2\x2\x2\x1E!\x3\x2\x2\x2\x1F\x1D\x3\x2\x2\x2\x1F"+
-		" \x3\x2\x2\x2 \"\x3\x2\x2\x2!\x1F\x3\x2\x2\x2\"#\a\a\x2\x2#\x5\x3\x2\x2"+
-		"\x2$*\x5\n\x6\x2%&\x5\n\x6\x2&\'\x5\b\x5\x2\'(\x5\f\a\x2(*\x3\x2\x2\x2"+
-		")$\x3\x2\x2\x2)%\x3\x2\x2\x2*\a\x3\x2\x2\x2+,\a\x3\x2\x2,\t\x3\x2\x2\x2"+
-		"-.\a\t\x2\x2.\v\x3\x2\x2\x2/\x30\a\t\x2\x2\x30\r\x3\x2\x2\x2\x31\x32\a"+
-		"\t\x2\x2\x32\x33\a\x4\x2\x2\x33\x34\x5\x10\t\x2\x34\x35\a\v\x2\x2\x35"+
-		"\xF\x3\x2\x2\x2\x36@\a\b\x2\x2\x37@\a\f\x2\x2\x38\x39\a\b\x2\x2\x39:\a"+
-		"\x5\x2\x2:;\a\b\x2\x2;<\a\x5\x2\x2<@\a\b\x2\x2=@\a\t\x2\x2>@\a\n\x2\x2"+
-		"?\x36\x3\x2\x2\x2?\x37\x3\x2\x2\x2?\x38\x3\x2\x2\x2?=\x3\x2\x2\x2?>\x3"+
-		"\x2\x2\x2@\x11\x3\x2\x2\x2\x6\x15\x1F)?";
+		"\t\x3\x2\x3\x2\x5\x2\x15\n\x2\a\x2\x17\n\x2\f\x2\xE\x2\x1A\v\x2\x3\x2"+
+		"\x3\x2\x3\x3\x3\x3\x3\x3\a\x3!\n\x3\f\x3\xE\x3$\v\x3\x3\x3\x3\x3\x3\x4"+
+		"\x3\x4\x3\x4\x3\x4\x5\x4,\n\x4\x3\x5\x3\x5\x3\x6\x3\x6\x3\a\x3\a\x3\b"+
+		"\x3\b\x3\b\x3\b\x5\b\x38\n\b\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3"+
+		"\t\x5\t\x43\n\t\x3\t\x2\x2\x2\n\x2\x2\x4\x2\x6\x2\b\x2\n\x2\f\x2\xE\x2"+
+		"\x10\x2\x2\x2\x45\x2\x18\x3\x2\x2\x2\x4\x1D\x3\x2\x2\x2\x6\'\x3\x2\x2"+
+		"\x2\b-\x3\x2\x2\x2\n/\x3\x2\x2\x2\f\x31\x3\x2\x2\x2\xE\x33\x3\x2\x2\x2"+
+		"\x10\x42\x3\x2\x2\x2\x12\x14\x5\x4\x3\x2\x13\x15\a\v\x2\x2\x14\x13\x3"+
+		"\x2\x2\x2\x14\x15\x3\x2\x2\x2\x15\x17\x3\x2\x2\x2\x16\x12\x3\x2\x2\x2"+
+		"\x17\x1A\x3\x2\x2\x2\x18\x16\x3\x2\x2\x2\x18\x19\x3\x2\x2\x2\x19\x1B\x3"+
+		"\x2\x2\x2\x1A\x18\x3\x2\x2\x2\x1B\x1C\a\x2\x2\x3\x1C\x3\x3\x2\x2\x2\x1D"+
+		"\x1E\x5\x6\x4\x2\x1E\"\a\x6\x2\x2\x1F!\x5\xE\b\x2 \x1F\x3\x2\x2\x2!$\x3"+
+		"\x2\x2\x2\" \x3\x2\x2\x2\"#\x3\x2\x2\x2#%\x3\x2\x2\x2$\"\x3\x2\x2\x2%"+
+		"&\a\a\x2\x2&\x5\x3\x2\x2\x2\'+\x5\n\x6\x2()\x5\b\x5\x2)*\x5\f\a\x2*,\x3"+
+		"\x2\x2\x2+(\x3\x2\x2\x2+,\x3\x2\x2\x2,\a\x3\x2\x2\x2-.\a\x3\x2\x2.\t\x3"+
+		"\x2\x2\x2/\x30\a\t\x2\x2\x30\v\x3\x2\x2\x2\x31\x32\a\t\x2\x2\x32\r\x3"+
+		"\x2\x2\x2\x33\x34\a\t\x2\x2\x34\x35\a\x4\x2\x2\x35\x37\x5\x10\t\x2\x36"+
+		"\x38\a\v\x2\x2\x37\x36\x3\x2\x2\x2\x37\x38\x3\x2\x2\x2\x38\xF\x3\x2\x2"+
+		"\x2\x39\x43\a\b\x2\x2:\x43\a\f\x2\x2;<\a\b\x2\x2<=\a\x5\x2\x2=>\a\b\x2"+
+		"\x2>?\a\x5\x2\x2?\x43\a\b\x2\x2@\x43\a\t\x2\x2\x41\x43\a\n\x2\x2\x42\x39"+
+		"\x3\x2\x2\x2\x42:\x3\x2\x2\x2\x42;\x3\x2\x2\x2\x42@\x3\x2\x2\x2\x42\x41"+
+		"\x3\x2\x2\x2\x43\x11\x3\x2\x2\x2\b\x14\x18\"+\x37\x42";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }
