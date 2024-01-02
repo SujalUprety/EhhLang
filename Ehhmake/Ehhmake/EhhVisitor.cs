@@ -5,99 +5,141 @@ namespace Ehhmake;
 
 public class EhhVisitor : EhhBaseVisitor<object?> {
     
-    private enum FunctionName {
+    private enum ObjectName {
         ehh,
         tehhxt = 1,
         rehhct = 2,
+        linehh = 3,
+        circlehh = 4,
+        polyLinehhs = 5,
+        ehhlipse = 6,
         text = 1,
-        rect = 2
+        rect = 2,
+        line = 3,
+        circle = 4,
+        polyLines = 5,
+        ellipse = 6
     }
 
     public override object? VisitProgram(EhhParser.ProgramContext context) {
         
-        if (context.function()[0].functionIdentifier().preFunctionName().GetText() != "ehh") {
-            Console.WriteLine("Main function Ehh not found");
-            return base.VisitProgram(context);
+        var firstChild = context.GetChild(0);
+
+        if (firstChild is not EhhParser.ObjectContext myObject) return base.VisitProgram(context);
+        if (myObject.objectIdentifier().preObjectName().GetText() == "ehh") return base.VisitProgram(context);
+        
+        Console.WriteLine("Ehh object not defined at the top of the program");
+        Environment.Exit(1);
+        return base.VisitProgram(context);
+    }
+
+    public override object? VisitObject(EhhParser.ObjectContext context) {
+        
+        var preDefinedObjectName = context.objectIdentifier().preObjectName().GetText();
+        var objectName = string.Empty;
+        var objectContext = context.attribPair();
+
+        #region CurlyBracesCheck
+        
+        if (context.LB().GetText() != "{") {
+            Console.WriteLine($"Curly braces not found in \'{objectName}\' object");
+            return base.VisitObject(context);
         }
+        
+        if (context.RB().GetText() != "}") {
+            Console.WriteLine($"Closing bracket not found in \'{objectName}\' object");
+            return base.VisitObject(context);
+        }
+        
+        #endregion
 
-        foreach (var function in context.function()) {
-            var preDefinedFunctionName = function.functionIdentifier().preFunctionName().GetText();
-            var functionName = string.Empty;
-            var symbol = string.Empty;
-            var functionContext = function.attribPair();
-
-            #region CurlyBracesCheck
-            
-            if (function.LB().GetText() != "{") {
-                Console.WriteLine($"Curly braces not found in \'{functionName}\' function");
-                return base.VisitProgram(context);
-            }
-            
-            if (function.RB().GetText() != "}") {
-                Console.WriteLine($"Closing bracket not found in \'{functionName}\' function");
-                return base.VisitProgram(context);
-            }
-            
-            #endregion
-
+        try {
+            objectName = context.objectIdentifier().objectName().GetText();
             try {
-                functionName = function.functionIdentifier().functionName().GetText();
-                
-                try {
-                    var functionObject = EhhmageComplete.FunctionNames[preDefinedFunctionName];
-                    switch (functionObject) {
-                        case EhhmageComplete.Text text:
-                            InsertText(functionContext, functionName, text.Clone());
-                            break;
+                var storedObjectContext = EhhmageComplete.ObjectNames[preDefinedObjectName];
+                switch (storedObjectContext) {
+                    case EhhmageComplete.Text text:
+                        InsertText(objectContext, objectName, text.Clone());
+                        break;
 
-                        case EhhmageComplete.Rectangle rectangle:
-                            DrawRect(functionContext, functionName, rectangle.Clone());
-                            break;
-
-                        default:
-                            Console.WriteLine($"Function \'{functionName}\' not identified");
-                            break;
-                    }
-                }
-                catch{
-                    CompareLibraryDefinedFunction(preDefinedFunctionName, functionName, functionContext);
+                    case EhhmageComplete.Rectangle rectangle:
+                        DrawRect(objectContext, objectName, rectangle.Clone());
+                        break;
+                    
+                    case EhhmageComplete.Line line:
+                        DrawLine(objectContext, objectName, line.Clone());
+                        break;
+                    
+                    case EhhmageComplete.Circle circle:
+                        DrawCircle(objectContext, objectName, circle.Clone());
+                        break;
+                    
+                    case EhhmageComplete.PolyLines polyLines:
+                        DrawPolyLines(objectContext, objectName, polyLines.Clone());
+                        break;
+                    
+                    case EhhmageComplete.Ellipse ellipse:
+                        DrawEllipse(objectContext, objectName, ellipse.Clone());
+                        break;
+                    
+                    default:
+                        Console.WriteLine($"Object \'{objectName}\' not identified");
+                        break;
                 }
             }
-            catch {
-                CompareLibraryDefinedFunction(preDefinedFunctionName, preDefinedFunctionName, functionContext);
+            catch{
+                CompareLibraryDefinedObject(preDefinedObjectName, objectName, objectContext);
             }
-
+        }
+        catch {
+            CompareLibraryDefinedObject(preDefinedObjectName, preDefinedObjectName, objectContext);
         }
         
         EhhmageComplete.Ehhmage.CreateImage();
         
-        return base.VisitProgram(context);
+        return base.VisitObject(context);
     }
 
-    private static void CompareLibraryDefinedFunction(string preDefinedFunctionName, string functionName, IEnumerable<EhhParser.AttribPairContext> functionContext) {
-        if(TryParse(preDefinedFunctionName, out FunctionName functionNameEnum)) {
-            switch (functionNameEnum) {
-                case FunctionName.ehh:
-                    InitializeFunctionEhh(functionContext);
+    private static void CompareLibraryDefinedObject(string preDefinedObjectName, string objectName, IEnumerable<EhhParser.AttribPairContext> objectContext) {
+        if(TryParse(preDefinedObjectName, out ObjectName objectNameEnum)) {
+            switch (objectNameEnum) {
+                case ObjectName.ehh:
+                    InitializeObjectEhh(objectContext);
                     break;
-
-                case FunctionName.tehhxt:
-                    InsertText(functionContext, functionName);
+                
+                case ObjectName.tehhxt:
+                    InsertText(objectContext, objectName);
                     break;
-
-                case FunctionName.rehhct:
-                    DrawRect(functionContext, functionName);
+                
+                case ObjectName.rehhct:
+                    DrawRect(objectContext, objectName);
                     break;
-
+                
+                case ObjectName.linehh:
+                    DrawLine(objectContext, objectName);
+                    break;
+                
+                case ObjectName.circlehh:
+                    DrawCircle(objectContext, objectName);
+                    break;
+                
+                case ObjectName.polyLinehhs:
+                    DrawPolyLines(objectContext, objectName);
+                    break;
+                
+                case ObjectName.ehhlipse:
+                    DrawEllipse(objectContext, objectName);
+                    break;
+                
                 default:
-                    Console.WriteLine($"Function \'{preDefinedFunctionName}\' not identified3");
+                    Console.WriteLine($"Object \'{preDefinedObjectName}\' not identified");
                     break;
             }
         }
-        else Console.WriteLine($"Function \'{preDefinedFunctionName}\' not identified");
+        else Console.WriteLine($"Object \'{preDefinedObjectName}\' not identified");
     }
 
-    private static void InitializeFunctionEhh(IEnumerable<EhhParser.AttribPairContext> context) {
+    private static void InitializeObjectEhh(IEnumerable<EhhParser.AttribPairContext> context) {
         
         foreach (var attribPairContext in context) {
             var attribName = attribPairContext.ID().GetText();
@@ -148,7 +190,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         
     }
 
-    private static void InsertText(IEnumerable<EhhParser.AttribPairContext> context, string functionName, EhhmageComplete.Text? text = null) {
+    private static void InsertText(IEnumerable<EhhParser.AttribPairContext> context, string objectName, EhhmageComplete.Text? text = null) {
         
         text ??= EhhmageComplete.Global.Text.Clone();
         
@@ -212,12 +254,12 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         }
         
         text.InsertText();
-        if(!functionName.Equals(string.Empty)) EhhmageComplete.FunctionNames.Add(functionName, text);
+        if(!objectName.Equals(string.Empty)) EhhmageComplete.ObjectNames.Add(objectName, text);
         else EhhmageComplete.Global.Text = text.Clone();
         
     }
 
-    private static void DrawRect(IEnumerable<EhhParser.AttribPairContext> context, string functionName, EhhmageComplete.Rectangle? rectangle = null) {
+    private static void DrawRect(IEnumerable<EhhParser.AttribPairContext> context, string objectName, EhhmageComplete.Rectangle? rectangle = null) {
         
         rectangle ??= EhhmageComplete.Global.Rectangle.Clone();
         
@@ -296,8 +338,316 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         }
         
         rectangle.DrawRectangle();
-        if(!functionName.Equals(string.Empty))   EhhmageComplete.FunctionNames.Add(functionName, rectangle);
+        if(!objectName.Equals(string.Empty))   EhhmageComplete.ObjectNames.Add(objectName, rectangle);
         else EhhmageComplete.Global.Rectangle = rectangle.Clone();
+    }
+
+    private static void DrawLine(IEnumerable<EhhParser.AttribPairContext> context, string objectName, EhhmageComplete.Line? line = null) {
+        
+        line ??= EhhmageComplete.Global.Line.Clone();
+        
+        foreach (var attribPairContext in context) {
+            var attribName = attribPairContext.ID().GetText();
+            var attribValue = attribPairContext.attribValue().GetText();
+
+            switch (attribName) {
+                case nameof(EhhmageComplete.LineAttribute.thickness): {
+                    if (!int.TryParse(attribValue, out var thickness)) {
+                        Console.WriteLine("Thickness attribute value is not a number");
+                        break;
+                    }
+                    line.SetThickness(thickness);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.LineAttribute.startPosition): {
+                    var lineStart = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (lineStart.Length != 2) {
+                        Console.WriteLine("LineStart attribute value is not a 2-tuple");
+                        break;
+                    }
+                    line.SetStartPosition(lineStart);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.LineAttribute.endPosition): {
+                    var lineEnd = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (lineEnd.Length != 2) {
+                        Console.WriteLine("LineEnd attribute value is not a 2-tuple");
+                        break;
+                    }
+                    line.SetEndPosition(lineEnd);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.LineAttribute.color): {
+                    var lineColor = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (lineColor.Length != 3) {
+                        Console.WriteLine("LineColor attribute value is not a 3-tuple");
+                        break;
+                    }
+                    line.SetColor(lineColor);
+                    break;
+                }
+                
+                default:
+                    Console.WriteLine($"{attribName} is not defined");
+                    break;
+            }
+        }
+        
+        line.DrawLine();
+        if(!objectName.Equals(string.Empty)) EhhmageComplete.ObjectNames.Add(objectName, line);
+        else EhhmageComplete.Global.Line = line.Clone();
+        
+    }
+
+    private static void DrawCircle(IEnumerable<EhhParser.AttribPairContext> context, string objectName, EhhmageComplete.Circle? circle = null) {
+        
+        circle ??= EhhmageComplete.Global.Circle.Clone();
+        
+        foreach (var attribPairContext in context) {
+            var attribName = attribPairContext.ID().GetText();
+            var attribValue = attribPairContext.attribValue().GetText();
+
+            switch (attribName) {
+                case nameof(EhhmageComplete.CircleAttribute.thickness): {
+                    if (!int.TryParse(attribValue, out var thickness)) {
+                        Console.WriteLine("Thickness attribute value is not a number");
+                        break;
+                    }
+                    circle.SetThickness(thickness);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.CircleAttribute.position): {
+                    var circlePosition = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (circlePosition.Length != 2) {
+                        Console.WriteLine("CirclePosition attribute value is not a 2-tuple");
+                        break;
+                    }
+                    circle.SetPosition(circlePosition);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.CircleAttribute.color): {
+                    var circleColor = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (circleColor.Length != 3) {
+                        Console.WriteLine("CircleColor attribute value is not a 3-tuple");
+                        break;
+                    }
+                    circle.SetColor(circleColor);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.CircleAttribute.radius): {
+                    if (!int.TryParse(attribValue, out var circleRadius)) {
+                        Console.WriteLine("CircleRadius attribute value is not a number");
+                        break;
+                    }
+                    circle.SetRadius(circleRadius);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.CircleAttribute.fillColor): {
+                    if (attribValue == "no") {
+                        circle.SetDoFill(false);
+                        break;
+                    }
+                    
+                    var fillColor = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (fillColor.Length != 3) {
+                        Console.WriteLine("FillColor attribute value is not a 3-tuple");
+                        break;
+                    }
+                    circle.SetDoFill(true);
+                    circle.SetFillColor(fillColor);
+                    break;
+                }
+                
+                default:
+                    Console.WriteLine($"{attribName} is not defined");
+                    break;
+            }
+        }
+        
+        circle.DrawCircle();
+        if(!objectName.Equals(string.Empty)) EhhmageComplete.ObjectNames.Add(objectName, circle);
+        else EhhmageComplete.Global.Circle = circle.Clone();
+        
+    }
+
+    private static void DrawPolyLines(IEnumerable<EhhParser.AttribPairContext> context, string objectName, EhhmageComplete.PolyLines? polyLines = null) {
+        
+        polyLines ??= EhhmageComplete.Global.PolyLines.Clone();
+        
+        foreach (var attribPairContext in context) {
+            var attribName = attribPairContext.ID().GetText();
+            var attribValue = attribPairContext.attribValue().GetText();
+
+            switch (attribName) {
+                case nameof(EhhmageComplete.PolyLinesAttribute.thickness): {
+                    if (!int.TryParse(attribValue, out var thickness)) {
+                        Console.WriteLine("Thickness attribute value is not a number");
+                        break;
+                    }
+                    polyLines.SetThickness(thickness);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.PolyLinesAttribute.color): {
+                    var polyLinesColor = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (polyLinesColor.Length != 3) {
+                        Console.WriteLine("PolyLinesColor attribute value is not a 3-tuple");
+                        break;
+                    }
+                    polyLines.SetColor(polyLinesColor);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.PolyLinesAttribute.position): {
+                    if (!int.TryParse(attribPairContext.INT()?.GetText(), out var polyLinesPositionIndex)) {
+                        Console.WriteLine("PolyLinesPosition Index not mentioned");
+                        break;
+                    }
+                    var polyLinesPosition = attribValue.Split(',').Select(int.Parse).ToList();
+                    if (polyLinesPosition.Count != 2) {
+                        Console.WriteLine("PolyLinesPosition attribute value is not a 2-tuple");
+                        break;
+                    }
+                    polyLines.SetPositions(polyLinesPositionIndex, polyLinesPosition);
+                    break;
+                }
+
+                case nameof(EhhmageComplete.PolyLinesAttribute.fillColor): {
+                    if (attribValue == "no") {
+                        polyLines.SetDoFill(false);
+                        break;
+                    }
+                    
+                    var fillColor = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (fillColor.Length != 3) {
+                        Console.WriteLine("FillColor attribute value is not a 3-tuple");
+                        break;
+                    }
+                    polyLines.SetDoFill(true);
+                    polyLines.SetFillColor(fillColor);
+                    break;
+                }
+                
+                default:
+                    Console.WriteLine($"{attribName} is not defined");
+                    break;
+            }
+        }
+        
+        polyLines.DrawPolyLines();
+        if(!objectName.Equals(string.Empty)) EhhmageComplete.ObjectNames.Add(objectName, polyLines);
+        else EhhmageComplete.Global.PolyLines = polyLines.Clone();
+    }
+
+    private static void DrawEllipse(IEnumerable<EhhParser.AttribPairContext> contexts, string objectName, EhhmageComplete.Ellipse? ellipse = null) {
+        
+        ellipse ??= EhhmageComplete.Global.Ellipse.Clone();
+        
+        foreach (var attribPairContext in contexts) {
+            var attribName = attribPairContext.ID().GetText();
+            var attribValue = attribPairContext.attribValue().GetText();
+
+            switch (attribName) {
+                case nameof(EhhmageComplete.EllipseAttribute.thickness): {
+                    if (!int.TryParse(attribValue, out var thickness)) {
+                        Console.WriteLine("Thickness attribute value is not a number");
+                        break;
+                    }
+                    ellipse.SetThickness(thickness);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.EllipseAttribute.position): {
+                    var ellipsePosition = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (ellipsePosition.Length != 2) {
+                        Console.WriteLine("EllipsePosition attribute value is not a 2-tuple");
+                        break;
+                    }
+                    ellipse.SetPosition(ellipsePosition);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.EllipseAttribute.color): {
+                    var ellipseColor = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (ellipseColor.Length != 3) {
+                        Console.WriteLine("EllipseColor attribute value is not a 3-tuple");
+                        break;
+                    }
+                    ellipse.SetColor(ellipseColor);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.EllipseAttribute.axes): {
+                    var ellipseAxes = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (ellipseAxes.Length != 2) {
+                        Console.WriteLine("EllipseAxes attribute value is not a 2-tuple");
+                        break;
+                    }
+                    ellipse.SetAxes(ellipseAxes);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.EllipseAttribute.angle): {
+                    if (!int.TryParse(attribValue, out var ellipseAngle)) {
+                        Console.WriteLine("EllipseAngle attribute value is not a number");
+                        break;
+                    }
+                    ellipse.SetAngle(ellipseAngle);
+                    break;
+                }
+
+                case nameof(EhhmageComplete.EllipseAttribute.startAngle): {
+                    if (!int.TryParse(attribValue, out var ellipseStartAngle)) {
+                        Console.WriteLine("EllipseStartAngle attribute value is not a number");
+                        break;
+                    }
+                    ellipse.SetStartAngle(ellipseStartAngle);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.EllipseAttribute.endAngle): {
+                    if (!int.TryParse(attribValue, out var ellipseEndAngle)) {
+                        Console.WriteLine("EllipseEndAngle attribute value is not a number");
+                        break;
+                    }
+                    ellipse.SetEndAngle(ellipseEndAngle);
+                    break;
+                }
+                
+                case nameof(EhhmageComplete.EllipseAttribute.fillColor): {
+                    if (attribValue == "no") {
+                        ellipse.SetDoFill(false);
+                        break;
+                    }
+                    
+                    var fillColor = attribValue.Split(',').Select(int.Parse).ToArray();
+                    if (fillColor.Length != 3) {
+                        Console.WriteLine("FillColor attribute value is not a 3-tuple");
+                        break;
+                    }
+                    ellipse.SetDoFill(true);
+                    ellipse.SetFillColor(fillColor);
+                    break;
+                }
+                
+                default:
+                    Console.WriteLine($"{attribName} is not defined");
+                    break;
+            }
+        }
+        
+        ellipse.DrawEllipse();
+        
+        if(!objectName.Equals(string.Empty)) EhhmageComplete.ObjectNames.Add(objectName, ellipse);
+        else EhhmageComplete.Global.Ellipse = ellipse.Clone();
+        
     }
     
 }

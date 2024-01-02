@@ -28,13 +28,45 @@ public static class EhhmageComplete {
         height,
         fillColor
     }
+    
+    public enum LineAttribute {
+        startPosition,
+        endPosition,
+        color,
+        thickness
+    }
+    
+    public enum CircleAttribute {
+        radius,
+        position,
+        color,
+        thickness,
+        fillColor
+    }
+    
+    public enum PolyLinesAttribute {
+        color,
+        thickness,
+        position,
+        fillColor
+    }
+    
+    public enum EllipseAttribute {
+        thickness,
+        position,
+        color,
+        axes,
+        angle,
+        startAngle,
+        endAngle,
+        fillColor
+    }
 
     private static Mat _ehhmageOutput = new();
-    public static readonly Dictionary<string, object?> FunctionNames = new();
+    public static readonly Dictionary<string, object?> ObjectNames = new();
     
 
     public static class Ehhmage {
-        
         private static int _height  = 1080;
         private static int _width  = 1920;
         private static int[] _background  = { 0, 0, 0 };
@@ -66,13 +98,12 @@ public static class EhhmageComplete {
         
         public static void CreateImage() {
             Cv2.ImWrite(_outputName, _ehhmageOutput);
-            // Cv2.ImShow(@"G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\Content\TestPrograms"+_outputName, _ehhmageOutput);
+            // Cv2.ImWrite(@"G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\Content\TestPrograms\"+_outputName, _ehhmageOutput);
         }
         
     }
 
     public class Text {
-        
         private int _fontScale = 1;
         private int _thickness = 1;
         private int[] _position = { 0, 0 };
@@ -114,14 +145,15 @@ public static class EhhmageComplete {
         }
         
         public void InsertText() {
-            Cv2.PutText(_ehhmageOutput, _text, new Point(_position[0], _position[1]), 
-                HersheyFonts.HersheyPlain, _fontScale, new Scalar(_color[2], _color[1], _color[0]), _thickness);
+            var textPosition = new Point(_position[0], _position[1]);
+            var textColor = new Scalar(_color[2], _color[1], _color[0]);
+            
+            Cv2.PutText(_ehhmageOutput, _text, textPosition, HersheyFonts.HersheyPlain, _fontScale, textColor, _thickness);
         }
         
     }
 
     public class Rectangle {
-        
         private int _thickness = 1;
         private int[] _position = { 0, 0 };
         private int[] _color = { 255, 255, 255 };
@@ -186,9 +218,248 @@ public static class EhhmageComplete {
         
     }
 
+    public class Line {
+        private int[] startPosition = { 0, 0 };
+        private int[] endPosition = { 0, 0 };
+        private int[] color = { 255, 255, 255 };
+        private int thickness = 1;
+        
+        #region Setters
+        
+        public void SetStartPosition(int[] lineStartPosition) {
+            startPosition = lineStartPosition;
+        }
+        
+        public void SetEndPosition(int[] lineEndPosition) {
+            endPosition = lineEndPosition;
+        }
+        
+        public void SetColor(int[] lineColor) {
+            color = lineColor;
+        }
+        
+        public void SetThickness(int lineThickness) {
+            thickness = lineThickness;
+        }
+        
+        #endregion
+        
+        public Line Clone() {
+            return new Line {
+                startPosition = startPosition,
+                endPosition = endPosition,
+                color = color,
+                thickness = thickness
+            };
+        }
+        
+        public void DrawLine() {
+            var start = new Point(startPosition[0], startPosition[1]);
+            var end = new Point(endPosition[0], endPosition[1]);
+            var lineColor = new Scalar(color[2], color[1], color[0]);
+            
+            Cv2.Line(_ehhmageOutput, start, end, lineColor, thickness);
+        }
+    }
+
+    public class Circle {
+        private int radius = 1;
+        private int[] position = { 0, 0 };
+        private int[] color = { 255, 255, 255 };
+        private int thickness = 1;
+        private int[] fillColor = { 255, 255, 255 };
+        
+        private bool doFill = false;
+        
+        #region Setters
+        
+        public void SetRadius(int circleRadius) {
+            radius = circleRadius;
+        }
+        
+        public void SetPosition(int[] circlePosition) {
+            position = circlePosition;
+        }
+        
+        public void SetColor(int[] circleColor) {
+            color = circleColor;
+        }
+        
+        public void SetThickness(int circleThickness) {
+            thickness = circleThickness;
+        }
+        
+        public void SetFillColor(int[] circleFillColor) {
+            fillColor = circleFillColor;
+        }
+        
+        public void SetDoFill(bool fillCircle) {
+            doFill = fillCircle;
+        }
+        
+        #endregion
+        
+        public Circle Clone() {
+            return new Circle {
+                radius = radius,
+                position = position,
+                color = color,
+                thickness = thickness,
+                fillColor = fillColor,
+                doFill = doFill
+            };
+        }
+        
+        public void DrawCircle() {
+            var circlePosition = new Point(position[0], position[1]);
+            var circleColor = new Scalar(color[2], color[1], color[0]);
+            var circleFillColor = new Scalar(fillColor[2], fillColor[1], fillColor[0]);
+            
+            if (doFill) Cv2.Circle(_ehhmageOutput, circlePosition, radius, circleFillColor, Cv2.FILLED);
+            Cv2.Circle(_ehhmageOutput, circlePosition, radius, circleColor, thickness);
+        }
+        
+    }
+
+    public class PolyLines {
+        private int[] color = { 255, 255, 255 };
+        private int thickness = 1;
+        private List<List<int>> positions = new();
+        private int[] fillColor = { 255, 255, 255 };
+        
+        private bool doFill = false;
+        
+        #region Setters
+        
+        public void SetColor(int[] polyLinesColor) {
+            color = polyLinesColor;
+        }
+        
+        public void SetThickness(int polyLinesThickness) {
+            thickness = polyLinesThickness;
+        }
+        
+        public void SetPositions(int index, List<int> polyLinesPosition) {
+            positions.Add(new List<int>());
+            positions[index] = polyLinesPosition;
+        }
+        
+        public void SetFillColor(int[] polyLinesFillColor) {
+            fillColor = polyLinesFillColor;
+        }
+        
+        public void SetDoFill(bool fillPolyLines) {
+            doFill = fillPolyLines;
+        }
+        
+        #endregion
+        
+        public PolyLines Clone() {
+            return new PolyLines {
+                color = color,
+                thickness = thickness,
+                positions = positions,
+                fillColor = fillColor,
+                doFill = doFill
+            };
+        }
+        
+        public void DrawPolyLines() {
+            var polyLinesPositions = new Point[positions.Count];
+            for (var i = 0; i < positions.Count; i++) {
+                polyLinesPositions[i] = new Point(positions[i][0], positions[i][1]);
+            }
+            var polyLinesColor = new Scalar(color[2], color[1], color[0]);
+            var polyLinesFillColor = new Scalar(fillColor[2], fillColor[1], fillColor[0]);
+            
+            if (doFill) Cv2.FillPoly(_ehhmageOutput, new[] { polyLinesPositions }, polyLinesFillColor);
+            Cv2.Polylines(_ehhmageOutput, new[] { polyLinesPositions }, true, polyLinesColor, thickness);
+        }
+    }
+
+    public class Ellipse {
+        private int thickness = 1;
+        private int[] position = { 0, 0 };
+        private int[] color = { 255, 255, 255 };
+        private int[] axes = { 1, 1 };
+        private int angle = 0;
+        private int startAngle = 0;
+        private int endAngle = 360;
+        private int[] fillColor = { 255, 255, 255 };
+        
+        private bool doFill = false;
+        
+        #region Setters
+        
+        public void SetThickness(int ellipseThickness) {
+            thickness = ellipseThickness;
+        }
+        
+        public void SetPosition(int[] ellipsePosition) {
+            position = ellipsePosition;
+        }
+        
+        public void SetColor(int[] ellipseColor) {
+            color = ellipseColor;
+        }
+        
+        public void SetAxes(int[] ellipseAxes) {
+            axes = ellipseAxes;
+        }
+        
+        public void SetAngle(int ellipseAngle) {
+            angle = ellipseAngle;
+        }
+        
+        public void SetStartAngle(int ellipseStartAngle) {
+            startAngle = ellipseStartAngle;
+        }
+        
+        public void SetEndAngle(int ellipseEndAngle) {
+            endAngle = ellipseEndAngle;
+        }
+        
+        public void SetFillColor(int[] ellipseFillColor) {
+            fillColor = ellipseFillColor;
+        }
+        
+        public void SetDoFill(bool fillEllipse) {
+            doFill = fillEllipse;
+        }
+        
+        #endregion
+        
+        public Ellipse Clone() {
+            return new Ellipse {
+                thickness = thickness,
+                position = position,
+                color = color,
+                axes = axes,
+                angle = angle,
+                startAngle = startAngle,
+                endAngle = endAngle,
+                fillColor = fillColor,
+                doFill = doFill
+            };
+        }
+        
+        public void DrawEllipse() {
+            var ellipsePosition = new Point(position[0], position[1]);
+            var ellipseColor = new Scalar(color[2], color[1], color[0]);
+            var ellipseFillColor = new Scalar(fillColor[2], fillColor[1], fillColor[0]);
+            
+            if (doFill) Cv2.Ellipse(_ehhmageOutput, ellipsePosition, new Size(axes[0], axes[1]), angle, startAngle, endAngle, ellipseFillColor, Cv2.FILLED);
+            Cv2.Ellipse(_ehhmageOutput, ellipsePosition, new Size(axes[0], axes[1]), angle, startAngle, endAngle, ellipseColor, thickness);
+        }
+    }
+
     public static class Global {
         internal static Text Text = new();
         internal static Rectangle Rectangle = new();
+        internal static Line Line = new();
+        internal static Circle Circle = new();
+        internal static PolyLines PolyLines = new();
+        internal static Ellipse Ellipse = new();
     }
 
 }

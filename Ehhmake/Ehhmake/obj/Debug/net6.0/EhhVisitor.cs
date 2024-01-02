@@ -40,18 +40,18 @@ public interface IEhhVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitProgram([NotNull] EhhParser.ProgramContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.function"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.object"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitFunction([NotNull] EhhParser.FunctionContext context);
+	Result VisitObject([NotNull] EhhParser.ObjectContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.functionIdentifier"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.objectIdentifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitFunctionIdentifier([NotNull] EhhParser.FunctionIdentifierContext context);
+	Result VisitObjectIdentifier([NotNull] EhhParser.ObjectIdentifierContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="EhhParser.symbol"/>.
@@ -61,18 +61,18 @@ public interface IEhhVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitSymbol([NotNull] EhhParser.SymbolContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.preFunctionName"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.preObjectName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitPreFunctionName([NotNull] EhhParser.PreFunctionNameContext context);
+	Result VisitPreObjectName([NotNull] EhhParser.PreObjectNameContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.functionName"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.objectName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitFunctionName([NotNull] EhhParser.FunctionNameContext context);
+	Result VisitObjectName([NotNull] EhhParser.ObjectNameContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="EhhParser.attribPair"/>.

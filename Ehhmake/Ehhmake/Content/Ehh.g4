@@ -1,25 +1,25 @@
 grammar Ehh;
 
-program: (function (NEWLINE)?)* EOF;
+program: (object (NEWLINE)?)* EOF;
         
-function: functionIdentifier LB
+object: objectIdentifier LB
             (attribPair)*
         RB;
         
-functionIdentifier: preFunctionName (symbol functionName)?;
+objectIdentifier: preObjectName ( (' ')? symbol (' ')? objectName)?;
     
 symbol: '::';
-preFunctionName: ID;
-functionName: ID;
+preObjectName: ID;
+objectName: ID;
         
-attribPair : ID ':' attribValue (NEWLINE)?;
+attribPair : ID (' ' INT)? ':' attribValue (NEWLINE)?;
 attribValue : INT | FILENAME | INT ',' INT ',' INT | ID | STRING;
 
 LB : [{];
 RB : [}];
 
 INT : [0-9]+;
-ID : [a-zA-Z]+;
+ID : [a-zA-Z] [a-zA-Z0-9]*;
 
 STRING: '"' .*? '"';
 NEWLINE : [\r\n]+;

@@ -1,0 +1,16 @@
+ehh {
+    width: 1920
+    height: 1080
+    background: 0, 0, 0
+    output: PolyLinesExample.png
+}
+
+polyLines {
+    color: 255, 255, 255
+    thickness: 4
+    position 0: 50, 300
+    position 1: 200, 50
+    position 2: 350, 350
+    position 3: 400, 600
+    fillColor: 255, 0, 0
+}

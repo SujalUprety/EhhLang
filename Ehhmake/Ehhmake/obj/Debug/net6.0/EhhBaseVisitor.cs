@@ -46,7 +46,7 @@ public partial class EhhBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, 
 	public virtual Result VisitProgram([NotNull] EhhParser.ProgramContext context) { return VisitChildren(context); }
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.function"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.object"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -54,10 +54,10 @@ public partial class EhhBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, 
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitFunction([NotNull] EhhParser.FunctionContext context) { return VisitChildren(context); }
+	public virtual Result VisitObject([NotNull] EhhParser.ObjectContext context) { return VisitChildren(context); }
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.functionIdentifier"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.objectIdentifier"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -65,7 +65,7 @@ public partial class EhhBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, 
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitFunctionIdentifier([NotNull] EhhParser.FunctionIdentifierContext context) { return VisitChildren(context); }
+	public virtual Result VisitObjectIdentifier([NotNull] EhhParser.ObjectIdentifierContext context) { return VisitChildren(context); }
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="EhhParser.symbol"/>.
@@ -79,7 +79,7 @@ public partial class EhhBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, 
 	public virtual Result VisitSymbol([NotNull] EhhParser.SymbolContext context) { return VisitChildren(context); }
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.preFunctionName"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.preObjectName"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -87,10 +87,10 @@ public partial class EhhBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, 
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitPreFunctionName([NotNull] EhhParser.PreFunctionNameContext context) { return VisitChildren(context); }
+	public virtual Result VisitPreObjectName([NotNull] EhhParser.PreObjectNameContext context) { return VisitChildren(context); }
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.functionName"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.objectName"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -98,7 +98,7 @@ public partial class EhhBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, 
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitFunctionName([NotNull] EhhParser.FunctionNameContext context) { return VisitChildren(context); }
+	public virtual Result VisitObjectName([NotNull] EhhParser.ObjectNameContext context) { return VisitChildren(context); }
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="EhhParser.attribPair"/>.
