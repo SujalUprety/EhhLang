@@ -26,7 +26,7 @@ rect::red{
     color: 255, 255, 255
     width: 200
     height: 200
-    thickness: 10
+    thickness: 5
     fillColor: 255, 0, 0
 }
 
