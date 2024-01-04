@@ -83,7 +83,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                         break;
                     
                     default:
-                        Console.WriteLine($"Object \'{objectName}\' not identified");
+                        Console.WriteLine($"Object \'{objectName}\' not identified1");
                         break;
                 }
             }
@@ -132,11 +132,11 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                     break;
                 
                 default:
-                    Console.WriteLine($"Object \'{preDefinedObjectName}\' not identified");
+                    Console.WriteLine($"Object \'{preDefinedObjectName}\' not identified2");
                     break;
             }
         }
-        else Console.WriteLine($"Object \'{preDefinedObjectName}\' not identified");
+        else Console.WriteLine($"Object \'{preDefinedObjectName}\' not identified3");
     }
 
     private static void InitializeObjectEhh(IEnumerable<EhhParser.AttribPairContext> context) {

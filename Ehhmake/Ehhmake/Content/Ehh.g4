@@ -6,20 +6,20 @@ object: objectIdentifier LB
             (attribPair)*
         RB;
         
-objectIdentifier: preObjectName ( (' ')? symbol (' ')? objectName)?;
+objectIdentifier: preObjectName ( symbol objectName)?;
     
 symbol: '::';
 preObjectName: ID;
 objectName: ID;
         
-attribPair : ID (' ' INT)? ':' attribValue (NEWLINE)?;
+attribPair : ID (INT)? ':' attribValue (NEWLINE)?;
 attribValue : INT | FILENAME | INT ',' INT ',' INT | ID | STRING;
 
 LB : [{];
 RB : [}];
 
 INT : [0-9]+;
-ID : [a-zA-Z] [a-zA-Z0-9]*;
+ID : [a-zA-Z]+;
 
 STRING: '"' .*? '"';
 NEWLINE : [\r\n]+;

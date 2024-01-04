@@ -1,11 +1,11 @@
-ehh{
+ehh {
     width: 1920
     height: 1080
     background: 0, 0, 0
     output: circleExample.png
 }
 
-circle{
+circle {
     position: 960, 540
     radius: 100
     color: 255, 0, 0
@@ -13,32 +13,32 @@ circle{
     fillColor: 0, 0, 255
 }
 
-circle :: sun1{
+circle :: sun {
     position: 1500, 500
     fillColor: 255, 255, 0
     color: 255, 255, 0
 }
 
-circle :: moon1{
+circle :: moon {
     position: 500, 500
     fillColor: 255, 255, 255
     color: 255, 255, 255
 }
 
-sun1 :: sun2{
+sun :: sunAnother {
     position: 1500, 800
 }
 
-moon1 :: moon2{
+moon :: moonAnother {
     position: 500, 800
 }
 
-sun2 :: sunWithNoFill{
+sunAnother :: sunWithNoFill {
     position: 1500, 200
     fillColor: no
 }
 
-moon2 :: moonWithNoFill{
+moonAnother :: moonWithNoFill {
     position: 500, 200
     fillColor: no
 }

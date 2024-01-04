@@ -1,0 +1,49 @@
+ehh {
+    width: 1920
+    height: 1080
+    background: 0, 0, 0
+    output: ehhhhh.png
+}
+
+text::hello {
+    fontScale: 5
+    thickness: 5
+    position: 100, 100
+    color: 255, 0, 0
+    text: "hello"
+}
+
+text::hi {
+    fontScale: 3
+    thickness: 3
+    position: 100, 200
+    color: 0, 255, 0
+    text: "hi"
+}
+
+hello::ok {
+    position: 300, 100
+    text: "ok"
+}
+
+hi::hola {
+    position: 300, 200
+    text: "hola"
+}
+
+ok::ko {
+    fontScale: 7
+    thickness: 7
+    position: 500, 100
+    text: "ko"
+}
+
+hola::ohh {
+    position: 500, 200
+    text: "ohh"
+}
+
+hello::hillo {
+    position: 800, 800
+    text: "hillo"
+}
