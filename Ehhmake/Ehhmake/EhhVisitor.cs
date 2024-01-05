@@ -42,12 +42,12 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         #region CurlyBracesCheck
         
         if (context.LB().GetText() != "{") {
-            Console.WriteLine($"Curly braces not found in \'{objectName}\' object");
+            Console.WriteLine($"Curly braces not found in \'{preDefinedObjectName}\' object");
             return base.VisitObject(context);
         }
         
         if (context.RB().GetText() != "}") {
-            Console.WriteLine($"Closing bracket not found in \'{objectName}\' object");
+            Console.WriteLine($"Closing bracket not found in \'{preDefinedObjectName}\' object");
             return base.VisitObject(context);
         }
         
@@ -142,7 +142,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
     private static void InitializeObjectEhh(IEnumerable<EhhParser.AttribPairContext> context) {
         
         foreach (var attribPairContext in context) {
-            var attribName = attribPairContext.ID().GetText();
+            var attribName = attribPairContext.attribName().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
         
             switch (attribName) {
@@ -176,7 +176,11 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                 }
                 
                 case nameof(EhhmageComplete.EhhmageAttribute.output): {
-                    EhhmageComplete.Ehhmage.SetOutputName(attribValue);
+                    if(attribValue.StartsWith('"') && attribValue.EndsWith('"')) {
+                        EhhmageComplete.Ehhmage.SetOutputName(attribValue[1..^1]);
+                    } else {
+                        Console.WriteLine("Output attribute value is not a string");
+                    }
                     break;
                 }
                 
@@ -195,7 +199,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         text ??= EhhmageComplete.Global.Text.Clone();
         
         foreach (var attribPairContext in context) {
-            var attribName = attribPairContext.ID().GetText();
+            var attribName = attribPairContext.attribName().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
 
             switch (attribName) {
@@ -264,7 +268,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         rectangle ??= EhhmageComplete.Global.Rectangle.Clone();
         
         foreach (var attribPairContext in context) {
-            var attribName = attribPairContext.ID().GetText();
+            var attribName = attribPairContext.attribName().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
 
             switch (attribName) {
@@ -347,7 +351,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         line ??= EhhmageComplete.Global.Line.Clone();
         
         foreach (var attribPairContext in context) {
-            var attribName = attribPairContext.ID().GetText();
+            var attribName = attribPairContext.attribName().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
 
             switch (attribName) {
@@ -407,7 +411,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         circle ??= EhhmageComplete.Global.Circle.Clone();
         
         foreach (var attribPairContext in context) {
-            var attribName = attribPairContext.ID().GetText();
+            var attribName = attribPairContext.attribName().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
 
             switch (attribName) {
@@ -482,7 +486,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         polyLines ??= EhhmageComplete.Global.PolyLines.Clone();
         
         foreach (var attribPairContext in context) {
-            var attribName = attribPairContext.ID().GetText();
+            var attribName = attribPairContext.attribName().ID().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
 
             switch (attribName) {
@@ -506,7 +510,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
                 }
                 
                 case nameof(EhhmageComplete.PolyLinesAttribute.position): {
-                    if (!int.TryParse(attribPairContext.INT()?.GetText(), out var polyLinesPositionIndex)) {
+                    if (!int.TryParse(attribPairContext.attribName().INT()?.GetText(), out var polyLinesPositionIndex)) {
                         Console.WriteLine("PolyLinesPosition Index not mentioned");
                         break;
                     }
@@ -551,7 +555,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         ellipse ??= EhhmageComplete.Global.Ellipse.Clone();
         
         foreach (var attribPairContext in contexts) {
-            var attribName = attribPairContext.ID().GetText();
+            var attribName = attribPairContext.attribName().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
 
             switch (attribName) {

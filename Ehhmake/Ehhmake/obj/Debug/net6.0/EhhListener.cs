@@ -118,5 +118,16 @@ public interface IEhhListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitAttribValue([NotNull] EhhParser.AttribValueContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="EhhParser.attribName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAttribName([NotNull] EhhParser.AttribNameContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="EhhParser.attribName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAttribName([NotNull] EhhParser.AttribNameContext context);
 }
 } // namespace Ehhmake.Content

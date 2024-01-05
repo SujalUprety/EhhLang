@@ -12,17 +12,16 @@ symbol: '::';
 preObjectName: ID;
 objectName: ID;
         
-attribPair : ID (INT)? ':' attribValue (NEWLINE)?;
-attribValue : INT | FILENAME | INT ',' INT ',' INT | ID | STRING;
+attribPair : attribName ':' attribValue (NEWLINE)?;
+attribValue : INT | INT ',' INT ',' INT | ID | STRING;
+
+attribName: ID ('[' INT ']')?;
 
 LB : [{];
 RB : [}];
 
 INT : [0-9]+;
 ID : [a-zA-Z]+;
-
 STRING: '"' .*? '"';
 NEWLINE : [\r\n]+;
-FILENAME : [a-zA-Z0-9.]+;
-
 WS : [ \t\r\n]+ -> skip;

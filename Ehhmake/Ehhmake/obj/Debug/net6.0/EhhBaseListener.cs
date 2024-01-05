@@ -139,6 +139,19 @@ public partial class EhhBaseListener : IEhhListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitAttribValue([NotNull] EhhParser.AttribValueContext context) { }
 
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="EhhParser.attribName"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAttribName([NotNull] EhhParser.AttribNameContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="EhhParser.attribName"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAttribName([NotNull] EhhParser.AttribNameContext context) { }
+
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>
 	public virtual void EnterEveryRule([NotNull] ParserRuleContext context) { }

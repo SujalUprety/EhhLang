@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\Content\Ehh.g4 by ANTLR 4.6.6
+// Generated from G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\Content\Ehh.g4 by ANTLR 4.6.6
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -33,38 +33,59 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IEhhVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.start"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.program"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitStart([NotNull] EhhParser.StartContext context);
+	Result VisitProgram([NotNull] EhhParser.ProgramContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.widthValue"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.object"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitWidthValue([NotNull] EhhParser.WidthValueContext context);
+	Result VisitObject([NotNull] EhhParser.ObjectContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.heightValue"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.objectIdentifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitHeightValue([NotNull] EhhParser.HeightValueContext context);
+	Result VisitObjectIdentifier([NotNull] EhhParser.ObjectIdentifierContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.colorValue"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.symbol"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitColorValue([NotNull] EhhParser.ColorValueContext context);
+	Result VisitSymbol([NotNull] EhhParser.SymbolContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="EhhParser.outputValue"/>.
+	/// Visit a parse tree produced by <see cref="EhhParser.preObjectName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitOutputValue([NotNull] EhhParser.OutputValueContext context);
+	Result VisitPreObjectName([NotNull] EhhParser.PreObjectNameContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="EhhParser.objectName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitObjectName([NotNull] EhhParser.ObjectNameContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="EhhParser.attribPair"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAttribPair([NotNull] EhhParser.AttribPairContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="EhhParser.attribValue"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAttribValue([NotNull] EhhParser.AttribValueContext context);
 }
 } // namespace Ehhmake.Content

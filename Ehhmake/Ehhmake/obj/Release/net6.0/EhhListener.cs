@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from G:\Projects\My Rule\Ehhmake\Ehhmake\Ehhmake\Content\Ehh.g4 by ANTLR 4.6.6
+// Generated from G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\Content\Ehh.g4 by ANTLR 4.6.6
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -32,58 +32,91 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IEhhListener : IParseTreeListener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.start"/>.
+	/// Enter a parse tree produced by <see cref="EhhParser.program"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterStart([NotNull] EhhParser.StartContext context);
+	void EnterProgram([NotNull] EhhParser.ProgramContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.start"/>.
+	/// Exit a parse tree produced by <see cref="EhhParser.program"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitStart([NotNull] EhhParser.StartContext context);
+	void ExitProgram([NotNull] EhhParser.ProgramContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.widthValue"/>.
+	/// Enter a parse tree produced by <see cref="EhhParser.object"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterWidthValue([NotNull] EhhParser.WidthValueContext context);
+	void EnterObject([NotNull] EhhParser.ObjectContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.widthValue"/>.
+	/// Exit a parse tree produced by <see cref="EhhParser.object"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitWidthValue([NotNull] EhhParser.WidthValueContext context);
+	void ExitObject([NotNull] EhhParser.ObjectContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.heightValue"/>.
+	/// Enter a parse tree produced by <see cref="EhhParser.objectIdentifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterHeightValue([NotNull] EhhParser.HeightValueContext context);
+	void EnterObjectIdentifier([NotNull] EhhParser.ObjectIdentifierContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.heightValue"/>.
+	/// Exit a parse tree produced by <see cref="EhhParser.objectIdentifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitHeightValue([NotNull] EhhParser.HeightValueContext context);
+	void ExitObjectIdentifier([NotNull] EhhParser.ObjectIdentifierContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.colorValue"/>.
+	/// Enter a parse tree produced by <see cref="EhhParser.symbol"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterColorValue([NotNull] EhhParser.ColorValueContext context);
+	void EnterSymbol([NotNull] EhhParser.SymbolContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.colorValue"/>.
+	/// Exit a parse tree produced by <see cref="EhhParser.symbol"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitColorValue([NotNull] EhhParser.ColorValueContext context);
+	void ExitSymbol([NotNull] EhhParser.SymbolContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="EhhParser.outputValue"/>.
+	/// Enter a parse tree produced by <see cref="EhhParser.preObjectName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterOutputValue([NotNull] EhhParser.OutputValueContext context);
+	void EnterPreObjectName([NotNull] EhhParser.PreObjectNameContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="EhhParser.outputValue"/>.
+	/// Exit a parse tree produced by <see cref="EhhParser.preObjectName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitOutputValue([NotNull] EhhParser.OutputValueContext context);
+	void ExitPreObjectName([NotNull] EhhParser.PreObjectNameContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="EhhParser.objectName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterObjectName([NotNull] EhhParser.ObjectNameContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="EhhParser.objectName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitObjectName([NotNull] EhhParser.ObjectNameContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="EhhParser.attribPair"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAttribPair([NotNull] EhhParser.AttribPairContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="EhhParser.attribPair"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAttribPair([NotNull] EhhParser.AttribPairContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="EhhParser.attribValue"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAttribValue([NotNull] EhhParser.AttribValueContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="EhhParser.attribValue"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAttribValue([NotNull] EhhParser.AttribValueContext context);
 }
 } // namespace Ehhmake.Content

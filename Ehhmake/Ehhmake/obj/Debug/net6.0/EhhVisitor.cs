@@ -87,5 +87,12 @@ public interface IEhhVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitAttribValue([NotNull] EhhParser.AttribValueContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="EhhParser.attribName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAttribName([NotNull] EhhParser.AttribNameContext context);
 }
 } // namespace Ehhmake.Content

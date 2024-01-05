@@ -1,0 +1,6 @@
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\EhhLexer.cs
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\EhhParser.cs
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\EhhListener.cs
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\EhhBaseListener.cs
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\EhhVisitor.cs
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\EhhBaseVisitor.cs
