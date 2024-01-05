@@ -114,3 +114,11 @@ G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Debug\net6.0\refint\Ehhmake.dll
 G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Debug\net6.0\Ehhmake.pdb
 G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Debug\net6.0\Ehhmake.genruntimeconfig.cache
 G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Debug\net6.0\ref\Ehhmake.dll
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Debug\net6.0\ExamplePrograms\circleExample.ehh
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Debug\net6.0\ExamplePrograms\circleExample.png
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Debug\net6.0\ExamplePrograms\EllipseExample.ehh
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Debug\net6.0\ExamplePrograms\EllipseExample.png
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Debug\net6.0\ExamplePrograms\PolyLinesExample.ehh
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Debug\net6.0\ExamplePrograms\PolyLinesExample.png
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Debug\net6.0\ExamplePrograms\SomeCreatedImages\veryFirstPicture.ehh
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Debug\net6.0\ExamplePrograms\SomeCreatedImages\veryFirstPicture.png

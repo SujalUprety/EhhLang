@@ -1,0 +1,44 @@
+ehh {
+    width: 1920
+    height: 1080
+    background: 0, 0, 0
+    output: circleExample.png
+}
+
+circle {
+    position: 960, 540
+    radius: 100
+    color: 255, 0, 0
+    thickness: 10
+    fillColor: 0, 0, 255
+}
+
+circle :: sun {
+    position: 1500, 500
+    fillColor: 255, 255, 0
+    color: 255, 255, 0
+}
+
+circle :: moon {
+    position: 500, 500
+    fillColor: 255, 255, 255
+    color: 255, 255, 255
+}
+
+sun :: sunAnother {
+    position: 1500, 800
+}
+
+moon :: moonAnother {
+    position: 500, 800
+}
+
+sunAnother :: sunWithNoFill {
+    position: 1500, 200
+    fillColor: no
+}
+
+moonAnother :: moonWithNoFill {
+    position: 500, 200
+    fillColor: no
+}
