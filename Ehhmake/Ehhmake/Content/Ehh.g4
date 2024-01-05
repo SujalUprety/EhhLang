@@ -9,8 +9,8 @@ object: objectIdentifier LB
 objectIdentifier: preObjectName ( symbol objectName)?;
     
 symbol: '::';
-preObjectName: ID;
-objectName: ID;
+preObjectName: ID (ID | INT)*;
+objectName: ID (ID | INT)*;
         
 attribPair : attribName ':' attribValue (NEWLINE)?;
 attribValue : INT | INT ',' INT ',' INT | ID | STRING;
