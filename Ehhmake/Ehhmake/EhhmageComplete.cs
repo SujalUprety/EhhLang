@@ -4,68 +4,30 @@ using Point = OpenCvSharp.Point;
 namespace Ehhmake;
 
 public static class EhhmageComplete {
-    
-    public enum EhhmageAttribute {
+
+    public enum Attributes {
         width,
         height,
         background,
-        output
-    }
-    
-    public enum TextAttribute {
+        output,
         fontScale,
         thickness,
         position,
         color,
-        text
-    }
-    
-    public enum RectangleAttribute {
-        thickness,
-        position,
-        color,
-        width,
-        height,
-        fillColor
-    }
-    
-    public enum LineAttribute {
+        text,
+        fillColor,
         startPosition,
         endPosition,
-        color,
-        thickness
-    }
-    
-    public enum CircleAttribute {
         radius,
-        position,
-        color,
-        thickness,
-        fillColor
-    }
-    
-    public enum PolyLinesAttribute {
-        color,
-        thickness,
-        position,
-        fillColor
-    }
-    
-    public enum EllipseAttribute {
-        thickness,
-        position,
-        color,
         axes,
         angle,
         startAngle,
         endAngle,
-        fillColor
     }
 
     private static Mat _ehhmageOutput = new();
     public static readonly Dictionary<string, object?> ObjectNames = new();
     
-
     public static class Ehhmage {
         private static int _height  = 1080;
         private static int _width  = 1920;
@@ -74,21 +36,11 @@ public static class EhhmageComplete {
         
         #region Setters
     
-        public static void SetHeight(int height) {
-            _height = height;
-        }
+        public static void SetHeight(int height) => _height = height;
+        public static void SetWidth(int width) => _width = width;
+        public static void SetBackground(int[] background) => _background = background;
+        public static void SetOutputName(string outputName) => _outputName = outputName;
         
-        public static void SetWidth(int width) {
-            _width = width;
-        }
-        
-        public static void SetBackground(int[] background) {
-            _background = background;
-        }
-        
-        public static void SetOutputName(string outputName) {
-            _outputName = outputName;
-        }
     
         #endregion
 
@@ -111,26 +63,12 @@ public static class EhhmageComplete {
         private string _text = "Tehhxt";
     
         #region Setters
-    
-        public void SetFontScale(int fontScale) {
-            _fontScale = fontScale;
-        }
         
-        public void SetThickness(int thickness) {
-            _thickness = thickness;
-        }
-        
-        public void SetPosition(int[] textPosition) {
-            _position = textPosition;
-        }
-        
-        public void SetColor(int[] textColor) {
-            _color = textColor;
-        }
-        
-        public void SetText(string text) {
-            _text = text;
-        }
+        public void SetFontScale(int textFontScale) => _fontScale = textFontScale;
+        public void SetThickness(int textThickness) => _thickness = textThickness;
+        public void SetPosition(int[] textPosition) => _position = textPosition;
+        public void SetColor(int[] textColor) => _color = textColor;
+        public void SetText(string textText) => _text = textText;
     
         #endregion
         
@@ -165,33 +103,14 @@ public static class EhhmageComplete {
         
         #region Setters
         
-        public void SetThickness(int rectangleThickness) {
-            _thickness = rectangleThickness;
-        }
+        public void SetThickness(int rectangleThickness) => _thickness = rectangleThickness;
+        public void SetPosition(int[] rectanglePosition) => _position = rectanglePosition;
+        public void SetColor(int[] rectangleColor) => _color = rectangleColor;
+        public void SetWidth(int rectangleWidth) => _width = rectangleWidth;
+        public void SetHeight(int rectangleHeight) => _height = rectangleHeight;
+        public void SetFillColor(int[] rectangleFillColor) => _fillColor = rectangleFillColor;
+        public void SetDoFill(bool fillRectangle) => _doFill = fillRectangle;
         
-        public void SetPosition(int[] rectanglePosition) {
-            _position = rectanglePosition;
-        }
-        
-        public void SetColor(int[] rectangleColor) {
-            _color = rectangleColor;
-        }
-        
-        public void SetWidth(int rectangleWidth) {
-            _width = rectangleWidth;
-        }
-        
-        public void SetHeight(int rectangleHeight) {
-            _height = rectangleHeight;
-        }
-        
-        public void SetFillColor(int[] rectangleFillColor) {
-            _fillColor = rectangleFillColor;
-        }
-        
-        public void SetDoFill(bool fillRectangle) {
-            _doFill = fillRectangle;
-        }
     
         #endregion
 
@@ -226,21 +145,10 @@ public static class EhhmageComplete {
         
         #region Setters
         
-        public void SetStartPosition(int[] lineStartPosition) {
-            startPosition = lineStartPosition;
-        }
-        
-        public void SetEndPosition(int[] lineEndPosition) {
-            endPosition = lineEndPosition;
-        }
-        
-        public void SetColor(int[] lineColor) {
-            color = lineColor;
-        }
-        
-        public void SetThickness(int lineThickness) {
-            thickness = lineThickness;
-        }
+        public void SetStartPosition(int[] lineStartPosition) => startPosition = lineStartPosition;
+        public void SetEndPosition(int[] lineEndPosition) => endPosition = lineEndPosition;
+        public void SetColor(int[] lineColor) => color = lineColor;
+        public void SetThickness(int lineThickness) => thickness = lineThickness;
         
         #endregion
         
@@ -273,29 +181,12 @@ public static class EhhmageComplete {
         
         #region Setters
         
-        public void SetRadius(int circleRadius) {
-            radius = circleRadius;
-        }
-        
-        public void SetPosition(int[] circlePosition) {
-            position = circlePosition;
-        }
-        
-        public void SetColor(int[] circleColor) {
-            color = circleColor;
-        }
-        
-        public void SetThickness(int circleThickness) {
-            thickness = circleThickness;
-        }
-        
-        public void SetFillColor(int[] circleFillColor) {
-            fillColor = circleFillColor;
-        }
-        
-        public void SetDoFill(bool fillCircle) {
-            doFill = fillCircle;
-        }
+        public void SetRadius(int circleRadius) => radius = circleRadius;
+        public void SetPosition(int[] circlePosition) => position = circlePosition;
+        public void SetColor(int[] circleColor) => color = circleColor;
+        public void SetThickness(int circleThickness) => thickness = circleThickness;
+        public void SetFillColor(int[] circleFillColor) => fillColor = circleFillColor;
+        public void SetDoFill(bool fillCircle) => doFill = fillCircle;
         
         #endregion
         
@@ -331,26 +222,17 @@ public static class EhhmageComplete {
         
         #region Setters
         
-        public void SetColor(int[] polyLinesColor) {
-            color = polyLinesColor;
-        }
-        
-        public void SetThickness(int polyLinesThickness) {
-            thickness = polyLinesThickness;
-        }
+        public void SetColor(int[] polyLinesColor) => color = polyLinesColor;
+        public void SetThickness(int polyLinesThickness) => thickness = polyLinesThickness;
         
         public void SetPositions(int index, List<int> polyLinesPosition) {
             positions.Add(new List<int>());
             positions[index] = polyLinesPosition;
         }
         
-        public void SetFillColor(int[] polyLinesFillColor) {
-            fillColor = polyLinesFillColor;
-        }
+        public void SetFillColor(int[] polyLinesFillColor) => fillColor = polyLinesFillColor;
         
-        public void SetDoFill(bool fillPolyLines) {
-            doFill = fillPolyLines;
-        }
+        public void SetDoFill(bool fillPolyLines) => doFill = fillPolyLines;
         
         #endregion
         
@@ -391,41 +273,15 @@ public static class EhhmageComplete {
         
         #region Setters
         
-        public void SetThickness(int ellipseThickness) {
-            thickness = ellipseThickness;
-        }
-        
-        public void SetPosition(int[] ellipsePosition) {
-            position = ellipsePosition;
-        }
-        
-        public void SetColor(int[] ellipseColor) {
-            color = ellipseColor;
-        }
-        
-        public void SetAxes(int[] ellipseAxes) {
-            axes = ellipseAxes;
-        }
-        
-        public void SetAngle(int ellipseAngle) {
-            angle = ellipseAngle;
-        }
-        
-        public void SetStartAngle(int ellipseStartAngle) {
-            startAngle = ellipseStartAngle;
-        }
-        
-        public void SetEndAngle(int ellipseEndAngle) {
-            endAngle = ellipseEndAngle;
-        }
-        
-        public void SetFillColor(int[] ellipseFillColor) {
-            fillColor = ellipseFillColor;
-        }
-        
-        public void SetDoFill(bool fillEllipse) {
-            doFill = fillEllipse;
-        }
+        public void SetThickness(int ellipseThickness) => thickness = ellipseThickness;
+        public void SetPosition(int[] ellipsePosition) => position = ellipsePosition;
+        public void SetColor(int[] ellipseColor) => color = ellipseColor;
+        public void SetAxes(int[] ellipseAxes) => axes = ellipseAxes;
+        public void SetAngle(int ellipseAngle) => angle = ellipseAngle;
+        public void SetStartAngle(int ellipseStartAngle) => startAngle = ellipseStartAngle;
+        public void SetEndAngle(int ellipseEndAngle) => endAngle = ellipseEndAngle;
+        public void SetFillColor(int[] ellipseFillColor) => fillColor = ellipseFillColor;
+        public void SetDoFill(bool fillEllipse) => doFill = fillEllipse;
         
         #endregion
         
