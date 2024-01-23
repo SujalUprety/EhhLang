@@ -49,8 +49,8 @@ public static class EhhmageComplete {
         }
         
         public static void CreateImage() {
-            // Cv2.ImWrite(_outputName, _ehhmageOutput);
-            Cv2.ImWrite(@"G:\"+_outputName, _ehhmageOutput);
+            Cv2.ImWrite(_outputName, _ehhmageOutput);
+            // Cv2.ImWrite(@"G:\"+_outputName, _ehhmageOutput);
         }
         
     }
