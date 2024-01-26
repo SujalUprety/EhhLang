@@ -1,105 +1,48 @@
+using Ehhmake.Content;
 using static Ehhmake.EhhmageComplete;
 
 namespace Ehhmake;
 
 public static class AttributesSetters {
-    
-    private static readonly Dictionary<(Type, string), (Action<object, object> Setter, Type Type)> ActionMaps = new() {
-        
-        //Ehhmage Attributes
-        { (typeof(Ehhmage), nameof(Attributes.width)), ((obj, arg) => Ehhmage.SetWidth((int)arg), typeof(int))},
-        { (typeof(Ehhmage),nameof(Attributes.height)), ((obj,arg) => Ehhmage.SetHeight((int)arg), typeof(int))},
-        { (typeof(Ehhmage),nameof(Attributes.background)), ((obj, arg) => Ehhmage.SetBackground((int[])arg), typeof(int[]))},
-        { (typeof(Ehhmage),nameof(Attributes.output)), ((obj, arg) => Ehhmage.SetOutputName((string)arg), typeof(string))},
-        
-        //TextAttributes
-        { (typeof(Text), nameof(Attributes.fontScale)), ((obj, arg) => ((Text)obj).SetFontScale((int)arg), typeof(int))},
-        { (typeof(Text), nameof(Attributes.thickness)), ((obj, arg) => ((Text)obj).SetThickness((int)arg), typeof(int))},
-        { (typeof(Text), nameof(Attributes.position)), ((obj, arg) => ((Text)obj).SetPosition((int[])arg), typeof(int[]))},
-        { (typeof(Text), nameof(Attributes.color)), ((obj, arg) => ((Text)obj).SetColor((int[])arg), typeof(int[]))},
-        { (typeof(Text), nameof(Attributes.text)), ((obj, arg) => ((Text)obj).SetText((string)arg), typeof(string))},
-        
-        //RectangleAttributes
-        { (typeof(Rectangle), nameof(Attributes.position)), ((obj, arg) => ((Rectangle)obj).SetPosition((int[])arg), typeof(int[]))},
-        { (typeof(Rectangle), nameof(Attributes.color)), ((obj, arg) => ((Rectangle)obj).SetColor((int[])arg), typeof(int[]))},
-        { (typeof(Rectangle), nameof(Attributes.width)), ((obj, arg) => ((Rectangle)obj).SetWidth((int)arg), typeof(int))},
-        { (typeof(Rectangle), nameof(Attributes.height)), ((obj, arg) => ((Rectangle)obj).SetHeight((int)arg), typeof(int))},
-        { (typeof(Rectangle), nameof(Attributes.thickness)), ((obj, arg) => ((Rectangle)obj).SetThickness((int)arg), typeof(int))},
-        { (typeof(Rectangle), nameof(Attributes.fillColor)), ((obj, arg) => ((Rectangle)obj).SetFillColor((int[])arg), typeof(int[]))},
-        
-        //LineAttributes
-        { (typeof(Line), nameof(Attributes.startPosition)), ((obj, arg) => ((Line)obj).SetStartPosition((int[])arg), typeof(int[]))},
-        { (typeof(Line), nameof(Attributes.endPosition)), ((obj, arg) => ((Line)obj).SetEndPosition((int[])arg), typeof(int[]))},
-        { (typeof(Line), nameof(Attributes.thickness)), ((obj, arg) => ((Line)obj).SetThickness((int)arg), typeof(int))},
-        { (typeof(Line), nameof(Attributes.color)), ((obj, arg) => ((Line)obj).SetColor((int[])arg), typeof(int[]))},
-        
-        //CircleAttributes
-        { (typeof(Circle), nameof(Attributes.position)), ((obj, arg) => ((Circle)obj).SetPosition((int[])arg), typeof(int[]))},
-        { (typeof(Circle), nameof(Attributes.color)), ((obj, arg) => ((Circle)obj).SetColor((int[])arg), typeof(int[]))},
-        { (typeof(Circle), nameof(Attributes.radius)), ((obj, arg) => ((Circle)obj).SetRadius((int)arg), typeof(int))},
-        { (typeof(Circle), nameof(Attributes.fillColor)), ((obj, arg) => ((Circle)obj).SetFillColor((int[])arg), typeof(int[]))},
-        { (typeof(Circle), nameof(Attributes.thickness)), ((obj, arg) => ((Circle)obj).SetThickness((int)arg), typeof(int))},
-        
-        //PolyLineAttributes
-        { (typeof(PolyLines), nameof(Attributes.color)), ((obj, arg) => ((PolyLines)obj).SetColor((int[])arg), typeof(int[]))},
-        { (typeof(PolyLines), nameof(Attributes.thickness)), ((obj, arg) => ((PolyLines)obj).SetThickness((int)arg), typeof(int))},
-        { (typeof(PolyLines), nameof(Attributes.fillColor)), ((obj, arg) => ((PolyLines)obj).SetFillColor((int[])arg), typeof(int[]))},
-        
-        //EllipseAttributes
-        { (typeof(Ellipse), nameof(Attributes.position)), ((obj, arg) => ((Ellipse)obj).SetPosition((int[])arg), typeof(int[]))},
-        { (typeof(Ellipse), nameof(Attributes.color)), ((obj, arg) => ((Ellipse)obj).SetColor((int[])arg), typeof(int[]))},
-        { (typeof(Ellipse), nameof(Attributes.axes)), ((obj, arg) => ((Ellipse)obj).SetAxes((int[])arg), typeof(int[]))},
-        { (typeof(Ellipse), nameof(Attributes.fillColor)), ((obj, arg) => ((Ellipse)obj).SetFillColor((int[])arg), typeof(int[]))},
-        { (typeof(Ellipse), nameof(Attributes.thickness)), ((obj, arg) => ((Ellipse)obj).SetThickness((int)arg), typeof(int))},
-        { (typeof(Ellipse), nameof(Attributes.angle)), ((obj, arg) => ((Ellipse)obj).SetAngle((int)arg), typeof(int))},
-        { (typeof(Ellipse), nameof(Attributes.startAngle)), ((obj, arg) => ((Ellipse)obj).SetStartAngle((int)arg), typeof(int))},
-        { (typeof(Ellipse), nameof(Attributes.endAngle)), ((obj, arg) => ((Ellipse)obj).SetEndAngle((int)arg), typeof(int))},
+
+    private static Dictionary<string, Type> attributeTypes = new()
+    {
+        { nameof(Attributes.width), typeof(int) },
+        { nameof(Attributes.height), typeof(int) },
+        { nameof(Attributes.background), typeof(int[]) },
+        { nameof(Attributes.output), typeof(string) },
+        { nameof(Attributes.fontScale), typeof(int) },
+        { nameof(Attributes.thickness), typeof(int) },
+        { nameof(Attributes.position), typeof(int[]) },
+        { nameof(Attributes.color), typeof(int[]) },
+        { nameof(Attributes.text), typeof(string) },
+        { nameof(Attributes.fillColor), typeof(object) },
+        { nameof(Attributes.startPosition), typeof(int[]) },
+        { nameof(Attributes.endPosition), typeof(int[]) },
+        { nameof(Attributes.radius), typeof(int) },
+        { nameof(Attributes.axes), typeof(int[]) },
+        { nameof(Attributes.angle), typeof(int) },
+        { nameof(Attributes.startAngle), typeof(int) },
+        { nameof(Attributes.endAngle), typeof(int) }
     };
-    
-    public static void SetAttribute(Type objectType, object? obj, string attribName, string attribValue) {
-        if (obj is null) SetStaticAttribute(objectType, attribName, attribValue);
-        else SetInstanceAttribute(obj, attribName, attribValue);
-    }
-    
-    private static void SetInstanceAttribute(object obj, string attribName, string attribValue) {
-        var type = obj.GetType();
-        if (ActionMaps.TryGetValue((type, attribName), out var action)) {
-            var extractedValue = action.Type switch {
-                Type t when t == typeof(int) => (object)ExtractValues.ExtractInt(type.Name, attribName, attribValue),
-                Type t when t == typeof(int[]) => ExtractValues.ExtractIntArray(type.Name, attribName, attribValue),
-                Type t when t == typeof(string) => ExtractValues.ExtractString(type.Name, attribName, attribValue),
-                _ => null
-            };
-    
-            if (extractedValue is not null) {
-                action.Setter(obj, extractedValue);
-            } else {
-                Console.WriteLine($"{type.Name}.{attribName} must be a {action.Type.Name}.");
-            }
-        } else {
-            Console.WriteLine($"{type.Name} does not have an attribute named {attribName}.");
+
+    public static object? GetAttributeValue(string objectName, string attribName, string attribValue) {
+        
+        if(!attributeTypes.TryGetValue(attribName, out var type)) {
+            Console.WriteLine($"Error: {objectName} does not have an attribute named {attribName}.");
+            Environment.Exit(1);
         }
+        
+        return type switch {
+            Type when type == typeof(int) => ExtractValues.ExtractInt(objectName, attribName, attribValue),
+            Type when type == typeof(int[]) => ExtractValues.ExtractIntArray(objectName, attribName, attribValue),
+            Type when type == typeof(string) => ExtractValues.ExtractString(objectName, attribName, attribValue),
+            Type when type == typeof(object) => ExtractValues.ExtractFillColor(objectName, attribName, attribValue),
+            _ => null
+        };
+        
     }
-    
-    private static void SetStaticAttribute(Type type, string attribName, string attribValue) {
-        if (ActionMaps.TryGetValue((type, attribName), out var action)) {
-            var extractedValue = action.Type switch {
-                Type t when t == typeof(int) => (object)ExtractValues.ExtractInt(type.Name, attribName, attribValue),
-                Type t when t == typeof(int[]) => ExtractValues.ExtractIntArray(type.Name, attribName, attribValue),
-                Type t when t == typeof(string) => ExtractValues.ExtractString(type.Name, attribName, attribValue),
-                _ => null
-            };
-    
-            if (extractedValue is not null) {
-                action.Setter(null!, extractedValue);
-            } else {
-                Console.WriteLine($"{type.Name}.{attribName} must be a {action.Type.Name}.");
-            }
-        } else {
-            Console.WriteLine($"{type.Name} does not have an attribute named {attribName}.");
-        }
-    }
-    
+
 }
 
 public static class ExtractValues {
@@ -110,11 +53,6 @@ public static class ExtractValues {
     }
     
     public static int[] ExtractIntArray(string objectName, string attribName, string attribValue) {
-        if(attribName == nameof(Attributes.fillColor)) {
-            ParseFillColor(objectName, attribName, attribValue);
-            return Enumerable.Empty<int>().ToArray();
-        }
-        
         var values = attribValue.Split(',');
         
         if((attribName == nameof(Attributes.background) && values.Length == 3) ||
@@ -146,14 +84,20 @@ public static class ExtractValues {
         return intValues;
     }
 
-    private static void ParseFillColor(string objectName, string attribName, string attribValue) {
-        if (attribValue == "no") {
-            
+    public static object ExtractFillColor(string objectName, string attribName, string attribValue) {
+        if (attribValue == "no") return false;
+        
+        var values = attribValue.Split(',');
+        if(values.Length == 3) {
+            return ParseIntArray(objectName, attribName, values);
         }
+        
+        HandleError(objectName, attribName, "fillColor");
+        return Enumerable.Empty<int>().ToArray();
     }
     
     private static void HandleError(string objectName, string attribName, string expectedType) {
-        Console.WriteLine($"Error: {objectName} {attribName} must be a {expectedType}.");
+        Console.WriteLine($"Error: {objectName} {attribName} must be a {expectedType}");
         Environment.Exit(1);
     }
     

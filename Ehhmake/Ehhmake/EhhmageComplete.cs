@@ -32,14 +32,14 @@ public static class EhhmageComplete {
         private static int _height  = 1080;
         private static int _width  = 1920;
         private static int[] _background  = { 0, 0, 0 };
-        private static string _outputName  = "ehhmage.png";
+        private static string _output  = "ehhmage.png";
         
         #region Setters
     
         public static void SetHeight(int height) => _height = height;
         public static void SetWidth(int width) => _width = width;
         public static void SetBackground(int[] background) => _background = background;
-        public static void SetOutputName(string outputName) => _outputName = outputName;
+        public static void SetOutput(string output) => _output = output;
         
     
         #endregion
@@ -49,7 +49,7 @@ public static class EhhmageComplete {
         }
         
         public static void CreateImage() {
-            Cv2.ImWrite(_outputName, _ehhmageOutput);
+            Cv2.ImWrite(_output, _ehhmageOutput);
             // Cv2.ImWrite(@"G:\Projects\My Rule\EhhLang Test"+_outputName, _ehhmageOutput);
         }
         
@@ -64,11 +64,11 @@ public static class EhhmageComplete {
     
         #region Setters
         
-        public void SetFontScale(int textFontScale) => _fontScale = textFontScale;
-        public void SetThickness(int textThickness) => _thickness = textThickness;
-        public void SetPosition(int[] textPosition) => _position = textPosition;
-        public void SetColor(int[] textColor) => _color = textColor;
-        public void SetText(string textText) => _text = textText;
+        public void SetFontScale(int fontScale) => _fontScale = fontScale;
+        public void SetThickness(int thickness) => _thickness = thickness;
+        public void SetPosition(int[] position) => _position = position;
+        public void SetColor(int[] color) => _color = color;
+        public void SetText(string text) => _text = text;
     
         #endregion
         
@@ -103,15 +103,19 @@ public static class EhhmageComplete {
         
         #region Setters
         
-        public void SetThickness(int rectangleThickness) => _thickness = rectangleThickness;
-        public void SetPosition(int[] rectanglePosition) => _position = rectanglePosition;
-        public void SetColor(int[] rectangleColor) => _color = rectangleColor;
-        public void SetWidth(int rectangleWidth) => _width = rectangleWidth;
-        public void SetHeight(int rectangleHeight) => _height = rectangleHeight;
-        public void SetFillColor(int[] rectangleFillColor) => _fillColor = rectangleFillColor;
-        public void SetDoFill(bool fillRectangle) => _doFill = fillRectangle;
+        public void SetThickness(int thickness) => _thickness = thickness;
+        public void SetPosition(int[] position) => _position = position;
+        public void SetColor(int[] color) => _color = color;
+        public void SetWidth(int width) => _width = width;
+        public void SetHeight(int height) => _height = height;
+        public void SetFillColor(object fillColor) {
+            if(fillColor is bool color)  _doFill = color;
+            else {
+                _doFill = true;
+                _fillColor = (int[])fillColor;
+            }
+        }
         
-    
         #endregion
 
         public Rectangle Clone() {
@@ -145,10 +149,10 @@ public static class EhhmageComplete {
         
         #region Setters
         
-        public void SetStartPosition(int[] lineStartPosition) => startPosition = lineStartPosition;
-        public void SetEndPosition(int[] lineEndPosition) => endPosition = lineEndPosition;
-        public void SetColor(int[] lineColor) => color = lineColor;
-        public void SetThickness(int lineThickness) => thickness = lineThickness;
+        public void SetStartPosition(int[] startPosition) => this.startPosition = startPosition;
+        public void SetEndPosition(int[] endPosition) => this.endPosition = endPosition;
+        public void SetColor(int[] color) => this.color = color;
+        public void SetThickness(int thickness) => this.thickness = thickness;
         
         #endregion
         
@@ -171,141 +175,156 @@ public static class EhhmageComplete {
     }
 
     public class Circle {
-        private int radius = 1;
-        private int[] position = { 0, 0 };
-        private int[] color = { 255, 255, 255 };
-        private int thickness = 1;
-        private int[] fillColor = { 255, 255, 255 };
+        private int _radius = 1;
+        private int[] _position = { 0, 0 };
+        private int[] _color = { 255, 255, 255 };
+        private int _thickness = 1;
+        private int[] _fillColor = { 255, 255, 255 };
         
-        private bool doFill = false;
+        private bool _doFill = false;
         
         #region Setters
         
-        public void SetRadius(int circleRadius) => radius = circleRadius;
-        public void SetPosition(int[] circlePosition) => position = circlePosition;
-        public void SetColor(int[] circleColor) => color = circleColor;
-        public void SetThickness(int circleThickness) => thickness = circleThickness;
-        public void SetFillColor(int[] circleFillColor) => fillColor = circleFillColor;
-        public void SetDoFill(bool fillCircle) => doFill = fillCircle;
+        public void SetRadius(int radius) => _radius = radius;
+        public void SetPosition(int[] position) => _position = position;
+        public void SetColor(int[] color) => _color = color;
+        public void SetThickness(int thickness) => _thickness = thickness;
+        
+        public void SetFillColor(object fillColor) {
+            if(fillColor is bool color)  _doFill = color;
+            else {
+                _doFill = true;
+                _fillColor = (int[])fillColor;
+            }
+        }
         
         #endregion
         
         public Circle Clone() {
             return new Circle {
-                radius = radius,
-                position = position,
-                color = color,
-                thickness = thickness,
-                fillColor = fillColor,
-                doFill = doFill
+                _radius = _radius,
+                _position = _position,
+                _color = _color,
+                _thickness = _thickness,
+                _fillColor = _fillColor,
+                _doFill = _doFill
             };
         }
         
         public void DrawCircle() {
-            var circlePosition = new Point(position[0], position[1]);
-            var circleColor = new Scalar(color[2], color[1], color[0]);
-            var circleFillColor = new Scalar(fillColor[2], fillColor[1], fillColor[0]);
+            var circlePosition = new Point(_position[0], _position[1]);
+            var circleColor = new Scalar(_color[2], _color[1], _color[0]);
+            var circleFillColor = new Scalar(_fillColor[2], _fillColor[1], _fillColor[0]);
             
-            if (doFill) Cv2.Circle(_ehhmageOutput, circlePosition, radius, circleFillColor, Cv2.FILLED);
-            Cv2.Circle(_ehhmageOutput, circlePosition, radius, circleColor, thickness);
+            if (_doFill) Cv2.Circle(_ehhmageOutput, circlePosition, _radius, circleFillColor, Cv2.FILLED);
+            Cv2.Circle(_ehhmageOutput, circlePosition, _radius, circleColor, _thickness);
         }
         
     }
 
     public class PolyLines {
-        private int[] color = { 255, 255, 255 };
-        private int thickness = 1;
-        private List<List<int>> positions = new();
-        private int[] fillColor = { 255, 255, 255 };
+        private int[] _color = { 255, 255, 255 };
+        private int _thickness = 1;
+        private List<List<int>> _positions = new();
+        private int[] _fillColor = { 255, 255, 255 };
         
-        private bool doFill = false;
+        private bool _doFill = false;
         
         #region Setters
         
-        public void SetColor(int[] polyLinesColor) => color = polyLinesColor;
-        public void SetThickness(int polyLinesThickness) => thickness = polyLinesThickness;
+        public void SetColor(int[] color) => _color = color;
+        public void SetThickness(int thickness) => _thickness = thickness;
         
-        public void SetPositions(int index, List<int> polyLinesPosition) {
-            positions.Add(new List<int>());
-            positions[index] = polyLinesPosition;
+        public void SetPositions(int index, List<int> position) {
+            _positions.Add(new List<int>());
+            _positions[index] = position;
         }
         
-        public void SetFillColor(int[] polyLinesFillColor) => fillColor = polyLinesFillColor;
-        
-        public void SetDoFill(bool fillPolyLines) => doFill = fillPolyLines;
+        public void SetFillColor(object fillColor) {
+            if(fillColor is bool color)  _doFill = color;
+            else {
+                _doFill = true;
+                _fillColor = (int[])fillColor;
+            }
+        }
         
         #endregion
         
         public PolyLines Clone() {
             return new PolyLines {
-                color = color,
-                thickness = thickness,
-                positions = positions,
-                fillColor = fillColor,
-                doFill = doFill
+                _color = _color,
+                _thickness = _thickness,
+                _positions = _positions,
+                _fillColor = _fillColor,
+                _doFill = _doFill
             };
         }
         
         public void DrawPolyLines() {
-            var polyLinesPositions = new Point[positions.Count];
-            for (var i = 0; i < positions.Count; i++) {
-                polyLinesPositions[i] = new Point(positions[i][0], positions[i][1]);
+            var polyLinesPositions = new Point[_positions.Count];
+            for (var i = 0; i < _positions.Count; i++) {
+                polyLinesPositions[i] = new Point(_positions[i][0], _positions[i][1]);
             }
-            var polyLinesColor = new Scalar(color[2], color[1], color[0]);
-            var polyLinesFillColor = new Scalar(fillColor[2], fillColor[1], fillColor[0]);
+            var polyLinesColor = new Scalar(_color[2], _color[1], _color[0]);
+            var polyLinesFillColor = new Scalar(_fillColor[2], _fillColor[1], _fillColor[0]);
             
-            if (doFill) Cv2.FillPoly(_ehhmageOutput, new[] { polyLinesPositions }, polyLinesFillColor);
-            Cv2.Polylines(_ehhmageOutput, new[] { polyLinesPositions }, true, polyLinesColor, thickness);
+            if (_doFill) Cv2.FillPoly(_ehhmageOutput, new[] { polyLinesPositions }, polyLinesFillColor);
+            Cv2.Polylines(_ehhmageOutput, new[] { polyLinesPositions }, true, polyLinesColor, _thickness);
         }
     }
 
     public class Ellipse {
-        private int thickness = 1;
-        private int[] position = { 0, 0 };
-        private int[] color = { 255, 255, 255 };
-        private int[] axes = { 1, 1 };
-        private int angle = 0;
-        private int startAngle = 0;
-        private int endAngle = 360;
-        private int[] fillColor = { 255, 255, 255 };
+        private int _thickness = 1;
+        private int[] _position = { 0, 0 };
+        private int[] _color = { 255, 255, 255 };
+        private int[] _axes = { 1, 1 };
+        private int _angle = 0;
+        private int _startAngle = 0;
+        private int _endAngle = 360;
+        private int[] _fillColor = { 255, 255, 255 };
         
-        private bool doFill = false;
+        private bool _doFill = false;
         
         #region Setters
         
-        public void SetThickness(int ellipseThickness) => thickness = ellipseThickness;
-        public void SetPosition(int[] ellipsePosition) => position = ellipsePosition;
-        public void SetColor(int[] ellipseColor) => color = ellipseColor;
-        public void SetAxes(int[] ellipseAxes) => axes = ellipseAxes;
-        public void SetAngle(int ellipseAngle) => angle = ellipseAngle;
-        public void SetStartAngle(int ellipseStartAngle) => startAngle = ellipseStartAngle;
-        public void SetEndAngle(int ellipseEndAngle) => endAngle = ellipseEndAngle;
-        public void SetFillColor(int[] ellipseFillColor) => fillColor = ellipseFillColor;
-        public void SetDoFill(bool fillEllipse) => doFill = fillEllipse;
+        public void SetThickness(int thickness) => _thickness = thickness;
+        public void SetPosition(int[] position) => _position = position;
+        public void SetColor(int[] color) => _color = color;
+        public void SetAxes(int[] axes) => _axes = axes;
+        public void SetAngle(int angle) => _angle = angle;
+        public void SetStartAngle(int startAngle) => _startAngle = startAngle;
+        public void SetEndAngle(int endAngle) => _endAngle = endAngle;
+        public void SetFillColor(object fillColor) {
+            if(fillColor is bool color)  _doFill = color;
+            else {
+                _doFill = true;
+                _fillColor = (int[])fillColor;
+            }
+        }
         
         #endregion
         
         public Ellipse Clone() {
             return new Ellipse {
-                thickness = thickness,
-                position = position,
-                color = color,
-                axes = axes,
-                angle = angle,
-                startAngle = startAngle,
-                endAngle = endAngle,
-                fillColor = fillColor,
-                doFill = doFill
+                _thickness = _thickness,
+                _position = _position,
+                _color = _color,
+                _axes = _axes,
+                _angle = _angle,
+                _startAngle = _startAngle,
+                _endAngle = _endAngle,
+                _fillColor = _fillColor,
+                _doFill = _doFill
             };
         }
         
         public void DrawEllipse() {
-            var ellipsePosition = new Point(position[0], position[1]);
-            var ellipseColor = new Scalar(color[2], color[1], color[0]);
-            var ellipseFillColor = new Scalar(fillColor[2], fillColor[1], fillColor[0]);
+            var ellipsePosition = new Point(_position[0], _position[1]);
+            var ellipseColor = new Scalar(_color[2], _color[1], _color[0]);
+            var ellipseFillColor = new Scalar(_fillColor[2], _fillColor[1], _fillColor[0]);
             
-            if (doFill) Cv2.Ellipse(_ehhmageOutput, ellipsePosition, new Size(axes[0], axes[1]), angle, startAngle, endAngle, ellipseFillColor, Cv2.FILLED);
-            Cv2.Ellipse(_ehhmageOutput, ellipsePosition, new Size(axes[0], axes[1]), angle, startAngle, endAngle, ellipseColor, thickness);
+            if (_doFill) Cv2.Ellipse(_ehhmageOutput, ellipsePosition, new Size(_axes[0], _axes[1]), _angle, _startAngle, _endAngle, ellipseFillColor, Cv2.FILLED);
+            Cv2.Ellipse(_ehhmageOutput, ellipsePosition, new Size(_axes[0], _axes[1]), _angle, _startAngle, _endAngle, ellipseColor, _thickness);
         }
     }
 

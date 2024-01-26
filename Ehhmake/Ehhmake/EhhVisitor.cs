@@ -1,3 +1,4 @@
+using System.Reflection;
 using Ehhmake.Content;
 using static System.Enum;
 
@@ -145,7 +146,13 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             var attribName = attribPairContext.attribName().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
             
-            AttributesSetters.SetAttribute(typeof(EhhmageComplete.Ehhmage), null, attribName, attribValue);
+            var setterMethod = typeof(EhhmageComplete.Ehhmage).GetMethod("set" + attribName, BindingFlags.IgnoreCase | BindingFlags.Static | BindingFlags.Public);
+            if (setterMethod is null)
+                Console.WriteLine(attribName + " is not defined for object ehh");
+            else {
+                var value = AttributesSetters.GetAttributeValue("ehh", attribName, attribValue);
+                setterMethod.Invoke(null, new [] {value});
+            }
         }
         
         EhhmageComplete.Ehhmage.InitializeEhhMage();
@@ -160,8 +167,13 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             var attribName = attribPairContext.attribName().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
             
-            AttributesSetters.SetAttribute(typeof(EhhmageComplete.Text), text, attribName, attribValue);
-            
+            var setterMethod = text.GetType().GetMethod("set" + attribName, BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public);
+            if (setterMethod is null)
+                Console.WriteLine(attribName + " is not defined for object text");
+            else {
+                var value = AttributesSetters.GetAttributeValue(objectName, attribName, attribValue);
+                setterMethod.Invoke(text, new [] {value});
+            }
         }
         
         text.InsertText();
@@ -177,74 +189,13 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         foreach (var attribPairContext in context) {
             var attribName = attribPairContext.attribName().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
-
-            switch (attribName) {
-                case nameof(EhhmageComplete.Attributes.thickness): {
-                    if (!int.TryParse(attribValue, out var thickness)) {
-                        Console.WriteLine("Thickness attribute value is not a number");
-                        break;
-                    }
-                    rectangle.SetThickness(thickness);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.position): {
-                    var rectPosition = attribValue.Split(',').Select(int.Parse).ToArray();
-                    if (rectPosition.Length != 2) {
-                        Console.WriteLine("RectPosition attribute value is not a 2-tuple");
-                        break;
-                    }
-                    rectangle.SetPosition(rectPosition);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.color): {
-                    var rectColor = attribValue.Split(',').Select(int.Parse).ToArray();
-                    if (rectColor.Length != 3) {
-                        Console.WriteLine("RectColor attribute value is not a 3-tuple");
-                        break;
-                    }
-                    rectangle.SetColor(rectColor);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.width): {
-                    if (!int.TryParse(attribValue, out var rectWidth)) {
-                        Console.WriteLine("RectWidth attribute value is not a number");
-                        break;
-                    }
-                    rectangle.SetWidth(rectWidth);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.height): {
-                    if (!int.TryParse(attribValue, out var rectHeight)) {
-                        Console.WriteLine("RectHeight attribute value is not a number");
-                        break;
-                    }
-                    rectangle.SetHeight(rectHeight);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.fillColor): {
-                    if (attribValue == "no") {
-                        rectangle.SetDoFill(false);
-                        break;
-                    }
-                    
-                    var fillColor = attribValue.Split(',').Select(int.Parse).ToArray();
-                    if (fillColor.Length != 3) {
-                        Console.WriteLine("FillColor attribute value is not a 3-tuple");
-                        break;
-                    }
-                    rectangle.SetDoFill(true);
-                    rectangle.SetFillColor(fillColor);
-                    break;
-                }
-                
-                default:
-                    Console.WriteLine($"{attribName} is not defined");
-                    break;
+            
+            var setterMethod = rectangle.GetType().GetMethod("set" + attribName, BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public);
+            if (setterMethod is null)
+                Console.WriteLine(attribName + " is not defined for object rectangle");
+            else {
+                var value = AttributesSetters.GetAttributeValue(objectName, attribName, attribValue);
+                setterMethod.Invoke(rectangle, new [] {value});
             }
         }
         
@@ -260,8 +211,14 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         foreach (var attribPairContext in context) {
             var attribName = attribPairContext.attribName().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
-
-            AttributesSetters.SetAttribute(typeof(EhhmageComplete.Line), line, attribName, attribValue);
+            
+            var setterMethod = line.GetType().GetMethod("set" + attribName, BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public);
+            if (setterMethod is null)
+                Console.WriteLine(attribName + " is not defined for object line");
+            else {
+                var value = AttributesSetters.GetAttributeValue(objectName, attribName, attribValue);
+                setterMethod.Invoke(line, new [] {value});
+            }
         }
         
         line.DrawLine();
@@ -277,65 +234,13 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         foreach (var attribPairContext in context) {
             var attribName = attribPairContext.attribName().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
-
-            switch (attribName) {
-                case nameof(EhhmageComplete.Attributes.thickness): {
-                    if (!int.TryParse(attribValue, out var thickness)) {
-                        Console.WriteLine("Thickness attribute value is not a number");
-                        break;
-                    }
-                    circle.SetThickness(thickness);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.position): {
-                    var circlePosition = attribValue.Split(',').Select(int.Parse).ToArray();
-                    if (circlePosition.Length != 2) {
-                        Console.WriteLine("CirclePosition attribute value is not a 2-tuple");
-                        break;
-                    }
-                    circle.SetPosition(circlePosition);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.color): {
-                    var circleColor = attribValue.Split(',').Select(int.Parse).ToArray();
-                    if (circleColor.Length != 3) {
-                        Console.WriteLine("CircleColor attribute value is not a 3-tuple");
-                        break;
-                    }
-                    circle.SetColor(circleColor);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.radius): {
-                    if (!int.TryParse(attribValue, out var circleRadius)) {
-                        Console.WriteLine("CircleRadius attribute value is not a number");
-                        break;
-                    }
-                    circle.SetRadius(circleRadius);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.fillColor): {
-                    if (attribValue == "no") {
-                        circle.SetDoFill(false);
-                        break;
-                    }
-                    
-                    var fillColor = attribValue.Split(',').Select(int.Parse).ToArray();
-                    if (fillColor.Length != 3) {
-                        Console.WriteLine("FillColor attribute value is not a 3-tuple");
-                        break;
-                    }
-                    circle.SetDoFill(true);
-                    circle.SetFillColor(fillColor);
-                    break;
-                }
-                
-                default:
-                    Console.WriteLine($"{attribName} is not defined");
-                    break;
+            
+            var setterMethod = circle.GetType().GetMethod("set" + attribName, BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public);
+            if (setterMethod is null)
+                Console.WriteLine(attribName + " is not defined for object circle");
+            else {
+                var value = AttributesSetters.GetAttributeValue(objectName ,attribName, attribValue);
+                setterMethod.Invoke(circle, new [] {value});
             }
         }
         
@@ -352,60 +257,27 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         foreach (var attribPairContext in context) {
             var attribName = attribPairContext.attribName().ID().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
-
-            switch (attribName) {
-                case nameof(EhhmageComplete.Attributes.thickness): {
-                    if (!int.TryParse(attribValue, out var thickness)) {
-                        Console.WriteLine("Thickness attribute value is not a number");
-                        break;
-                    }
-                    polyLines.SetThickness(thickness);
+            
+            if(attribName.Equals(nameof(EhhmageComplete.Attributes.position))) {
+                if (!int.TryParse(attribPairContext.attribName().INT()?.GetText(), out var polyLinesPositionIndex)) {
+                    Console.WriteLine("PolyLinesPosition Index not mentioned");
                     break;
                 }
-                
-                case nameof(EhhmageComplete.Attributes.color): {
-                    var polyLinesColor = attribValue.Split(',').Select(int.Parse).ToArray();
-                    if (polyLinesColor.Length != 3) {
-                        Console.WriteLine("PolyLinesColor attribute value is not a 3-tuple");
-                        break;
-                    }
-                    polyLines.SetColor(polyLinesColor);
+                var polyLinesPosition = attribValue.Split(',').Select(int.Parse).ToList();
+                if (polyLinesPosition.Count != 2) {
+                    Console.WriteLine("PolyLinesPosition attribute value is not a 2-tuple");
                     break;
                 }
-                
-                case nameof(EhhmageComplete.Attributes.position): {
-                    if (!int.TryParse(attribPairContext.attribName().INT()?.GetText(), out var polyLinesPositionIndex)) {
-                        Console.WriteLine("PolyLinesPosition Index not mentioned");
-                        break;
-                    }
-                    var polyLinesPosition = attribValue.Split(',').Select(int.Parse).ToList();
-                    if (polyLinesPosition.Count != 2) {
-                        Console.WriteLine("PolyLinesPosition attribute value is not a 2-tuple");
-                        break;
-                    }
-                    polyLines.SetPositions(polyLinesPositionIndex, polyLinesPosition);
-                    break;
-                }
-
-                case nameof(EhhmageComplete.Attributes.fillColor): {
-                    if (attribValue == "no") {
-                        polyLines.SetDoFill(false);
-                        break;
-                    }
-                    
-                    var fillColor = attribValue.Split(',').Select(int.Parse).ToArray();
-                    if (fillColor.Length != 3) {
-                        Console.WriteLine("FillColor attribute value is not a 3-tuple");
-                        break;
-                    }
-                    polyLines.SetDoFill(true);
-                    polyLines.SetFillColor(fillColor);
-                    break;
-                }
-                
-                default:
-                    Console.WriteLine($"{attribName} is not defined");
-                    break;
+                polyLines.SetPositions(polyLinesPositionIndex, polyLinesPosition);
+                continue;
+            }
+            
+            var setterMethod = polyLines.GetType().GetMethod("set" + attribName, BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public);
+            if (setterMethod is null)
+                Console.WriteLine(attribName + " is not defined for object polyLines");
+            else {
+                var value = AttributesSetters.GetAttributeValue(objectName, attribName, attribValue);
+                setterMethod.Invoke(polyLines, new [] {value});
             }
         }
         
@@ -421,93 +293,13 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         foreach (var attribPairContext in contexts) {
             var attribName = attribPairContext.attribName().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
-
-            switch (attribName) {
-                case nameof(EhhmageComplete.Attributes.thickness): {
-                    if (!int.TryParse(attribValue, out var thickness)) {
-                        Console.WriteLine("Thickness attribute value is not a number");
-                        break;
-                    }
-                    ellipse.SetThickness(thickness);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.position): {
-                    var ellipsePosition = attribValue.Split(',').Select(int.Parse).ToArray();
-                    if (ellipsePosition.Length != 2) {
-                        Console.WriteLine("EllipsePosition attribute value is not a 2-tuple");
-                        break;
-                    }
-                    ellipse.SetPosition(ellipsePosition);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.color): {
-                    var ellipseColor = attribValue.Split(',').Select(int.Parse).ToArray();
-                    if (ellipseColor.Length != 3) {
-                        Console.WriteLine("EllipseColor attribute value is not a 3-tuple");
-                        break;
-                    }
-                    ellipse.SetColor(ellipseColor);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.axes): {
-                    var ellipseAxes = attribValue.Split(',').Select(int.Parse).ToArray();
-                    if (ellipseAxes.Length != 2) {
-                        Console.WriteLine("EllipseAxes attribute value is not a 2-tuple");
-                        break;
-                    }
-                    ellipse.SetAxes(ellipseAxes);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.angle): {
-                    if (!int.TryParse(attribValue, out var ellipseAngle)) {
-                        Console.WriteLine("EllipseAngle attribute value is not a number");
-                        break;
-                    }
-                    ellipse.SetAngle(ellipseAngle);
-                    break;
-                }
-
-                case nameof(EhhmageComplete.Attributes.startAngle): {
-                    if (!int.TryParse(attribValue, out var ellipseStartAngle)) {
-                        Console.WriteLine("EllipseStartAngle attribute value is not a number");
-                        break;
-                    }
-                    ellipse.SetStartAngle(ellipseStartAngle);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.endAngle): {
-                    if (!int.TryParse(attribValue, out var ellipseEndAngle)) {
-                        Console.WriteLine("EllipseEndAngle attribute value is not a number");
-                        break;
-                    }
-                    ellipse.SetEndAngle(ellipseEndAngle);
-                    break;
-                }
-                
-                case nameof(EhhmageComplete.Attributes.fillColor): {
-                    if (attribValue == "no") {
-                        ellipse.SetDoFill(false);
-                        break;
-                    }
-                    
-                    var fillColor = attribValue.Split(',').Select(int.Parse).ToArray();
-                    if (fillColor.Length != 3) {
-                        Console.WriteLine("FillColor attribute value is not a 3-tuple");
-                        break;
-                    }
-                    ellipse.SetDoFill(true);
-                    ellipse.SetFillColor(fillColor);
-                    break;
-                }
-                
-                default:
-                    Console.WriteLine($"{attribName} is not defined");
-                    break;
+            
+            var setterMethod = ellipse.GetType().GetMethod("set" + attribName, BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public);
+            if (setterMethod is null)
+                Console.WriteLine(attribName + " is not defined for object ellipse");
+            else {
+                var value = AttributesSetters.GetAttributeValue("ellipse", attribName, attribValue);
+                setterMethod.Invoke(ellipse, new [] {value});
             }
         }
         
