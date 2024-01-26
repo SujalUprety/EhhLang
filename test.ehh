@@ -1,0 +1,19 @@
+ehh {
+    width: 1920
+    height: 1080
+    background: 255, 255, 0
+    output: ummmm.png
+}
+
+text -> okText {
+    fontScale: 5
+    thickness: 5
+    position: 100, 100
+    color: 255, 0, 0
+    text: "ok Text"
+}
+
+okText :: hmm {
+    position: 100, 300
+    text: "hmm"
+}
