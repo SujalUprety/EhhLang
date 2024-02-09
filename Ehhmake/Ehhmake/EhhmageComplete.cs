@@ -225,7 +225,7 @@ public static class EhhmageComplete {
     public class PolyLines {
         private int[] _color = { 255, 255, 255 };
         private int _thickness = 1;
-        private List<List<int>> _positions = new();
+        private readonly List<int[]> _position = new();
         private int[] _fillColor = { 255, 255, 255 };
         
         private bool _doFill = false;
@@ -235,9 +235,10 @@ public static class EhhmageComplete {
         public void SetColor(int[] color) => _color = color;
         public void SetThickness(int thickness) => _thickness = thickness;
         
-        public void SetPositions(int index, List<int> position) {
-            _positions.Add(new List<int>());
-            _positions[index] = position;
+        public void SetPosition(object positionInfo) {
+            var (index, position) = ((int, int[]))positionInfo;
+            if( index >= _position.Count ) _position.Add(new int[2]);
+            _position[index] = position;
         }
         
         public void SetFillColor(object fillColor) {
@@ -254,16 +255,15 @@ public static class EhhmageComplete {
             return new PolyLines {
                 _color = _color,
                 _thickness = _thickness,
-                _positions = _positions,
                 _fillColor = _fillColor,
                 _doFill = _doFill
             };
         }
         
         public void DrawPolyLines() {
-            var polyLinesPositions = new Point[_positions.Count];
-            for (var i = 0; i < _positions.Count; i++) {
-                polyLinesPositions[i] = new Point(_positions[i][0], _positions[i][1]);
+            var polyLinesPositions = new Point[_position.Count];
+            for (var i = 0; i < _position.Count; i++) {
+                polyLinesPositions[i] = new Point(_position[i][0], _position[i][1]);
             }
             var polyLinesColor = new Scalar(_color[2], _color[1], _color[0]);
             var polyLinesFillColor = new Scalar(_fillColor[2], _fillColor[1], _fillColor[0]);

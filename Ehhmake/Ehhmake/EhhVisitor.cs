@@ -1,5 +1,4 @@
 using System.Reflection;
-using Ehhmake.Content;
 using static System.Enum;
 
 namespace Ehhmake;
@@ -255,28 +254,15 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         polyLines ??= EhhmageComplete.Global.PolyLines.Clone();
         
         foreach (var attribPairContext in context) {
+            var fullAttribName = attribPairContext.attribName().GetText();
             var attribName = attribPairContext.attribName().ID().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
-            
-            if(attribName.Equals(nameof(EhhmageComplete.Attributes.position))) {
-                if (!int.TryParse(attribPairContext.attribName().INT()?.GetText(), out var polyLinesPositionIndex)) {
-                    Console.WriteLine("PolyLinesPosition Index not mentioned");
-                    break;
-                }
-                var polyLinesPosition = attribValue.Split(',').Select(int.Parse).ToList();
-                if (polyLinesPosition.Count != 2) {
-                    Console.WriteLine("PolyLinesPosition attribute value is not a 2-tuple");
-                    break;
-                }
-                polyLines.SetPositions(polyLinesPositionIndex, polyLinesPosition);
-                continue;
-            }
             
             var setterMethod = polyLines.GetType().GetMethod("set" + attribName, BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public);
             if (setterMethod is null)
                 Console.WriteLine(attribName + " is not defined for object polyLines");
             else {
-                var value = AttributesSetters.GetAttributeValue(objectName, attribName, attribValue);
+                var value = AttributesSetters.GetAttributeValue(objectName, fullAttribName, attribValue);
                 setterMethod.Invoke(polyLines, new [] {value});
             }
         }
