@@ -40,15 +40,20 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         var objectContext = context.attribPair();
 
         #region CurlyBracesCheck
-        
-        if (context.LB().GetText() != "{") {
-            Console.WriteLine($"Curly braces not found in \'{preDefinedObjectName}\' object");
-            return base.VisitObject(context);
+
+        try {
+            if (context.LB().GetText() != "{") {
+                Console.WriteLine($"Curly braces not found in \'{preDefinedObjectName}\' object");
+                return base.VisitObject(context);
+            }
+
+            if (context.RB().GetText() != "}") {
+                Console.WriteLine($"Closing braces not found in \'{preDefinedObjectName}\' object");
+                return base.VisitObject(context);
+            }
         }
-        
-        if (context.RB().GetText() != "}") {
-            Console.WriteLine($"Closing bracket not found in \'{preDefinedObjectName}\' object");
-            return base.VisitObject(context);
+        catch {
+            Console.WriteLine($"No braces found in \'{preDefinedObjectName}\' object. Error code: 0x00000000");
         }
         
         #endregion

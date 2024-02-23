@@ -13,6 +13,10 @@
       <DebugSymbols>true</DebugSymbols>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DefineConstants />
+    </PropertyGroup>
+
     <ItemGroup>
       <PackageReference Include="Antlr4" Version="4.6.6">
         <PrivateAssets>all</PrivateAssets>
