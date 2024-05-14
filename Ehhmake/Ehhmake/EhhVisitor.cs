@@ -4,22 +4,6 @@ using static System.Enum;
 namespace Ehhmake;
 
 public class EhhVisitor : EhhBaseVisitor<object?> {
-    
-    private enum ObjectName {
-        ehh,
-        tehhxt = 1,
-        rehhct = 2,
-        linehh = 3,
-        circlehh = 4,
-        polyLinehhs = 5,
-        ehhlipse = 6,
-        text = 1,
-        rect = 2,
-        line = 3,
-        circle = 4,
-        polyLines = 5,
-        ellipse = 6
-    }
 
     public override object? VisitProgram(EhhParser.ProgramContext context) {
         
@@ -36,7 +20,6 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
     public override object? VisitObject(EhhParser.ObjectContext context) {
         
         var preDefinedObjectName = context.objectIdentifier().preObjectName().GetText();
-        var objectName = string.Empty;
         var objectContext = context.attribPair();
 
         #region CurlyBracesCheck
@@ -59,7 +42,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         #endregion
 
         try {
-            objectName = context.objectIdentifier().objectName().GetText();
+            var objectName = context.objectIdentifier().objectName().GetText();
             try {
                 var storedObjectContext = EhhmageComplete.ObjectNames[preDefinedObjectName];
                 if(storedObjectContext is EhhmageComplete.EhhmageObject storedEhhmageObjectContext) InsertObject(objectContext, objectName, storedEhhmageObjectContext.Clone());
