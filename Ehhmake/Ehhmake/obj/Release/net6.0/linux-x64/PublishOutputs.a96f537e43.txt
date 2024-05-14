@@ -191,4 +191,5 @@ G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\linux-x64\libmsco
 G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\linux-x64\libmscordbi.so
 G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\linux-x64\Antlr4.Runtime.dll
 G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\linux-x64\OpenCvSharp.dll
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\linux-x64\libOpenCvSharpExtern.so
 G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\linux-x64\Ehhmake.deps.json

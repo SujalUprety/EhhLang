@@ -2,7 +2,7 @@ ehh{
     width: 1114
     height: 596
     background: 0, 162, 232
-    output: veryFirstPicture.png
+    output: "veryFirstPicture.png"
 }
 
 circle::sun{
@@ -17,21 +17,21 @@ polyLines::mountain{
     thickness: 4
     color: 0, 0, 0
     fillColor: 34, 177, 76
-    position 0: 0, 510
-    position 1: 110, 145
-    position 2: 215, 510
-    position 3: 320, 145
-    position 4: 420, 510
-    position 5: 505, 145
-    position 6: 605, 510
-    position 7: 685, 145
-    position 8: 790, 510
-    position 9: 860, 145
-    position 10: 945, 510
-    position 11: 1030, 145
-    position 12: 1114, 510
-    position 13: 1114, 596
-    position 14: 0, 596
+    position [0]: 0, 510
+    position [1]: 110, 145
+    position [2]: 215, 510
+    position [3]: 320, 145
+    position [4]: 420, 510
+    position [5]: 505, 145
+    position [6]: 605, 510
+    position [7]: 685, 145
+    position [8]: 790, 510
+    position [9]: 860, 145
+    position [10]: 945, 510
+    position [11]: 1030, 145
+    position [12]: 1114, 510
+    position [13]: 1114, 596
+    position [14]: 0, 596
 }
 
 ellipse::crowLeftSide{

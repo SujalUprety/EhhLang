@@ -27,6 +27,27 @@ public static class EhhmageComplete {
 
     private static Mat _ehhmageOutput = new();
     public static readonly Dictionary<string, object?> ObjectNames = new();
+
+    public static class EhhmageObjectFactory {
+        private static readonly Dictionary<string, Func<EhhmageObject>> ObjectCreators =
+            new Dictionary<string, Func<EhhmageObject>>()
+            {
+                { "text", () => new Text() },
+                { "rectangle", () => new Rectangle() },
+                { "line", () => new Line() },
+                { "circle", () => new Circle() },
+                { "polyLines", () => new PolyLines() },
+                { "ellipse", () => new Ellipse() }
+            };
+        
+        public static EhhmageObject CreateObject(string objectName) {
+            if (ObjectCreators.TryGetValue(objectName, out var objectCreator)) return objectCreator();
+            Console.WriteLine($"Error: {objectName} is not a valid object name.");
+            Environment.Exit(1);
+            return objectCreator();
+        }
+        
+    }
     
     public static class Ehhmage {
         private static int _height  = 1080;
@@ -54,8 +75,13 @@ public static class EhhmageComplete {
         }
         
     }
+    
+    public interface EhhmageObject {
+        public EhhmageObject Clone();
+        public void InsertObject();
+    }
 
-    public class Text {
+    public class Text : EhhmageObject {
         private int _fontScale = 1;
         private int _thickness = 1;
         private int[] _position = { 0, 0 };
@@ -72,7 +98,7 @@ public static class EhhmageComplete {
     
         #endregion
         
-        public Text Clone() {
+        public EhhmageObject Clone() {
             return new Text {
                 _fontScale = _fontScale,
                 _thickness = _thickness,
@@ -82,7 +108,7 @@ public static class EhhmageComplete {
             };
         }
         
-        public void InsertText() {
+        public void InsertObject() {
             var textPosition = new Point(_position[0], _position[1]);
             var textColor = new Scalar(_color[2], _color[1], _color[0]);
             
@@ -91,7 +117,7 @@ public static class EhhmageComplete {
         
     }
 
-    public class Rectangle {
+    public class Rectangle : EhhmageObject{
         private int _thickness = 1;
         private int[] _position = { 0, 0 };
         private int[] _color = { 255, 255, 255 };
@@ -118,7 +144,7 @@ public static class EhhmageComplete {
         
         #endregion
 
-        public Rectangle Clone() {
+        public EhhmageObject Clone() {
             return new Rectangle {
                 _thickness = _thickness,
                 _position = _position,
@@ -130,7 +156,7 @@ public static class EhhmageComplete {
             };
         }
         
-        public void DrawRectangle() {
+        public void InsertObject() {
             var rect = new Rect(_position[0], _position[1], _width, _height);
             var rectColor = new Scalar(_color[2], _color[1], _color[0]);
             var fillColor = new Scalar(_fillColor[2], _fillColor[1], _fillColor[0]);
@@ -141,40 +167,40 @@ public static class EhhmageComplete {
         
     }
 
-    public class Line {
-        private int[] startPosition = { 0, 0 };
-        private int[] endPosition = { 0, 0 };
-        private int[] color = { 255, 255, 255 };
-        private int thickness = 1;
+    public class Line : EhhmageObject {
+        private int[] _startPosition = { 0, 0 };
+        private int[] _endPosition = { 0, 0 };
+        private int[] _color = { 255, 255, 255 };
+        private int _thickness = 1;
         
         #region Setters
         
-        public void SetStartPosition(int[] startPosition) => this.startPosition = startPosition;
-        public void SetEndPosition(int[] endPosition) => this.endPosition = endPosition;
-        public void SetColor(int[] color) => this.color = color;
-        public void SetThickness(int thickness) => this.thickness = thickness;
+        public void SetStartPosition(int[] startPosition) => this._startPosition = startPosition;
+        public void SetEndPosition(int[] endPosition) => this._endPosition = endPosition;
+        public void SetColor(int[] color) => this._color = color;
+        public void SetThickness(int thickness) => this._thickness = thickness;
         
         #endregion
         
-        public Line Clone() {
+        public EhhmageObject Clone() {
             return new Line {
-                startPosition = startPosition,
-                endPosition = endPosition,
-                color = color,
-                thickness = thickness
+                _startPosition = _startPosition,
+                _endPosition = _endPosition,
+                _color = _color,
+                _thickness = _thickness
             };
         }
         
-        public void DrawLine() {
-            var start = new Point(startPosition[0], startPosition[1]);
-            var end = new Point(endPosition[0], endPosition[1]);
-            var lineColor = new Scalar(color[2], color[1], color[0]);
+        public void InsertObject() {
+            var start = new Point(_startPosition[0], _startPosition[1]);
+            var end = new Point(_endPosition[0], _endPosition[1]);
+            var lineColor = new Scalar(_color[2], _color[1], _color[0]);
             
-            Cv2.Line(_ehhmageOutput, start, end, lineColor, thickness);
+            Cv2.Line(_ehhmageOutput, start, end, lineColor, _thickness);
         }
     }
 
-    public class Circle {
+    public class Circle : EhhmageObject {
         private int _radius = 1;
         private int[] _position = { 0, 0 };
         private int[] _color = { 255, 255, 255 };
@@ -200,7 +226,7 @@ public static class EhhmageComplete {
         
         #endregion
         
-        public Circle Clone() {
+        public EhhmageObject Clone() {
             return new Circle {
                 _radius = _radius,
                 _position = _position,
@@ -211,7 +237,7 @@ public static class EhhmageComplete {
             };
         }
         
-        public void DrawCircle() {
+        public void InsertObject() {
             var circlePosition = new Point(_position[0], _position[1]);
             var circleColor = new Scalar(_color[2], _color[1], _color[0]);
             var circleFillColor = new Scalar(_fillColor[2], _fillColor[1], _fillColor[0]);
@@ -222,7 +248,7 @@ public static class EhhmageComplete {
         
     }
 
-    public class PolyLines {
+    public class PolyLines : EhhmageObject {
         private int[] _color = { 255, 255, 255 };
         private int _thickness = 1;
         private readonly List<int[]> _position = new();
@@ -251,7 +277,7 @@ public static class EhhmageComplete {
         
         #endregion
         
-        public PolyLines Clone() {
+        public EhhmageObject Clone() {
             return new PolyLines {
                 _color = _color,
                 _thickness = _thickness,
@@ -260,7 +286,7 @@ public static class EhhmageComplete {
             };
         }
         
-        public void DrawPolyLines() {
+        public void InsertObject() {
             var polyLinesPositions = new Point[_position.Count];
             for (var i = 0; i < _position.Count; i++) {
                 polyLinesPositions[i] = new Point(_position[i][0], _position[i][1]);
@@ -273,7 +299,7 @@ public static class EhhmageComplete {
         }
     }
 
-    public class Ellipse {
+    public class Ellipse : EhhmageObject {
         private int _thickness = 1;
         private int[] _position = { 0, 0 };
         private int[] _color = { 255, 255, 255 };
@@ -304,7 +330,7 @@ public static class EhhmageComplete {
         
         #endregion
         
-        public Ellipse Clone() {
+        public EhhmageObject Clone() {
             return new Ellipse {
                 _thickness = _thickness,
                 _position = _position,
@@ -318,7 +344,7 @@ public static class EhhmageComplete {
             };
         }
         
-        public void DrawEllipse() {
+        public void InsertObject() {
             var ellipsePosition = new Point(_position[0], _position[1]);
             var ellipseColor = new Scalar(_color[2], _color[1], _color[0]);
             var ellipseFillColor = new Scalar(_fillColor[2], _fillColor[1], _fillColor[0]);
@@ -328,13 +354,13 @@ public static class EhhmageComplete {
         }
     }
 
-    public static class Global {
-        internal static Text Text = new();
-        internal static Rectangle Rectangle = new();
-        internal static Line Line = new();
-        internal static Circle Circle = new();
-        internal static PolyLines PolyLines = new();
-        internal static Ellipse Ellipse = new();
-    }
+    // public static class Global {
+    //     internal static Text Text = new();
+    //     internal static Rectangle Rectangle = new();
+    //     internal static Line Line = new();
+    //     internal static Circle Circle = new();
+    //     internal static PolyLines PolyLines = new();
+    //     internal static Ellipse Ellipse = new();
+    // }
 
 }

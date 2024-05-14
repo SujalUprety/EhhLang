@@ -12,7 +12,7 @@
           "Antlr4.CodeGenerator": "4.6.6",
           "Antlr4.Runtime": "4.6.6",
           "OpenCvSharp4": "4.8.0.20230708",
-          "OpenCvSharp4.runtime.win": "4.8.0.20230708"
+          "OpenCvSharp4.runtime.win": "4.9.0.20240103"
         },
         "runtime": {
           "Ehhmake.dll": {}
@@ -105,27 +105,27 @@
           }
         }
       },
-      "OpenCvSharp4.runtime.win/4.8.0.20230708": {
+      "OpenCvSharp4.runtime.win/4.9.0.20240103": {
         "runtimeTargets": {
           "runtimes/win-x64/native/OpenCvSharpExtern.dll": {
             "rid": "win-x64",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
           },
-          "runtimes/win-x64/native/opencv_videoio_ffmpeg480_64.dll": {
+          "runtimes/win-x64/native/opencv_videoio_ffmpeg490_64.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "2023.6.0.0"
+            "fileVersion": "2023.12.0.0"
           },
           "runtimes/win-x86/native/OpenCvSharpExtern.dll": {
             "rid": "win-x86",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
           },
-          "runtimes/win-x86/native/opencv_videoio_ffmpeg480.dll": {
+          "runtimes/win-x86/native/opencv_videoio_ffmpeg490.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "2023.6.0.0"
+            "fileVersion": "2023.12.0.0"
           }
         }
       },
@@ -783,12 +783,12 @@
       "path": "opencvsharp4/4.8.0.20230708",
       "hashPath": "opencvsharp4.4.8.0.20230708.nupkg.sha512"
     },
-    "OpenCvSharp4.runtime.win/4.8.0.20230708": {
+    "OpenCvSharp4.runtime.win/4.9.0.20240103": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-V9zbVQXazSSoEG04nF1KEkxfY62WMQAcKAlDe7xgkNErY7WQZzEcj8dMEuHXQMaDr45jPvrJi50SQroi+w4wNw==",
-      "path": "opencvsharp4.runtime.win/4.8.0.20230708",
-      "hashPath": "opencvsharp4.runtime.win.4.8.0.20230708.nupkg.sha512"
+      "sha512": "sha512-PkV3ge6rE//gj0OlG4TRXzmcLVDoKsJx0lYN1ogx9gZhqUPHlzrnWqKk2hAFK+nU8T0chRhrwHL0U2hSMyoCWw==",
+      "path": "opencvsharp4.runtime.win/4.9.0.20240103",
+      "hashPath": "opencvsharp4.runtime.win.4.9.0.20240103.nupkg.sha512"
     },
     "runtime.native.System/4.0.0": {
       "type": "package",

@@ -1,0 +1,17 @@
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\ExamplePrograms\circleExample.ehh
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\ExamplePrograms\circleExample.png
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\ExamplePrograms\EllipseExample.ehh
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\ExamplePrograms\EllipseExample.png
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\ExamplePrograms\PolyLinesExample.ehh
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\ExamplePrograms\PolyLinesExample.png
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\ExamplePrograms\SomeCreatedImages\veryFirstPicture.ehh
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\ExamplePrograms\SomeCreatedImages\veryFirstPicture.png
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\Ehhmake.exe
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\Ehhmake.dll
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\Ehhmake.runtimeconfig.json
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\Ehhmake.pdb
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\Antlr4.Runtime.dll
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\OpenCvSharp.dll
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\OpenCvSharpExtern.dll
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\opencv_videoio_ffmpeg480_64.dll
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\FrameworkDependent\Ehhmake.deps.json

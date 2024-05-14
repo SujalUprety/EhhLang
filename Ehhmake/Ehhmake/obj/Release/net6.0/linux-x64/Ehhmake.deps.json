@@ -13,7 +13,7 @@
           "Antlr4.CodeGenerator": "4.6.6",
           "Antlr4.Runtime": "4.6.6",
           "OpenCvSharp4": "4.8.0.20230708",
-          "OpenCvSharp4.runtime.win": "4.8.0.20230708",
+          "Sdcb.OpenCvSharp4.mini.runtime.debian.12-x64": "4.8.0.20231125",
           "runtimepack.Microsoft.NETCore.App.Runtime.linux-x64": "6.0.19"
         },
         "runtime": {
@@ -816,7 +816,6 @@
           }
         }
       },
-      "OpenCvSharp4.runtime.win/4.8.0.20230708": {},
       "runtime.any.System.Collections/4.0.11": {
         "dependencies": {
           "System.Runtime": "4.1.0"
@@ -959,6 +958,13 @@
           "System.Private.Uri": "4.0.1",
           "runtime.native.System": "4.0.0",
           "runtime.native.System.Security.Cryptography": "4.0.0"
+        }
+      },
+      "Sdcb.OpenCvSharp4.mini.runtime.debian.12-x64/4.8.0.20231125": {
+        "native": {
+          "runtimes/linux-x64/native/libOpenCvSharpExtern.so": {
+            "fileVersion": "0.0.0.0"
+          }
         }
       },
       "System.AppContext/4.1.0": {
@@ -1684,13 +1690,6 @@
       "path": "opencvsharp4/4.8.0.20230708",
       "hashPath": "opencvsharp4.4.8.0.20230708.nupkg.sha512"
     },
-    "OpenCvSharp4.runtime.win/4.8.0.20230708": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-V9zbVQXazSSoEG04nF1KEkxfY62WMQAcKAlDe7xgkNErY7WQZzEcj8dMEuHXQMaDr45jPvrJi50SQroi+w4wNw==",
-      "path": "opencvsharp4.runtime.win/4.8.0.20230708",
-      "hashPath": "opencvsharp4.runtime.win.4.8.0.20230708.nupkg.sha512"
-    },
     "runtime.any.System.Collections/4.0.11": {
       "type": "package",
       "serviceable": true,
@@ -1893,6 +1892,13 @@
       "sha512": "sha512-ouVt2t9k22LcC9HeNX4mu3Ebvp1h+IPKaYiU3tDtOW9YcMR62XQyHsPq5BjBjMHuxjBRL5Hz+BwhSdrY6HjacA==",
       "path": "runtime.unix.system.runtime.extensions/4.1.0",
       "hashPath": "runtime.unix.system.runtime.extensions.4.1.0.nupkg.sha512"
+    },
+    "Sdcb.OpenCvSharp4.mini.runtime.debian.12-x64/4.8.0.20231125": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tbhG6zOXarhOXvjQFF6IQE00IuOdExBWJVD5K1koMLzFYcbf/a1ZOtb9ZccvzY2P3XwsXXL9ETwbBgCijBBpRg==",
+      "path": "sdcb.opencvsharp4.mini.runtime.debian.12-x64/4.8.0.20231125",
+      "hashPath": "sdcb.opencvsharp4.mini.runtime.debian.12-x64.4.8.0.20231125.nupkg.sha512"
     },
     "System.AppContext/4.1.0": {
       "type": "package",

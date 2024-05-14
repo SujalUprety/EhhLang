@@ -210,3 +210,4 @@ G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\linux-x64\refint\
 G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\linux-x64\Ehhmake.pdb
 G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\linux-x64\Ehhmake.genruntimeconfig.cache
 G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\linux-x64\ref\Ehhmake.dll
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\linux-x64\libOpenCvSharpExtern.so
