@@ -29,8 +29,8 @@ public static class EhhmageComplete {
     public static readonly Dictionary<string, object?> ObjectNames = new();
 
     public static class EhhmageObjectFactory {
-        private static readonly Dictionary<string, Func<EhhmageObject>> ObjectCreators =
-            new Dictionary<string, Func<EhhmageObject>>()
+        private static readonly Dictionary<string, Func<IEhhmageObject>> ObjectCreators =
+            new ()
             {
                 { "text", () => new Text() },
                 { "rectangle", () => new Rectangle() },
@@ -40,7 +40,7 @@ public static class EhhmageComplete {
                 { "ellipse", () => new Ellipse() }
             };
         
-        public static EhhmageObject CreateObject(string objectName) {
+        public static IEhhmageObject CreateObject(string objectName) {
             if (ObjectCreators.TryGetValue(objectName, out var objectCreator)) return objectCreator();
             Console.WriteLine($"Error: {objectName} is not a valid object name.");
             Environment.Exit(1);
@@ -76,12 +76,12 @@ public static class EhhmageComplete {
         
     }
     
-    public interface EhhmageObject {
-        public EhhmageObject Clone();
+    public interface IEhhmageObject {
+        public IEhhmageObject Clone();
         public void InsertObject();
     }
 
-    public class Text : EhhmageObject {
+    private class Text : IEhhmageObject {
         private int _fontScale = 1;
         private int _thickness = 1;
         private int[] _position = { 0, 0 };
@@ -98,7 +98,7 @@ public static class EhhmageComplete {
     
         #endregion
         
-        public EhhmageObject Clone() {
+        public IEhhmageObject Clone() {
             return new Text {
                 _fontScale = _fontScale,
                 _thickness = _thickness,
@@ -117,7 +117,7 @@ public static class EhhmageComplete {
         
     }
 
-    public class Rectangle : EhhmageObject{
+    private class Rectangle : IEhhmageObject{
         private int _thickness = 1;
         private int[] _position = { 0, 0 };
         private int[] _color = { 255, 255, 255 };
@@ -144,7 +144,7 @@ public static class EhhmageComplete {
         
         #endregion
 
-        public EhhmageObject Clone() {
+        public IEhhmageObject Clone() {
             return new Rectangle {
                 _thickness = _thickness,
                 _position = _position,
@@ -167,7 +167,7 @@ public static class EhhmageComplete {
         
     }
 
-    public class Line : EhhmageObject {
+    private class Line : IEhhmageObject {
         private int[] _startPosition = { 0, 0 };
         private int[] _endPosition = { 0, 0 };
         private int[] _color = { 255, 255, 255 };
@@ -182,7 +182,7 @@ public static class EhhmageComplete {
         
         #endregion
         
-        public EhhmageObject Clone() {
+        public IEhhmageObject Clone() {
             return new Line {
                 _startPosition = _startPosition,
                 _endPosition = _endPosition,
@@ -200,7 +200,7 @@ public static class EhhmageComplete {
         }
     }
 
-    public class Circle : EhhmageObject {
+    private class Circle : IEhhmageObject {
         private int _radius = 1;
         private int[] _position = { 0, 0 };
         private int[] _color = { 255, 255, 255 };
@@ -226,7 +226,7 @@ public static class EhhmageComplete {
         
         #endregion
         
-        public EhhmageObject Clone() {
+        public IEhhmageObject Clone() {
             return new Circle {
                 _radius = _radius,
                 _position = _position,
@@ -248,7 +248,7 @@ public static class EhhmageComplete {
         
     }
 
-    public class PolyLines : EhhmageObject {
+    private class PolyLines : IEhhmageObject {
         private int[] _color = { 255, 255, 255 };
         private int _thickness = 1;
         private readonly List<int[]> _position = new();
@@ -277,7 +277,7 @@ public static class EhhmageComplete {
         
         #endregion
         
-        public EhhmageObject Clone() {
+        public IEhhmageObject Clone() {
             return new PolyLines {
                 _color = _color,
                 _thickness = _thickness,
@@ -299,7 +299,7 @@ public static class EhhmageComplete {
         }
     }
 
-    public class Ellipse : EhhmageObject {
+    private class Ellipse : IEhhmageObject {
         private int _thickness = 1;
         private int[] _position = { 0, 0 };
         private int[] _color = { 255, 255, 255 };
@@ -330,7 +330,7 @@ public static class EhhmageComplete {
         
         #endregion
         
-        public EhhmageObject Clone() {
+        public IEhhmageObject Clone() {
             return new Ellipse {
                 _thickness = _thickness,
                 _position = _position,
@@ -353,14 +353,5 @@ public static class EhhmageComplete {
             Cv2.Ellipse(_ehhmageOutput, ellipsePosition, new Size(_axes[0], _axes[1]), _angle, _startAngle, _endAngle, ellipseColor, _thickness);
         }
     }
-
-    // public static class Global {
-    //     internal static Text Text = new();
-    //     internal static Rectangle Rectangle = new();
-    //     internal static Line Line = new();
-    //     internal static Circle Circle = new();
-    //     internal static PolyLines PolyLines = new();
-    //     internal static Ellipse Ellipse = new();
-    // }
 
 }

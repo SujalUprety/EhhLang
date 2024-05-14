@@ -1,5 +1,4 @@
 using System.Reflection;
-using static System.Enum;
 
 namespace Ehhmake;
 
@@ -45,7 +44,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
             var objectName = context.objectIdentifier().objectName().GetText();
             try {
                 var storedObjectContext = EhhmageComplete.ObjectNames[preDefinedObjectName];
-                if(storedObjectContext is EhhmageComplete.EhhmageObject storedEhhmageObjectContext) InsertObject(objectContext, objectName, storedEhhmageObjectContext.Clone());
+                if(storedObjectContext is EhhmageComplete.IEhhmageObject storedEhhmageObjectContext) InsertObject(objectContext, objectName, storedEhhmageObjectContext.Clone());
                 else Console.WriteLine($"Object \'{objectName}\' not identified. Error code: 0x00000001");
             }
             catch{
@@ -87,7 +86,7 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
         
     }
     
-    private static void InsertObject(IEnumerable<EhhParser.AttribPairContext> context, string objectName, EhhmageComplete.EhhmageObject ehhmageObject) {
+    private static void InsertObject(IEnumerable<EhhParser.AttribPairContext> context, string objectName, EhhmageComplete.IEhhmageObject ehhmageObject) {
         
         foreach (var attribPairContext in context) {
             var attribName = attribPairContext.attribName().GetText();
