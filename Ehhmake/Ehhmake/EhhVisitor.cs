@@ -89,14 +89,15 @@ public class EhhVisitor : EhhBaseVisitor<object?> {
     private static void InsertObject(IEnumerable<EhhParser.AttribPairContext> context, string objectName, EhhmageComplete.IEhhmageObject ehhmageObject) {
         
         foreach (var attribPairContext in context) {
-            var attribName = attribPairContext.attribName().GetText();
+            var fullAttribName = attribPairContext.attribName().GetText();
+            var attribName = attribPairContext.attribName().ID().GetText();
             var attribValue = attribPairContext.attribValue().GetText();
             
             var setterMethod = ehhmageObject.GetType().GetMethod("set" + attribName, BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public);
             if (setterMethod is null)
                 Console.WriteLine(attribName + " is not defined for object " + objectName);
             else {
-                var value = AttributesSetters.GetAttributeValue(objectName, attribName, attribValue);
+                var value = AttributesSetters.GetAttributeValue(objectName, fullAttribName, attribValue);
                 setterMethod.Invoke(ehhmageObject, new [] {value});
             }
         }
