@@ -33,7 +33,7 @@ public static class EhhmageComplete {
             new ()
             {
                 { "text", () => new Text() },
-                { "rectangle", () => new Rectangle() },
+                { "rect", () => new Rectangle() },
                 { "line", () => new Line() },
                 { "circle", () => new Circle() },
                 { "polyLines", () => new PolyLines() },
