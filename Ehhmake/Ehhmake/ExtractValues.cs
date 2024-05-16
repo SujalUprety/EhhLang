@@ -15,7 +15,7 @@ public static class AttributesSetters {
         }
     }
 
-    public static readonly Dictionary<string, AttributeInfo> attributeTypes = new()
+    public static readonly Dictionary<string, AttributeInfo> AttributeTypes = new()
     {
         { nameof(Attributes.width), new AttributeInfo(typeof(int)) },
         { nameof(Attributes.height), new AttributeInfo(typeof(int)) },
@@ -40,16 +40,16 @@ public static class AttributesSetters {
 
         if (IsArray(attribName)) return ExtractValues.ExtractArrayAttribute(objectName, attribName, attribValue);
         
-        if(!attributeTypes.TryGetValue(attribName, out var attributeInfo)) {
+        if(!AttributeTypes.TryGetValue(attribName, out var attributeInfo)) {
             Console.WriteLine($"Error: {objectName} does not have an attribute named {attribName}.");
             Environment.Exit(1);
         }
         
         return attributeInfo.Type switch {
-            Type when attributeInfo.Type == typeof(int) => ExtractValues.ExtractInt(objectName, attribName, attribValue),
-            Type when attributeInfo.Type == typeof(int[]) => ExtractValues.ExtractIntArray(objectName, attribName, attribValue, attributeInfo.ArrayLength),
-            Type when attributeInfo.Type == typeof(string) => ExtractValues.ExtractString(objectName, attribName, attribValue),
-            Type when attributeInfo.Type == typeof(object) => ExtractValues.ExtractFillColor(objectName, attribName, attribValue),
+            not null when attributeInfo.Type == typeof(int) => ExtractValues.ExtractInt(objectName, attribName, attribValue),
+            not null when attributeInfo.Type == typeof(int[]) => ExtractValues.ExtractIntArray(objectName, attribName, attribValue, attributeInfo.ArrayLength),
+            not null when attributeInfo.Type == typeof(string) => ExtractValues.ExtractString(objectName, attribName, attribValue),
+            not null when attributeInfo.Type == typeof(object) => ExtractValues.ExtractFillColor(objectName, attribName, attribValue),
             _ => null
         };
         
@@ -110,7 +110,7 @@ public static class ExtractValues {
         var attribNameWithoutBrackets = RemoveBrackets(attribName);
         var attribNameIndex = GetIndex(attribName);
         
-        if(!AttributesSetters.attributeTypes.TryGetValue(attribNameWithoutBrackets, out var attributeInfo)) {
+        if(!AttributesSetters.AttributeTypes.TryGetValue(attribNameWithoutBrackets, out var attributeInfo)) {
             Console.WriteLine($"Error: {objectName} does not have an attribute named {attribNameWithoutBrackets}.");
             Environment.Exit(1);
         }

@@ -235,5 +235,5 @@ G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\win-x64\ucrtbase.
 G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\win-x64\Antlr4.Runtime.dll
 G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\win-x64\OpenCvSharp.dll
 G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\win-x64\OpenCvSharpExtern.dll
-G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\win-x64\opencv_videoio_ffmpeg480_64.dll
+G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\win-x64\opencv_videoio_ffmpeg490_64.dll
 G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\bin\Release\net6.0\win-x64\Ehhmake.deps.json
