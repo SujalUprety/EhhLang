@@ -23,6 +23,7 @@ public static class EhhmageComplete {
         angle,
         startAngle,
         endAngle,
+        imagePath,
     }
 
     private static Mat _ehhmageOutput = new();
@@ -37,7 +38,8 @@ public static class EhhmageComplete {
                 { "line", () => new Line() },
                 { "circle", () => new Circle() },
                 { "polyLines", () => new PolyLines() },
-                { "ellipse", () => new Ellipse() }
+                { "ellipse", () => new Ellipse() },
+                { "image", () => new Image() }
             };
         
         public static IEhhmageObject CreateObject(string objectName) {
@@ -351,6 +353,45 @@ public static class EhhmageComplete {
             
             if (_doFill) Cv2.Ellipse(_ehhmageOutput, ellipsePosition, new Size(_axes[0], _axes[1]), _angle, _startAngle, _endAngle, ellipseFillColor, Cv2.FILLED);
             Cv2.Ellipse(_ehhmageOutput, ellipsePosition, new Size(_axes[0], _axes[1]), _angle, _startAngle, _endAngle, ellipseColor, _thickness);
+        }
+    }
+    
+    private class Image : IEhhmageObject {
+        private string _imagePath = "";
+        private int[] _position = { 0, 0 };
+        
+        #region Setters
+        
+        public void SetImagePath(string imagePath) => _imagePath = imagePath;
+        public void SetPosition(int[] position) => _position = position;
+        
+        #endregion
+        
+        public IEhhmageObject Clone() {
+            return new Image {
+                _imagePath = _imagePath,
+                _position = _position
+            };
+        }
+        
+        public void InsertObject() {
+            var imagePosition = new Point(_position[0], _position[1]);
+            var image = Cv2.ImRead(_imagePath);
+
+            if (image.Empty()) {
+                Console.WriteLine("Could not load image");
+                return;
+            }
+            
+            var visibleWidth = Math.Min(image.Width, _ehhmageOutput.Width - imagePosition.X);
+            var visibleHeight = Math.Min(image.Height, _ehhmageOutput.Height - imagePosition.Y);
+            
+            var roi = new Rect(imagePosition.X, imagePosition.Y, visibleWidth, visibleHeight);
+            var roiMat = new Mat(_ehhmageOutput, roi);
+            
+            var croppedImage = new Mat(image, new Rect(0, 0, visibleWidth, visibleHeight));
+            
+            croppedImage.CopyTo(roiMat);
         }
     }
 

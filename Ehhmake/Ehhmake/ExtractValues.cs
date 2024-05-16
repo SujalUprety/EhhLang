@@ -33,7 +33,8 @@ public static class AttributesSetters {
         { nameof(Attributes.axes), new AttributeInfo(typeof(int[]), 2) },
         { nameof(Attributes.angle), new AttributeInfo(typeof(int)) },
         { nameof(Attributes.startAngle), new AttributeInfo(typeof(int)) },
-        { nameof(Attributes.endAngle), new AttributeInfo(typeof(int)) }
+        { nameof(Attributes.endAngle), new AttributeInfo(typeof(int)) },
+        { nameof(Attributes.imagePath), new AttributeInfo(typeof(string))},
     };
 
     public static object? GetAttributeValue(string objectName, string attribName, string attribValue) {
