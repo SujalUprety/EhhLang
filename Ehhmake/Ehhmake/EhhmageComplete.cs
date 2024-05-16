@@ -24,6 +24,7 @@ public static class EhhmageComplete {
         startAngle,
         endAngle,
         imagePath,
+        resize,
     }
 
     private static Mat _ehhmageOutput = new();
@@ -359,18 +360,21 @@ public static class EhhmageComplete {
     private class Image : IEhhmageObject {
         private string _imagePath = "";
         private int[] _position = { 0, 0 };
+        private int[] _resize = { 0, 0 };
         
         #region Setters
         
         public void SetImagePath(string imagePath) => _imagePath = imagePath;
         public void SetPosition(int[] position) => _position = position;
+        public void SetResize(int[] resize) => this._resize = resize;
         
         #endregion
         
         public IEhhmageObject Clone() {
             return new Image {
                 _imagePath = _imagePath,
-                _position = _position
+                _position = _position,
+                _resize = _resize
             };
         }
         
@@ -383,6 +387,8 @@ public static class EhhmageComplete {
                 return;
             }
             
+            if(_resize[0] > 0 && _resize[1] > 0) Cv2.Resize(image, image, new Size(_resize[0], _resize[1]));
+            
             var visibleWidth = Math.Min(image.Width, _ehhmageOutput.Width - imagePosition.X);
             var visibleHeight = Math.Min(image.Height, _ehhmageOutput.Height - imagePosition.Y);
             
@@ -390,6 +396,7 @@ public static class EhhmageComplete {
             var roiMat = new Mat(_ehhmageOutput, roi);
             
             var croppedImage = new Mat(image, new Rect(0, 0, visibleWidth, visibleHeight));
+            
             
             croppedImage.CopyTo(roiMat);
         }

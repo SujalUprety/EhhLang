@@ -35,6 +35,7 @@ public static class AttributesSetters {
         { nameof(Attributes.startAngle), new AttributeInfo(typeof(int)) },
         { nameof(Attributes.endAngle), new AttributeInfo(typeof(int)) },
         { nameof(Attributes.imagePath), new AttributeInfo(typeof(string))},
+        { nameof(Attributes.resize), new AttributeInfo(typeof(int[]), 2)}
     };
 
     public static object? GetAttributeValue(string objectName, string attribName, string attribValue) {
