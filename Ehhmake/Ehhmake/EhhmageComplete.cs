@@ -397,7 +397,6 @@ public static class EhhmageComplete {
             
             var croppedImage = new Mat(image, new Rect(0, 0, visibleWidth, visibleHeight));
             
-            
             croppedImage.CopyTo(roiMat);
         }
     }
