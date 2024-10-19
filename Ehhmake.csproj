@@ -33,62 +33,62 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="Content\Ehh.g4" />
+      <Content Include="Content/Ehh.g4" />
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Program.cs">
+	<Compile Update="src/Program.cs">
         <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       </Compile>
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Content\TestPrograms\circleExample.ehh">
+	<None Update="Content/TestPrograms/circleExample.ehh">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="Content\TestPrograms\SomeCreatedImages\veryFirstPicture.ehh">
+      <None Update="Content/TestPrograms/SomeCreatedImages/veryFirstPicture.ehh">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="Content\TestPrograms\SomeCreatedImages\veryFirstPicture.png">
+      <None Update="Content/TestPrograms/SomeCreatedImages/veryFirstPicture.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="Content\TestPrograms\circleExample.png">
+      <None Update="Content/TestPrograms/circleExample.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="Content\TestPrograms\EllipseExample.ehh">
+      <None Update="Content/TestPrograms/EllipseExample.ehh">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="Content\TestPrograms\EllipseExample.png">
+      <None Update="Content/TestPrograms/EllipseExample.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="Content\TestPrograms\PolyLinesExample.ehh">
+      <None Update="Content/TestPrograms/PolyLinesExample.ehh">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="Content\TestPrograms\PolyLinesExample.png">
+      <None Update="Content/TestPrograms/PolyLinesExample.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ExamplePrograms\SomeCreatedImages\veryFirstPicture.ehh">
+      <None Update="ExamplePrograms/SomeCreatedImages/veryFirstPicture.ehh">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ExamplePrograms\SomeCreatedImages\veryFirstPicture.png">
+      <None Update="ExamplePrograms/SomeCreatedImages/veryFirstPicture.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ExamplePrograms\circleExample.ehh">
+      <None Update="ExamplePrograms/circleExample.ehh">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ExamplePrograms\circleExample.png">
+      <None Update="ExamplePrograms/circleExample.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ExamplePrograms\EllipseExample.ehh">
+      <None Update="ExamplePrograms/EllipseExample.ehh">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ExamplePrograms\EllipseExample.png">
+      <None Update="ExamplePrograms/EllipseExample.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ExamplePrograms\PolyLinesExample.ehh">
+      <None Update="ExamplePrograms/PolyLinesExample.ehh">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ExamplePrograms\PolyLinesExample.png">
+      <None Update="ExamplePrograms/PolyLinesExample.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
