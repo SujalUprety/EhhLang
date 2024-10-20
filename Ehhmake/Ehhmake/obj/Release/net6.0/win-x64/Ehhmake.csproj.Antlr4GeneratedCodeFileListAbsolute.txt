@@ -1,6 +1,0 @@
-G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\win-x64\EhhLexer.cs
-G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\win-x64\EhhParser.cs
-G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\win-x64\EhhListener.cs
-G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\win-x64\EhhBaseListener.cs
-G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\win-x64\EhhVisitor.cs
-G:\Projects\My Rule\EhhLang\Ehhmake\Ehhmake\obj\Release\net6.0\win-x64\EhhBaseVisitor.cs
